@@ -13,6 +13,7 @@
 "   6.1) Normalization
 " 7) Project-Specific items
 " 8) nvim support
+" 9) macvim settings
 
 """ Plug =======================
 " PlugInstall       - install plugins
