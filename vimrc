@@ -166,13 +166,6 @@ Plug 'henrik/vim-indexed-search'
 
 """"" UI Plugins =======================
 Plug 'itchyny/lightline.vim'
-  " let g:lightline = {
-  "       \ 'colorscheme': 'gruvbox',
-  "       \ 'component': {
-  "       \   'readonly': '%{&readonly?"x":""}',
-  "       \ }
-  "       \ }
-  set laststatus=2
   let g:lightline = {
         \ 'colorscheme': 'gruvbox',
         \ 'active': {
@@ -301,6 +294,9 @@ Plug 'itchyny/lightline.vim'
   let g:unite_force_overwrite_statusline = 0
   let g:vimfiler_force_overwrite_statusline = 0
   let g:vimshell_force_overwrite_statusline = 0
+
+  set laststatus=2
+
 """ End lightline
 
 " Plug 'tomasr/molokai'
