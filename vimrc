@@ -335,21 +335,7 @@ Plug 'ctrlpvim/ctrlp.vim'
     \ 'types': {
     \ 1: ['.git', 'cd %s && git ls-files'],
     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-    \ },
-    \ 'fallback': 'ag %s -i --nocolor --nogroup --hidden
-    \ --ignore out
-    \ --ignore _build
-    \ --ignore deps
-    \ --ignore node_modules
-    \ --ignore .git
-    \ --ignore .gitkeep
-    \ --ignore .svn
-    \ --ignore .hg
-    \ --ignore .DS_Store
-    \ --ignore .codekit-cache
-    \ --ignore .codekit
-    \ --ignore "*/.pyc"
-    \ -g ""'
+    \ }
     \ }
   let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-e>', '<c-space>'],
