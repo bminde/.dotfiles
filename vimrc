@@ -6,13 +6,13 @@
 "   1.4) Code Navigation
 " 2) UI Tweaks
 " 3) Keyboard shortcut Setup
-" 4) vim environment handling tweaks (needs work / renaming)
+" 4) Vim environment handling tweaks
 " 5) File navigation
 " 6) Auto Commands
 "   6.1) Filetypes
 "   6.1) Normalization
 " 7) Project-Specific items
-" 8) nvim support
+" 8) Nvim support
 
 """ Plug =======================
 " PlugInstall       - install plugins
@@ -48,41 +48,32 @@ Plug 'avdgaag/vim-phoenix'
 " Plug 'lambdatoast/elm.vim'
 
 """"""" JavaScript
-" Plug 'claco/jasmine.vim'
 Plug 'elzr/vim-json'
 Plug 'jelera/vim-javascript-syntax'
-" Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'Shutnik/jshint2.vim'
-" Plug 'burnettk/vim-angular'
-" Plug 'mtscout6/vim-cjsx'
 " Plug 'ElmCast/elm-vim'
 
 """"""" Web Development (HTML/CSS/preprocessors/etc)
 Plug 'aaronjensen/vim-sass-status'
 Plug 'cakebaker/scss-syntax.vim'
-" Plug 'groenewege/vim-less'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'lukaszb/vim-web-indent'
 Plug 'othree/html5.vim'
 Plug 'tpope/vim-haml'
-" Plug 'slim-template/vim-slim'
 
 """"""" Markdown
 " Use fenced code blocks in markdown
 Plug 'jtratner/vim-flavored-markdown'
   let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'clojure', 'sh', 'html', 'sass', 'scss', 'haml', 'erlang', 'go']
-" Markdown is now included in vim, but by default .md is read as Modula-2
-" files.  This fixes that, because I don't ever edit Modula-2 files :)
+
+" .md is markdown, not Modula-2
 autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
 autocmd FileType markdown set tw=80
 
 """""" TOML
 Plug 'cespare/vim-toml'
-
-"""""" CoffeeScript
-" Plug 'kchmck/vim-coffee-script'
 
 """""" Go
 Plug 'fatih/vim-go'
@@ -92,7 +83,6 @@ Plug 'fatih/vim-go'
 """"" Utilities ========================
 
 " Set leader
-" let mapleader=","
 let mapleader = "\<Space>"
 let maplocalleader="\\"
 
@@ -113,7 +103,7 @@ set nrformats=
 "   let g:syntastic_check_on_wq = 0
 
 Plug 'tpope/vim-surround'
-" temporary fix for ultisnips macvim crashing bug
+" temporary fix for ultisnips macvim bug
 if !has("gui_macvim")
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 endif
@@ -131,7 +121,7 @@ Plug 'janko-m/vim-test'                " Run tests with varying granularity
   nmap <silent> <leader>g :TestVisit<CR>
 
 Plug 'christoomey/vim-tmux-navigator'  " Navigate between tmux panes and vim splits seamlessly
-Plug 'tpope/vim-fugitive'              " git support from dat tpope
+Plug 'tpope/vim-fugitive'              " git support
   nnoremap <silent> <leader>gs :Gstatus<CR>
   nnoremap <silent> <leader>gd :Gdiff<CR>
   nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -177,7 +167,7 @@ Plug 'henrik/vim-indexed-search'
 """"" UI Plugins =======================
 Plug 'vim-airline/vim-airline'       " UI statusbar niceties
 Plug 'vim-airline/vim-airline-themes'
-  set laststatus=2               " enable airline even if no splits
+  set laststatus=2                   " enable airline even if no splits
   if !exists('g:airline_symbols')
     let g:airline_symbols = {}
   endif
@@ -205,6 +195,7 @@ Plug 'vim-airline/vim-airline-themes'
         \ 'c' : 'CMD   ',
         \ '': 'V-BLCK',
         \ }
+
 " Plug 'tomasr/molokai'
 "   let g:molokai_original = 1
 "   let g:rehash256 = 1
@@ -214,11 +205,12 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'rakr/vim-one'
 Plug 'mkarmona/colorsbox'
 
-" Plugin 'roman/golden-ratio'
 Plug 'airblade/vim-gitgutter'
+
 """"" End UI Plugins ===================
 
 """"" Code Navigation ===============
+
 Plug 'ctrlpvim/ctrlp.vim'
   nnoremap <Leader>p :CtrlP<CR>
   let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
@@ -280,8 +272,9 @@ call plug#end() " required for Vundle
 """ End setup Vundle ===================
 
 """ UI Tweaks ==========================
-set number " line numbering
-set t_Co=256 " Force 256 colors
+
+set number    " line numbering
+set t_Co=256  " Force 256 colors
 
 " Turn off menu in gui
 set guioptions="agimrLt"
@@ -289,8 +282,6 @@ set guioptions="agimrLt"
 " Set GUI font
 set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 
-" Turn off mouse click in gui
-" set mouse=""
 " Enable mouse
 if has('mouse')
   set mouse=a
@@ -322,20 +313,9 @@ let $TERM='screen-256color'
 
 " Highlighting line or number follows....
 set cul " highlight current line
-" If you want to just highlight the line number:
-" hi clear CursorLine
-" augroup CLClear
-"   autocmd! ColorScheme * hi clear CursorLine
-" augroup END
-" hi CursorLineNR cterm=bold
-" augroup CLNRSet
-"   autocmd! ColorScheme * hi CursorLineNR cterm=bold
-" augroup END
+set cuc " highlight current column
 
-" Highlight current column
-set cuc
-
-" change vim cursor depending on the mode
+" Change vim cursor depending on the mode
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
@@ -366,34 +346,31 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
 endif
+
 """ End UI Tweaks ======================
 
 """ Keyboard shortcut setup =====================
-" Remove highlights
-" Clear the search buffer when hitting return
-nnoremap å :nohlsearch<cr>
+
+nnoremap å :nohlsearch<cr>  "Clear search highlight
 
 " Search and replace - /something - cs - <Esc> - n.n.n.n.
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
 omap s :normal vs<CR>
 
-" NO ARROW KEYS COME ON
-map <Left>  :echo "no!"<cr>
-map <Right> :echo "no!"<cr>
-map <Up>    :echo "no!"<cr>
-map <Down>  :echo "no!"<cr>
-
 " Escape keys
 :imap jk <Esc>
 
-" move vertically by visual line
+" Move vertically by visual line
 nnoremap j gj
 nnoremap k gk
 
 " More natural split opening
 set splitbelow
 set splitright
+
+" Always use vertical diffs
+set diffopt+=vertical
 
 " Resize buffers
 if bufwinnr(1)
@@ -412,10 +389,10 @@ map <leader>ba :bufdo bd<cr>
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
-" save session (assortment of windows) - reopen with vim -S
+" Save session (assortment of windows) - reopen with vim -S
 nnoremap <leader>s :mksession<CR>
 
-" format the entire file
+" Format the entire file
 nmap <leader>fef ggVG=
 
 " Create/edit file in the current directory
@@ -425,17 +402,18 @@ nmap :ed :edit %:p:h/
 map <C-N> :vsp .<CR>
 map <C-C> :q<CR>
 
-" reselect pasted content:
+" Reselect pasted content:
 noremap gV `[v`]
 
+" Toggle paste
 set pastetoggle=<F5>
 
-" jump to end of pasted text
+" Jump to end of pasted text
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
-" access system clipboard
+" Access system clipboard
 set clipboard=unnamed
 
 " 45<Enter> to go to line 45
@@ -450,10 +428,6 @@ nnoremap U :syntax sync fromstart<cr>:redraw!<cr>
 
 " Keep the cursor in place while joining lines
 nnoremap J mzJ`z
-
-" Split line (sister to [J]oin lines above)
-" The normal use of S is covered by cc, so don't worry about shadowing it.
-" nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 " Open the alternate file
 map ,, <C-^>
@@ -473,8 +447,8 @@ nnoremap <leader>ev :vsp $MYVIMRC<CR>
 """ End Keyboard shortcut setup =================
 
 """ Vim environment handling tweaks ====
+
 """"" BACKUP / TMP FILES
-" taken from
 " Save your backups to a less annoying place than the current directory.
 " If you have .vim-backup in the current directory, it'll use that.
 " Otherwise it saves it to ~/.vim/backup or . if all else fails.
@@ -515,7 +489,7 @@ endif
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
 
-" display incomplete commands
+" Display incomplete commands
 set showcmd
 
 " Set encoding
@@ -526,7 +500,7 @@ set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 
-" Whitespace stuff
+" Whitespace
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -544,12 +518,10 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,_build/*,.git/*,
 
 " Makes foo-bar considered one word
 set iskeyword+=-
+
 """ End Vim environment handling tweaks
 
 """ File navigation ====================
-" case insensitive highlight matches in normal/visual mode
-nnoremap / /\v
-vnoremap / /\v
 
 if executable('ag')
   " Use ag over grep
@@ -562,6 +534,7 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 """ End File navigation ================
 
 """ Auto Commands ======================
+
 """"" Filetypes ========================
 augroup erlang
   au!
@@ -586,16 +559,21 @@ func! DeleteTrailingWS()
 endfunc
 au BufWrite * silent call DeleteTrailingWS()
 """"" End Normalization ================
+
 """ End Auto Commands ==================
 
 """ Project-Specific Items =============
+
 " Enable per-project vimrcs
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
+
 """ End Project-Specific Items =========
 
-""" nvim support =======================
+""" Nvim support =======================
+
 if has('nvim')
   set unnamedclip
 endif
-""" end nvim support ===================
+
+""" End nvim support ===================
