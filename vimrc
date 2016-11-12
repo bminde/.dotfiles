@@ -34,61 +34,58 @@ call plug#begin('~/.vim/plugged')
 
 """"" Filetypes ========================
 
-Plug 'sheerun/vim-polyglot'
-  " let g:polyglot_disabled = ['css']
+""""""" Ruby
+Plug 'vim-ruby/vim-ruby'
 
-" """"""" Ruby
-" Plug 'vim-ruby/vim-ruby'
-"
-" """"""" Elixir
-" Plug 'elixir-lang/vim-elixir'
-" " Plug 'slashmili/alchemist.vim'
-"
-" """"""" Phoenix
-" Plug 'avdgaag/vim-phoenix'
-"
-" """"""" Elm
-" " Plug 'lambdatoast/elm.vim'
-"
-" """"""" JavaScript
-" " Plug 'claco/jasmine.vim'
-" Plug 'elzr/vim-json'
-" Plug 'jelera/vim-javascript-syntax'
-" " Plug 'mxw/vim-jsx'
-" Plug 'othree/javascript-libraries-syntax.vim'
-" Plug 'pangloss/vim-javascript'
-" Plug 'Shutnik/jshint2.vim'
-" " Plug 'burnettk/vim-angular'
-" " Plug 'mtscout6/vim-cjsx'
-" " Plug 'ElmCast/elm-vim'
-"
-" """"""" Web Development (HTML/CSS/preprocessors/etc)
-" Plug 'aaronjensen/vim-sass-status'
-" Plug 'cakebaker/scss-syntax.vim'
+""""""" Elixir
+Plug 'elixir-lang/vim-elixir'
+" Plug 'slashmili/alchemist.vim'
+
+""""""" Phoenix
+Plug 'avdgaag/vim-phoenix'
+
+""""""" Elm
+" Plug 'lambdatoast/elm.vim'
+
+""""""" JavaScript
+" Plug 'claco/jasmine.vim'
+Plug 'elzr/vim-json'
+Plug 'jelera/vim-javascript-syntax'
+" Plug 'mxw/vim-jsx'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'Shutnik/jshint2.vim'
+" Plug 'burnettk/vim-angular'
+" Plug 'mtscout6/vim-cjsx'
+" Plug 'ElmCast/elm-vim'
+
+""""""" Web Development (HTML/CSS/preprocessors/etc)
+Plug 'aaronjensen/vim-sass-status'
+Plug 'cakebaker/scss-syntax.vim'
 " Plug 'groenewege/vim-less'
-" Plug 'hail2u/vim-css3-syntax'
-" Plug 'lukaszb/vim-web-indent'
-" Plug 'othree/html5.vim'
-" Plug 'tpope/vim-haml'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'lukaszb/vim-web-indent'
+Plug 'othree/html5.vim'
+Plug 'tpope/vim-haml'
 " Plug 'slim-template/vim-slim'
 
-" """"""" Markdown
-" " Use fenced code blocks in markdown
-" Plug 'jtratner/vim-flavored-markdown'
-  " let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'clojure', 'sh', 'html', 'sass', 'scss', 'haml', 'erlang', 'go']
+""""""" Markdown
+" Use fenced code blocks in markdown
+Plug 'jtratner/vim-flavored-markdown'
+  let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'clojure', 'sh', 'html', 'sass', 'scss', 'haml', 'erlang', 'go']
 " Markdown is now included in vim, but by default .md is read as Modula-2
 " files.  This fixes that, because I don't ever edit Modula-2 files :)
 autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
 autocmd FileType markdown set tw=80
 
-""""""" TOML
-" Plug 'cespare/vim-toml'
+"""""" TOML
+Plug 'cespare/vim-toml'
 
-""""""" CoffeeScript
+"""""" CoffeeScript
 " Plug 'kchmck/vim-coffee-script'
 
-""""""" Go
-" Plug 'fatih/vim-go'
+"""""" Go
+Plug 'fatih/vim-go'
 
 """"" End Filetypes ====================
 
