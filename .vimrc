@@ -13,7 +13,6 @@
 "   6.1) Normalization
 " 7) Project-Specific items
 " 8) nvim support
-" 9) macvim settings
 
 """ Plug =======================
 " PlugInstall       - install plugins
@@ -186,7 +185,6 @@ Plug 'vim-airline/vim-airline-themes'
     let g:airline_symbols = {}
   endif
   let g:airline_symbols.space = "\ua0"
-  let g:airline_theme='luna'
   let g:airline_powerline_fonts=1
   let g:airline#extensions#branch#enabled = 1
   let g:airline#extensions#syntastic#enabled = 1
@@ -210,15 +208,12 @@ Plug 'vim-airline/vim-airline-themes'
         \ 'c' : 'CMD   ',
         \ '': 'V-BLCK',
         \ }
-Plug 'tomasr/molokai'
-  let g:molokai_original = 1
-  let g:rehash256 = 1
+" Plug 'tomasr/molokai'
+"   let g:molokai_original = 1
+"   let g:rehash256 = 1
 
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'morhetz/gruvbox'
 Plug 'whatyouhide/vim-gotham'
-Plug 'rakr/vim-two-firewatch'
 Plug 'rakr/vim-one'
 Plug 'mkarmona/colorsbox'
 
@@ -314,16 +309,15 @@ set backspace=indent,eol,start  "Allow backspace in insert mode
 set background=dark
 syntax enable
 
-colorscheme molokai
-" colorscheme gruvbox
-" let g:airline_theme='gruvbox'
-" nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-" nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-" nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-"
-" nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-" nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-" nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
+nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+
+nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
 set enc=utf-8
 " set term=screen-256color
@@ -608,18 +602,3 @@ if has('nvim')
   set unnamedclip
 endif
 """ end nvim support ===================
-
-""" macvim =============================
-if has("gui_macvim")
-  colorscheme gotham
-  let g:airline_theme='gotham'
-  " colorscheme hybrid_material
-  " let g:airline_theme='deep_space'
-  " colorscheme two-firewatch
-  " let g:airline_theme='twofirewatch'
-  " colorscheme colorsbox-material
-  " let g:airline_theme='gruvbox'
-  " colorscheme one
-  " let g:airline_theme='one'
-endif
-""" end macvim =========================
