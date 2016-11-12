@@ -440,7 +440,8 @@ endif
 
 """ Keyboard shortcut setup =====================
 
-nnoremap å :nohlsearch<cr>  " Clear search highlight
+" Clear search highlight
+nnoremap å :nohlsearch<cr>
 
 " Search and replace - /something - cs - <Esc> - n.n.n.n.
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
