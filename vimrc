@@ -524,7 +524,7 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :x<CR>
 
 " Edit .vimrc
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>ev :e $MYVIMRC<CR>
 
 """ End Keyboard shortcut setup =================
 
