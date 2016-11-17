@@ -187,7 +187,7 @@ Plug 'tomasr/molokai'
   let g:molokai_original = 1
   let g:rehash256 = 1
 
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 
 Plug 'airblade/vim-gitgutter'
 
@@ -265,10 +265,14 @@ let &t_AF="\e[38;5;%dm"
 
 set t_ut= " improve screen clearing by using the background color
 set backspace=indent,eol,start  "Allow backspace in insert mode
- syntax enable
+syntax enable
 set background=dark
 
-colorscheme solarized
+colorscheme solarized8_dark_high
+nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
+  \ ? substitute(g:colors_name, 'dark', 'light', '')
+  \ : substitute(g:colors_name, 'light', 'dark', '')
+  \ )<cr>
 
 set enc=utf-8
 " set term=screen-256color
