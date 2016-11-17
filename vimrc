@@ -232,6 +232,7 @@ Plug 'ctrlpvim/ctrlp.vim'
     \}
 
 Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
+  let g:netrw_list_hide = &wildignore
 " Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
 Plug 'ervandew/supertab'
 
@@ -275,7 +276,7 @@ set enc=utf-8
 
 " Highlighting line or number follows....
 set cul " highlight current line
-set cuc " highlight current column
+" set cuc " highlight current column
 
 " Change vim cursor depending on the mode
 if has("unix")
