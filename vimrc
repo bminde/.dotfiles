@@ -537,6 +537,14 @@ endfunc
 au BufWrite * silent call DeleteTrailingWS()
 """"" End Normalization ================
 
+" make Esc happen without waiting for timeoutlen
+" fixes airline delay
+augroup FastEscape
+  autocmd!
+  au InsertEnter * set timeoutlen=0
+  au InsertLeave * set timeoutlen=1000
+augroup END
+
 """ End Auto Commands ==================
 
 """ Project-Specific Items =============
