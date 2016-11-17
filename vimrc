@@ -172,7 +172,7 @@ Plug 'vim-airline/vim-airline-themes'
   let g:airline_powerline_fonts = 1
   let g:airline_enable_branch = 1
   let g:airline_enable_syntastic = 1
-  let g:airline#extensions#tabline#enabled = 0
+  let g:airline#extensions#tabline#enabled = 1
   let g:airline_mode_map = {
         \ 'n' : 'N',
         \ 'i' : 'I',
@@ -339,6 +339,12 @@ set splitright
 
 " Always use vertical diffs
 set diffopt+=vertical
+
+" Buffers
+nnoremap <leader>l :ls<CR>:b<Space>
+nmap <Leader>n :enew<cr>
+nmap <Leader>f :bnext<CR>
+nmap <Leader>d :bprevious<CR>
 
 " Resize buffers
 if bufwinnr(1)
