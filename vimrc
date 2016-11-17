@@ -299,14 +299,11 @@ Plug 'itchyny/lightline.vim'
 
 """ End lightline
 
-" Plug 'tomasr/molokai'
-"   let g:molokai_original = 1
-"   let g:rehash256 = 1
+Plug 'tomasr/molokai'
+  let g:molokai_original = 1
+  let g:rehash256 = 1
 
-Plug 'morhetz/gruvbox'
-Plug 'whatyouhide/vim-gotham'
-Plug 'rakr/vim-one'
-Plug 'mkarmona/colorsbox'
+Plug 'altercation/vim-colors-solarized'
 
 Plug 'airblade/vim-gitgutter'
 
@@ -383,10 +380,10 @@ let &t_AF="\e[38;5;%dm"
 
 set t_ut= " improve screen clearing by using the background color
 set backspace=indent,eol,start  "Allow backspace in insert mode
+ syntax enable
 set background=dark
-syntax enable
 
-colorscheme gruvbox
+colorscheme solarized
 
 set enc=utf-8
 " set term=screen-256color
