@@ -13,6 +13,7 @@
 "   6.1) Normalization
 " 7) Project-Specific items
 " 8) Nvim support
+" 9) Macvim
 
 """ Plug =======================
 " PlugInstall       - install plugins
@@ -199,6 +200,7 @@ Plug 'tomasr/molokai'
   let g:rehash256 = 1
 
 Plug 'lifepillar/vim-solarized8'
+Plug 'kamwitsta/nordisk'
 
 Plug 'airblade/vim-gitgutter'
 
@@ -573,3 +575,13 @@ if has('nvim')
 endif
 
 """ End nvim support ===================
+
+""" Macvim  =======================
+
+if has("gui_macvim")
+  let macvim_skip_colorscheme=1
+  colorscheme nordisk
+  let g:airline_theme='nordisk'
+endif
+
+""" End Macvim  ===================
