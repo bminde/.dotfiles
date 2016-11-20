@@ -46,7 +46,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'avdgaag/vim-phoenix'
 
 """"""" Elm
-" Plug 'lambdatoast/elm.vim'
+Plug 'lambdatoast/elm.vim'
 
 """"""" JavaScript
 Plug 'elzr/vim-json'
@@ -128,29 +128,15 @@ Plug 'tpope/vim-fugitive'              " git support
   nnoremap <silent> <leader>gc :Gcommit<CR>
   nnoremap <silent> <leader>gt :Gcommit -v -q %:p<CR>
   nnoremap <silent> <leader>gb :Gblame<CR>
-  " nnoremap <silent> <leader>gl :Glog<CR>
   nnoremap <silent> <leader>gl :Git lg<CR>
   nnoremap <silent> <leader>gp :Git push<CR>
   nnoremap <silent> <leader>gr :Gread<CR>
   nnoremap <silent> <leader>gw :Gwrite<CR>
   nnoremap <silent> <leader>ge :Gedit<CR>
-" Plug 'scrooloose/nerdtree'
-  " map <leader>n :NERDTreeToggle<CR>
-  " let NERDTreeHighlightCursorline=1
-  " let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build']
-  " let g:NERDTreeWinSize = 40
-" Plug 'Xuyuanp/nerdtree-git-plugin'
+
 Plug 'DataWraith/auto_mkdir'
 Plug 'vim-scripts/gitignore'
 Plug 'vim-scripts/SyntaxRange'         " Allow ranges within a file to define different syntax mappings
-Plug 'mattn/webapi-vim'                " vim interface to web apis.  Required for gist-vim
-Plug 'mattn/gist-vim'                  " create gists trivially from buffer, selection, etc.
-  let g:gist_open_browser_after_post = 1
-  let g:gist_detect_filetype = 2
-  let g:gist_post_private = 1
-  if has('macunix')
-    let g:gist_clip_command = 'pbcopy'
-  endif
 
 Plug 'sjl/gundo.vim'
   nnoremap <F7> :GundoToggle<CR>
@@ -199,9 +185,20 @@ Plug 'tomasr/molokai'
   let g:molokai_original = 1
   let g:rehash256 = 1
 
-Plug 'lifepillar/vim-solarized8'
-Plug 'kamwitsta/nordisk'
+Plug 'altercation/vim-colors-solarized'
+  " set t_Co=16 " 8 | 256
+  " g:solarized_termcolors=   16       " |   256
+  " g:solarized_termtrans =   0        " |   1
+  " g:solarized_degrade   =   0        " |   1
+  " g:solarized_bold      =   1        " |   0
+  " g:solarized_underline =   1        " |   0
+  " g:solarized_italic    =   1        " |   0
+  " g:solarized_contrast  =   "normal" " |   "high" or "low"
+  " g:solarized_visibility=   "normal" " |   "high" or "low"
+  " g:solarized_hitrail   =   0        " |   1
+  " g:solarized_menu      =   1        " |   0
 
+Plug 'kamwitsta/nordisk'
 Plug 'airblade/vim-gitgutter'
 
 """"" End UI Plugins ===================
@@ -257,8 +254,8 @@ call plug#end() " required for Vundle
 
 """ UI Tweaks ==========================
 
-set number    " line numbering
-set t_Co=256  " Force 256 colors
+" line numbering
+set number
 
 " Turn off menu in gui
 set guioptions="agimrLt"
@@ -271,51 +268,18 @@ if has('mouse')
   set mouse=a
 endif
 
-" in case t_Co alone doesn't work, add this as well:
-" i.e. Force 256 colors harder
-let &t_AB="\e[48;5;%dm"
-let &t_AF="\e[38;5;%dm"
-
 set t_ut= " improve screen clearing by using the background color
 set backspace=indent,eol,start  "Allow backspace in insert mode
 syntax enable
 set background=dark
 
-colorscheme solarized8_dark_high
-nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
-  \ ? substitute(g:colors_name, 'dark', 'light', '')
-  \ : substitute(g:colors_name, 'light', 'dark', '')
-  \ )<cr>
+colorscheme solarized
 
 set enc=utf-8
 " set term=screen-256color
 " let $TERM='screen-256color'
 
-" Highlighting line or number follows....
 set cul " highlight current line
-" set cuc " highlight current column
-
-" Change vim cursor depending on the mode
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin\n"
-    " OS X iTerm 2 settings
-    if exists('$TMUX')
-      let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-      let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-    else
-      let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-      let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-    endif
-  else
-    if has("autocmd")
-      au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-      au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-      au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-      au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-    endif
-  endif
-endif
 
 " Show trailing whitespace and spaces before a tab:
 :highlight ExtraWhitespace ctermbg=red guibg=red
@@ -338,9 +302,6 @@ nnoremap å :nohlsearch<cr>
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
     \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
 omap s :normal vs<CR>
-
-" Escape keys
-:imap jk <Esc>
 
 " Move vertically by visual line
 nnoremap j gj
@@ -525,21 +486,6 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 """ Auto Commands ======================
 
-""""" Filetypes ========================
-augroup erlang
-  au!
-  au BufNewFile,BufRead *.erl setlocal tabstop=4
-  au BufNewFile,BufRead *.erl setlocal shiftwidth=4
-  au BufNewFile,BufRead *.erl setlocal softtabstop=4
-  au BufNewFile,BufRead relx.config setlocal filetype=erlang
-augroup END
-
-augroup dotenv
-  au!
-  au BufNewFile,BufRead *.envrc setlocal filetype=sh
-augroup END
-""""" End Filetypes ====================
-
 """"" Normalization ====================
 " Delete trailing white space on save
 func! DeleteTrailingWS()
@@ -567,14 +513,6 @@ set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
 
 """ End Project-Specific Items =========
-
-""" Nvim support =======================
-
-if has('nvim')
-  set unnamedclip
-endif
-
-""" End nvim support ===================
 
 """ Macvim  =======================
 
