@@ -285,6 +285,7 @@ set enc=utf-8
 " let $TERM='screen-256color'
 
 set cul " highlight current line
+set cuc " highlight current column
 
 " Show trailing whitespace and spaces before a tab:
 :highlight ExtraWhitespace ctermbg=red guibg=red
