@@ -73,6 +73,11 @@ Plug 'jtratner/vim-flavored-markdown'
 autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
 autocmd FileType markdown set tw=80
 
+"""""" Taskpaper
+Plug 'davidoc/taskpaper.vim'
+Plug 'vim-scripts/vim-auto-save'
+Plug 'djoshea/vim-autoread'
+
 """""" TOML
 Plug 'cespare/vim-toml'
 
@@ -155,7 +160,7 @@ Plug 'henrik/vim-indexed-search'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
   set laststatus=2
-  let g:airline_theme='solarized'
+  let g:airline_theme='luna'
   let g:airline_powerline_fonts = 1
   let g:airline_enable_branch = 1
   let g:airline_enable_syntastic = 1
@@ -486,6 +491,10 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 """ Auto Commands ======================
 
+" Taskpaper auto write/read
+autocmd filetype taskpaper let g:auto_save = 1
+autocmd filetype taskpaper :WatchForChanges!
+
 """"" Normalization ====================
 " Delete trailing white space on save
 func! DeleteTrailingWS()
@@ -494,8 +503,6 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 au BufWrite * silent call DeleteTrailingWS()
-""""" End Normalization ================
-
 " make Esc happen without waiting for timeoutlen
 " fixes airline delay
 augroup FastEscape
@@ -503,6 +510,7 @@ augroup FastEscape
   au InsertEnter * set timeoutlen=0
   au InsertLeave * set timeoutlen=1000
 augroup END
+""""" End Normalization ================
 
 """ End Auto Commands ==================
 
