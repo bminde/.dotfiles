@@ -109,10 +109,7 @@ set nrformats=
 "   let g:syntastic_check_on_wq = 0
 
 Plug 'tpope/vim-surround'
-" temporary fix for ultisnips macvim bug
-if !has("gui_macvim")
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-endif
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-projectionist'
 Plug 'mhinz/vim-startify'
