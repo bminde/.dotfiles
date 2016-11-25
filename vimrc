@@ -123,6 +123,10 @@ Plug 'godlygeek/tabular'
     vmap <Leader>a: :Tabularize /:\zs<CR>
   endif
 
+Plug 'terryma/vim-expand-region'
+  vmap v <Plug>(expand_region_expand)
+  vmap <C-v> <Plug>(expand_region_shrink)
+
 Plug 'janko-m/vim-test'                " Run tests with varying granularity
   nmap <silent> <leader>t :TestNearest<CR>
   nmap <silent> <leader>T :TestFile<CR>
