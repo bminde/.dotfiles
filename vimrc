@@ -115,6 +115,13 @@ Plug 'tpope/vim-projectionist'
 Plug 'mhinz/vim-startify'
 Plug 'tomtom/tcomment_vim'  " Line commenting
   " By default, `gc` will toggle comments
+Plug 'godlygeek/tabular'
+  if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+  endif
 
 Plug 'janko-m/vim-test'                " Run tests with varying granularity
   nmap <silent> <leader>t :TestNearest<CR>
