@@ -168,7 +168,11 @@ Plug 'henrik/vim-indexed-search'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
   set laststatus=2
-  let g:airline_theme='luna'
+  if has("gui_macvim")
+    let g:airline_theme='nordisk'
+  else
+    let g:airline_theme='luna'
+  endif
   let g:airline_powerline_fonts = 1
   let g:airline_enable_branch = 1
   let g:airline_enable_syntastic = 1
@@ -286,7 +290,12 @@ set backspace=indent,eol,start  "Allow backspace in insert mode
 syntax enable
 set background=dark
 
-colorscheme solarized
+if has("gui_macvim")
+  let macvim_skip_colorscheme=1
+  colorscheme nordisk
+else
+  colorscheme solarized
+endif
 
 set enc=utf-8
 " set term=screen-256color
@@ -530,13 +539,3 @@ set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
 
 """ End Project-Specific Items =========
-
-""" Macvim  =======================
-
-if has("gui_macvim")
-  let macvim_skip_colorscheme=1
-  colorscheme nordisk
-  let g:airline_theme='nordisk'
-endif
-
-""" End Macvim  ===================
