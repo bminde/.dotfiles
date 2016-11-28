@@ -12,8 +12,6 @@
 "   6.1) Filetypes
 "   6.1) Normalization
 " 7) Project-Specific items
-" 8) Nvim support
-" 9) Macvim
 
 """ Plug =======================
 " PlugInstall       - install plugins
