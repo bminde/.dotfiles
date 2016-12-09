@@ -292,7 +292,7 @@ if has("gui_macvim")
   let macvim_skip_colorscheme=1
   colorscheme nordisk
 else
-  colorscheme solarized
+  colorscheme molokai
 endif
 
 set enc=utf-8
