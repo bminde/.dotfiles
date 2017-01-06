@@ -1,18 +1,103 @@
-" Table of Contents
-" 1) Plug
-"   1.1) Filetypes
-"   1.2) Utilities
-"   1.3) UI Plugins
-"   1.4) Code Navigation
-" 2) UI Tweaks
-" 3) Keyboard shortcut Setup
-" 4) Vim environment handling tweaks
-" 5) File navigation
-" 6) Auto Commands
-"   6.1) Filetypes
-"   6.1) Normalization
-" 7) Project-Specific items
+scriptencoding utf-8
 
+" Table of Contents
+" 1) Basics #basics
+"   1.1) Tabs #tabs
+"   1.2) Format Options #format-options
+"   1.3) Leader #leader
+"   1.4) Omni #omni
+"   1.5) UI Basics #ui-basics
+" 2) Plugins #plugins
+"   2.1) Filetypes #filetypes
+"   2.2) Utilities #utilities
+"   2.3) UI Plugins #ui-plugins
+"   2.4) Code Navigation #code-navigation
+" 3) UI Tweaks #ui-tweaks
+"   3.1) Theme #theme
+" 4) Navigation #navigation
+
+"""""""""""""" Basics #basics
+""" Tabs #tabs
+" - Two spaces wide
+set tabstop=2
+set softtabstop=2
+" - Expand them all
+set expandtab
+" - Indent by 2 spaces by default
+set shiftwidth=2
+
+""" Format Options #format-options
+set formatoptions=tcrq
+set textwidth=80
+
+" Start scrolling 8 lines before the border
+set scrolloff=8
+set sidescrolloff=15
+set sidescroll=1
+
+""" Leader #leader
+" Use space for leader
+let g:mapleader=' '
+
+""" omni #omni
+" enable omni syntax completion
+set omnifunc=syntaxcomplete#Complete
+
+""" UI Basics #ui-basics
+" turn off mouse
+" set mouse=""
+
+" Set GUI font
+set guifont=Sauce\ Code\ Powerline:h13
+
+" Turn off menu in gui
+set guioptions="agimrLt"
+
+" NOTE: I stopped highlighting cursor position because it makes redrawing
+" super slow.
+" set cursorline
+" set cursorcolumn
+
+" Highlight search results
+set hlsearch
+" Incremental search, search as you type
+set incsearch
+" Ignore case when searching
+set ignorecase smartcase
+" Ignore case when searching lowercase
+set smartcase
+
+" Tab completion
+set wildmode=list:longest,list:full
+set wildignore+=.DS_Store
+set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.psd,*.o,*.obj,*.min.js,*.codekit
+set wildignore+=*/bower_components/*,*/node_modules/*,*/_build/*,*/build/*,*/deps/*
+set wildignore+=*/.git/*,*/.svn/*,*/log/*,*/tmp/*,*/vendor/*,*/.codekit-cache/*
+
+" Treat 0-padded numbers as decimal, not octal
+set nrformats=
+
+" Set the title of the iterm tab
+set title
+
+" Line numbering
+set number
+
+""" Undo #undo
+" undofile - This allows you to use undos after exiting and restarting
+" This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
+" :help undo-persistence
+" This is only present in 7.3+
+if isdirectory($HOME . '/.config/nvim/undo') == 0
+  :silent !mkdir -p ~/.config/nvim/undo > /dev/null 2>&1
+endif
+set undodir=./.vim-undo//
+set undodir+=~/.vim/undo//
+set undofile
+
+"""""""""""""" End Basics
+
+"""""""""""""" Plugins #plugins
 """ Plug =======================
 " PlugInstall       - install plugins
 " PlugUpdate        - install or update plugins
@@ -27,92 +112,65 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+call plug#begin()
 
-" Initialize plug
-call plug#begin('~/.vim/plugged')
+""" Filetypes #filetypes
+" Polyglot loads language support on demand!
+Plug 'sheerun/vim-polyglot'
+  let g:polyglot_disabled = ['elm']
 
-""""" Filetypes ========================
+" Elixir
+Plug 'slashmili/alchemist.vim'
 
-""""""" Ruby
-Plug 'vim-ruby/vim-ruby'
+" Phoenix
+Plug 'c-brenn/phoenix.vim'
+Plug 'tpope/vim-projectionist' " required for some navigation features
 
-""""""" Elixir
-Plug 'elixir-lang/vim-elixir'
-" Plug 'slashmili/alchemist.vim'
+" Elm
+Plug 'ElmCast/elm-vim'
+  let g:elm_format_autosave = 1
 
-""""""" Phoenix
-Plug 'avdgaag/vim-phoenix'
-
-""""""" Elm
-Plug 'lambdatoast/elm.vim'
-
-""""""" JavaScript
-Plug 'elzr/vim-json'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'Shutnik/jshint2.vim'
-" Plug 'ElmCast/elm-vim'
-
-""""""" Web Development (HTML/CSS/preprocessors/etc)
-Plug 'aaronjensen/vim-sass-status'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'lukaszb/vim-web-indent'
-Plug 'othree/html5.vim'
-Plug 'tpope/vim-haml'
-
-""""""" Markdown
+" Markdown
 " Use fenced code blocks in markdown
-Plug 'jtratner/vim-flavored-markdown'
-  let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'clojure', 'sh', 'html', 'sass', 'scss', 'haml', 'erlang', 'go']
+" Plug 'jtratner/vim-flavored-markdown'
+"   let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'clojure', 'sh', 'html', 'sass', 'scss', 'haml', 'erlang', 'go']
 
 " .md is markdown, not Modula-2
-autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
-autocmd FileType markdown set tw=80
+" autocmd BufNewFile,BufReadPost *.md,*.markdown set filetype=markdown
+" autocmd FileType markdown set tw=80
 
 """""" Taskpaper
 Plug 'davidoc/taskpaper.vim'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'djoshea/vim-autoread'
 
-"""""" TOML
-Plug 'cespare/vim-toml'
+""" Utilities #utilities
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    let g:deoplete#enable_at_startup = 1
+    if !exists('g:deoplete#omni#input_patterns')
+      let g:deoplete#omni#input_patterns = {}
+    endif
+    " use tab for completion
+    inoremap <expr><Tab> pumvisible() ? "\<c-n>" : "\<Tab>"
+    inoremap <expr><S-Tab> pumvisible() ? "\<c-p>" : "\<S-Tab>"
+endif
 
-"""""" Go
-Plug 'fatih/vim-go'
+" Add comment textobjects (I really want to reformat comments without affecting
+" the next line of code)
+Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
+  " Example: Reformat a comment with `gqac` (ac is "a comment")
 
-""""" End Filetypes ====================
+" EditorConfig support
+Plug 'editorconfig/editorconfig-vim'
 
-""""" Utilities ========================
+" Jump between quicklist, location (syntastic, etc) items with ease, among other things
+Plug 'tpope/vim-unimpaired'
 
-" Set leader
-let mapleader = "\<Space>"
-let maplocalleader="\\"
-
-" Treat 0-padded numbers as decimal, not octal
-set nrformats=
-
-" Plug 'editorconfig/editorconfig-vim' " EditorConfig support
-
-" Plug 'scrooloose/syntastic' " Syntax highlighting
-"   let g:syntastic_mode_map = { "mode": "passive",
-"                              \ "passive_filetypes": ["elixir", "java", "html", "css", "scss"] }
-"   set statusline+=%#warningmsg#
-"   set statusline+=%{SyntasticStatuslineFlag()}
-"   set statusline+=%*
-"   let g:syntastic_always_populate_loc_list = 1
-"   let g:syntastic_auto_loc_list = 1
-"   let g:syntastic_check_on_open = 1
-"   let g:syntastic_check_on_wq = 0
-
-Plug 'tpope/vim-surround'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-projectionist'
-Plug 'mhinz/vim-startify'
-Plug 'tomtom/tcomment_vim'  " Line commenting
+" Line commenting
+Plug 'tomtom/tcomment_vim'
   " By default, `gc` will toggle comments
+
 Plug 'godlygeek/tabular'
   if exists(":Tabularize")
     nmap <Leader>a= :Tabularize /=<CR>
@@ -131,9 +189,13 @@ Plug 'janko-m/vim-test'                " Run tests with varying granularity
   nmap <silent> <leader>a :TestSuite<CR>
   nmap <silent> <leader>l :TestLast<CR>
   nmap <silent> <leader>g :TestVisit<CR>
+  " run tests in neovim strategy
+  let g:test#strategy = 'neovim'
+  " I use spinach, not cucumber!
+  let g:test#ruby#cucumber#executable = 'spinach'
 
-Plug 'christoomey/vim-tmux-navigator'  " Navigate between tmux panes and vim splits seamlessly
-Plug 'tpope/vim-fugitive'              " git support
+" git support from dat tpope
+Plug 'tpope/vim-fugitive'
   nnoremap <silent> <leader>gs :Gstatus<CR>
   nnoremap <silent> <leader>gd :Gdiff<CR>
   nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -145,12 +207,24 @@ Plug 'tpope/vim-fugitive'              " git support
   nnoremap <silent> <leader>gw :Gwrite<CR>
   nnoremap <silent> <leader>ge :Gedit<CR>
 
-Plug 'DataWraith/auto_mkdir'
-Plug 'vim-scripts/gitignore'
-Plug 'vim-scripts/SyntaxRange'         " Allow ranges within a file to define different syntax mappings
+" github support from dat tpope
+Plug 'tpope/vim-rhubarb'
 
+" vim interface to web apis.  Required for gist-vim
+Plug 'mattn/webapi-vim'
+
+" create gists trivially from buffer, selection, etc.
+Plug 'mattn/gist-vim'
+  let g:gist_open_browser_after_post = 1
+  let g:gist_detect_filetype = 2
+  let g:gist_post_private = 1
+  if has('macunix')
+    let g:gist_clip_command = 'pbcopy'
+  endif
+
+" visualize your undo tree
 Plug 'sjl/gundo.vim'
-  nnoremap <F7> :GundoToggle<CR>
+  nnoremap <F5> :GundoToggle<CR>
 
 Plug 'szw/vim-maximizer'
   nnoremap <silent><F6> :MaximizerToggle<CR>
@@ -160,9 +234,13 @@ Plug 'szw/vim-maximizer'
 " Indexed search
 Plug 'henrik/vim-indexed-search'
 
-""""" End Utilities ====================
+""" UI Plugins #ui-plugins
+" Molokai theme makes me cozy
+Plug 'tomasr/molokai'
+Plug 'fmoralesc/molokayo'
+" Try out the ayu theme - https://github.com/ayu-theme/ayu-vim
+Plug 'ayu-theme/ayu-vim'
 
-""""" UI Plugins =======================
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
   set laststatus=2
@@ -171,9 +249,12 @@ Plug 'vim-airline/vim-airline-themes'
   else
     let g:airline_theme='luna'
   endif
-  let g:airline_powerline_fonts = 0
-  let g:airline_enable_branch = 1
-  let g:airline_enable_syntastic = 1
+  let g:bufferline_echo = 0
+  let g:airline_powerline_fonts=0
+  let g:airline_enable_branch=1
+  let g:airline_enable_syntastic=1
+  let g:airline_branch_prefix = '⎇ '
+  let g:airline_paste_symbol = '∥'
   let g:airline#extensions#tabline#enabled = 0
   let g:airline_mode_map = {
         \ 'n' : 'N',
@@ -200,10 +281,6 @@ Plug 'vim-airline/vim-airline-themes'
   let g:airline_symbols.paste = 'ρ'
   let g:airline_symbols.whitespace = 'Ξ'
 
-Plug 'tomasr/molokai'
-  let g:molokai_original = 1
-  let g:rehash256 = 1
-
 Plug 'altercation/vim-colors-solarized'
   " set t_Co=16 " 8 | 256
   " g:solarized_termcolors=   16       " |   256
@@ -220,78 +297,79 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'kamwitsta/nordisk'
 Plug 'airblade/vim-gitgutter'
 
-""""" End UI Plugins ===================
+""" Code Navigation #code-navigation
+" fzf fuzzy finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+  let g:fzf_layout = { 'window': 'enew' }
+  let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+  nnoremap <silent> <leader>p :FZF<cr>
+  nnoremap <silent> <leader>a :Ag<cr>
+  augroup localfzf
+    autocmd!
+    autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
+    autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
+  augroup END
 
-""""" Code Navigation ===============
+" Open files where you last left them
+Plug 'dietsche/vim-lastplace'
 
-Plug 'ctrlpvim/ctrlp.vim'
-  nnoremap <Leader>p :CtrlP<CR>
-  let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
-  let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
-  let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
-  let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
-  let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
-  let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
-  let g:ctrlp_arg_map = 0
-  let g:ctrlp_dotfiles = 0               " do not show (.) dotfiles in match list
-  let g:ctrlp_showhidden = 0             " do not show hidden files in match list
-  let g:ctrlp_split_window = 0
-  let g:ctrlp_max_height = 40            " restrict match list to a maxheight of 40
-  let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
-  let g:ctrlp_max_files = 0              " no restriction on results/file list
-  let g:ctrlp_working_path_mode = 'r'
-  let g:ctrlp_dont_split = 'NERD_tree_2' " don't split these buffers
-  let g:ctrlp_user_command = {
-    \ 'types': {
-    \ 1: ['.git', 'cd %s && git ls-files'],
-    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-    \ }
-    \ }
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-e>', '<c-space>'],
-    \ 'AcceptSelection("h")': ['<c-h>', '<c-x>', '<c-cr>', '<c-s>'],
-    \ 'AcceptSelection("v")': ['<c-v>'],
-    \ 'AcceptSelection("t")': ['<c-t>'],
-    \ 'AcceptSelection("r")': ['<cr>'],
-    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
-    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
-    \ 'PrtHistory(-1)':       ['<c-n>'],
-    \ 'PrtHistory(1)':        ['<c-p>'],
-    \ 'ToggleFocus()':        ['<c-tab>'],
-    \}
+" Execute code checks, find mistakes, in the background
+Plug 'neomake/neomake'
+  " Run Neomake when I save any buffer
+  augroup localneomake
+    autocmd! BufWritePost * Neomake
+  augroup END
+  " Don't tell me to use smartquotes in markdown ok?
+  let g:neomake_markdown_enabled_makers = []
 
-Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw, among other things
+  " Configure a nice credo setup, courtesy https://github.com/neomake/neomake/pull/300
+  let g:neomake_elixir_enabled_makers = ['mix', 'mycredo']
+  function! NeomakeCredoErrorType(entry)
+    if a:entry.type ==# 'F'      " Refactoring opportunities
+      let l:type = 'W'
+    elseif a:entry.type ==# 'D'  " Software design suggestions
+      let l:type = 'I'
+    elseif a:entry.type ==# 'W'  " Warnings
+      let l:type = 'W'
+    elseif a:entry.type ==# 'R'  " Readability suggestions
+      let l:type = 'I'
+    elseif a:entry.type ==# 'C'  " Convention violation
+      let l:type = 'W'
+    else
+      let l:type = 'M'           " Everything else is a message
+    endif
+    let a:entry.type = l:type
+  endfunction
+
+  let g:neomake_elixir_mycredo_maker = {
+        \ 'exe': 'mix',
+        \ 'args': ['credo', 'list', '%:p', '--format=oneline'],
+        \ 'errorformat': '[%t] %. %f:%l:%c %m,[%t] %. %f:%l %m',
+        \ 'postprocess': function('NeomakeCredoErrorType')
+        \ }
+
+" Easily manage tags files
+Plug 'ludovicchabant/vim-gutentags'
+  let g:gutentags_cache_dir = '~/.tags_cache'
+
+" navigate up a directory with '-' in netrw, among other things
+Plug 'tpope/vim-vinegar'
   let g:netrw_list_hide = &wildignore
-" Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
-Plug 'ervandew/supertab'
 
-""""" End Code Navigation ===========
+call plug#end()
+"""""""""""""" End Plugins
 
-call plug#end() " required for Vundle
-
-""" End setup Vundle ===================
-
-""" UI Tweaks ==========================
-
-" line numbering
-set number
-
-" Turn off menu in gui
-set guioptions="agimrLt"
-
-" Set GUI font
-set guifont=Sauce\ Code\ Powerline:h13
-
-" Enable mouse
-if has('mouse')
-  set mouse=a
+"""""""""""""" UI Tweaks #ui-tweaks
+""" Theme #theme
+if (empty($TMUX))
+  if (has('termguicolors'))
+    set termguicolors
+  endif
 endif
-
-set t_ut= " improve screen clearing by using the background color
-set backspace=indent,eol,start  "Allow backspace in insert mode
-syntax enable
 set background=dark
-
+"set background=light
+syntax enable
 if has("gui_macvim")
   let macvim_skip_colorscheme=1
   colorscheme nordisk
@@ -299,29 +377,20 @@ else
   colorscheme molokai
 endif
 
-set enc=utf-8
-" set term=screen-256color
-" let $TERM='screen-256color'
+" Ayu theme config
+" let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+"colorscheme ayu
 
-set cul " highlight current line
-set cuc " highlight current column
+""" Keyboard
+" Remove highlights
+" Clear the search buffer when hitting return
+nnoremap <silent> å :nohlsearch<cr>
 
-" Show trailing whitespace and spaces before a tab:
-:highlight ExtraWhitespace ctermbg=red guibg=red
-:autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\\t/
-
-" Open files where we left off
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g'\"" | endif
-endif
-
-""" End UI Tweaks ======================
-
-""" Keyboard shortcut setup =====================
-
-" Clear search highlight
-nnoremap å :nohlsearch<cr>
+" Move vertically by visual line
+nnoremap j gj
+nnoremap k gk
 
 " Search and replace - /something - cs - <Esc> - n.n.n.n.
 vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
@@ -372,10 +441,12 @@ nmap <leader>fef ggVG=
 nmap :ed :edit %:p:h/
 
 " Custom split opening / closing behaviour
-map <C-N> :vsp .<CR>
+map <C-N> :vsp<CR><C-P>
 map <C-C> :q<CR>
+" Custom tab opening behaviour
+map <leader>n :tabnew .<CR><C-P>
 
-" Reselect pasted content:
+" reselect pasted content:
 noremap gV `[v`]
 
 " Toggle paste
@@ -396,14 +467,18 @@ nnoremap <BS> gg
 " Save with sudo
 ca w!! w !sudo tee "%"
 
-" Redraw my screen
-nnoremap U :syntax sync fromstart<cr>:redraw!<cr>
-
 " Keep the cursor in place while joining lines
 nnoremap J mzJ`z
 
+" Split line (sister to [J]oin lines above)
+" The normal use of S is covered by cc, so don't worry about shadowing it.
+" nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+
 " Open the alternate file
 map ,, <C-^>
+
+" Makes foo-bar considered one word
+set iskeyword+=-
 
 " Fast save
 nnoremap <Leader>w :w<CR>
@@ -417,112 +492,65 @@ nnoremap <Leader>x :x<CR>
 " Edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<CR>
 
-""" End Keyboard shortcut setup =================
+""" Auto Commands ====================== #auto-cmd
+""""" Filetypes ========================
+augroup erlang
+  autocmd!
+  autocmd BufNewFile,BufRead *.erl setlocal tabstop=4
+  autocmd BufNewFile,BufRead *.erl setlocal shiftwidth=4
+  autocmd BufNewFile,BufRead *.erl setlocal softtabstop=4
+  autocmd BufNewFile,BufRead relx.config setlocal filetype=erlang
+augroup END
 
-""" Vim environment handling tweaks ====
+augroup elm
+  autocmd!
+  autocmd BufNewFile,BufRead *.elm setlocal tabstop=4
+  autocmd BufNewFile,BufRead *.elm setlocal shiftwidth=4
+  autocmd BufNewFile,BufRead *.elm setlocal softtabstop=4
+augroup END
 
-""""" BACKUP / TMP FILES
-" Save your backups to a less annoying place than the current directory.
-" If you have .vim-backup in the current directory, it'll use that.
-" Otherwise it saves it to ~/.vim/backup or . if all else fails.
-if isdirectory($HOME . '/.vim/backup') == 0
-  :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
-endif
-set backupdir-=.
-set backupdir+=.
-set backupdir-=~/
-set backupdir^=~/.vim/backup/
-set backupdir^=./.vim-backup/
-set backup
+augroup dotenv
+  autocmd!
+  autocmd BufNewFile,BufRead *.envrc setlocal filetype=sh
+augroup END
 
-" Save your swp files to a less annoying place than the current directory.
-" If you have .vim-swap in the current directory, it'll use that.
-" Otherwise it saves it to ~/.vim/swap, ~/tmp or .
-if isdirectory($HOME . '/.vim/swap') == 0
-  :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
-endif
-set directory=./.vim-swap//
-set directory=~/.vim/swap
-set viminfo+=n~/.vim/viminfo
+augroup es6
+  autocmd!
+  autocmd BufNewFile,BufRead *.es6 setlocal filetype=javascript
+  autocmd BufNewFile,BufRead *.es6.erb setlocal filetype=javascript
+augroup END
 
-if exists("+undofile")
-  " undofile - This allows you to use undos after exiting and restarting
-  " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
-  " :help undo-persistence
-  " This is only present in 7.3+
-  if isdirectory($HOME . '/.vim/undo') == 0
-    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-  endif
-  set undodir=./.vim-undo//
-  set undodir+=~/.vim/undo//
-  set undofile
-endif
+augroup markdown
+  autocmd!
+  autocmd FileType markdown setlocal textwidth=80
+  autocmd FileType markdown setlocal formatoptions=tcrq
+augroup END
 
-" Prevent Vim from clobbering the scrollback buffer. See
-" http://www.shallowsky.com/linux/noaltscreen.html
-set t_ti= t_te=
+augroup taskpaper
+  autocmd!
+  autocmd filetype taskpaper let g:auto_save = 1
+  autocmd filetype taskpaper :WatchForChanges!
+augroup END
 
-" Display incomplete commands
-set showcmd
-
-" Set encoding
-set encoding=utf-8
-
-" Start scrolling 8 lines before the border
-set scrolloff=8
-set sidescrolloff=15
-set sidescroll=1
-
-" Whitespace
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-" Searching
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-
-" Tab completion
-set wildmode=list:longest,list:full
-set wildignore+=.DS_Store
-set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.psd,*.o,*.obj,*.min.js,*.codekit
-set wildignore+=*/bower_components/*,*/node_modules/*,*/_build/*,*/build/*,*/deps/*
-set wildignore+=*/.git/*,*/.svn/*,*/log/*,*/tmp/*,*/vendor/*,*/.codekit-cache/*
-
-" Makes foo-bar considered one word
-set iskeyword+=-
-
-""" End Vim environment handling tweaks
-
-""" File navigation ====================
-
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-""" End File navigation ================
-
-""" Auto Commands ======================
-
-" Taskpaper auto write/read
-autocmd filetype taskpaper let g:auto_save = 1
-autocmd filetype taskpaper :WatchForChanges!
+augroup viml
+  autocmd!
+  autocmd FileType vim setlocal textwidth=80
+  autocmd FileType vim setlocal formatoptions=tcrq
+augroup END
+""""" End Filetypes ====================
 
 """"" Normalization ====================
 " Delete trailing white space on save
 func! DeleteTrailingWS()
-  exe "normal mz"
+  exe 'normal mz'
   %s/\s\+$//ge
-  exe "normal `z"
+  exe 'normal `z'
 endfunc
-au BufWrite * silent call DeleteTrailingWS()
+
+augroup whitespace
+  autocmd BufWrite * silent call DeleteTrailingWS()
+augroup END
+
 " make Esc happen without waiting for timeoutlen
 " fixes airline delay
 augroup FastEscape
@@ -531,8 +559,29 @@ augroup FastEscape
   au InsertLeave * set timeoutlen=1000
 augroup END
 """"" End Normalization ================
-
 """ End Auto Commands ==================
+
+""" Navigation ====================== #navigation
+" Navigate terminal with C-h,j,k,l
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+
+" Navigate splits with C-h,j,k,l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <silent> <BS> <C-w>h
+  " Have to add this because hyperterm sends backspace for C-h
+
+" Navigate tabs with leader+h,l
+" It's hard to hit space and h/l simultaneously so increase the timeout for
+" space
+nnoremap <leader>h :tabprev<cr>
+nnoremap <leader>l :tabnext<cr>
+""" End Navigation ==================
 
 """ Project-Specific Items =============
 
