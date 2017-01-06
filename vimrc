@@ -55,8 +55,8 @@ set guioptions="agimrLt"
 
 " NOTE: I stopped highlighting cursor position because it makes redrawing
 " super slow.
-" set cursorline
-" set cursorcolumn
+set cursorline
+set cursorcolumn
 
 " Highlight search results
 set hlsearch
@@ -125,6 +125,7 @@ Plug 'slashmili/alchemist.vim'
 " Phoenix
 Plug 'c-brenn/phoenix.vim'
 Plug 'tpope/vim-projectionist' " required for some navigation features
+Plug 'powerman/vim-plugin-AnsiEsc'
 
 " Elm
 Plug 'ElmCast/elm-vim'
