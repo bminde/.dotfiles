@@ -305,11 +305,13 @@ Plug 'junegunn/fzf.vim'
   let $FZF_DEFAULT_COMMAND = 'ag -g ""'
   nnoremap <silent> <leader>p :FZF<cr>
   nnoremap <silent> <leader>a :Ag<cr>
-  augroup localfzf
-    autocmd!
-    autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
-    autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
-  augroup END
+  if has('nvim')
+    augroup localfzf
+      autocmd!
+      autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
+      autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
+    augroup END
+  endif
 
 " Open files where you last left them
 Plug 'dietsche/vim-lastplace'
@@ -563,10 +565,12 @@ augroup END
 
 """ Navigation ====================== #navigation
 " Navigate terminal with C-h,j,k,l
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
+if has('nvim')
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
+endif
 
 " Navigate splits with C-h,j,k,l
 nnoremap <C-h> <C-w>h
