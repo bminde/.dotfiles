@@ -241,6 +241,7 @@ Plug 'tomasr/molokai'
 Plug 'fmoralesc/molokayo'
 " Try out the ayu theme - https://github.com/ayu-theme/ayu-vim
 Plug 'ayu-theme/ayu-vim'
+Plug 'morhetz/gruvbox'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -248,7 +249,7 @@ Plug 'vim-airline/vim-airline-themes'
   if has("gui_macvim")
     let g:airline_theme='nordisk'
   else
-    let g:airline_theme='luna'
+    let g:airline_theme='gruvbox'
   endif
   let g:bufferline_echo = 0
   let g:airline_powerline_fonts=0
@@ -281,19 +282,6 @@ Plug 'vim-airline/vim-airline-themes'
   let g:airline_symbols.paste = '∥'
   let g:airline_symbols.paste = 'ρ'
   let g:airline_symbols.whitespace = 'Ξ'
-
-Plug 'altercation/vim-colors-solarized'
-  " set t_Co=16 " 8 | 256
-  " g:solarized_termcolors=   16       " |   256
-  " g:solarized_termtrans =   0        " |   1
-  " g:solarized_degrade   =   0        " |   1
-  " g:solarized_bold      =   1        " |   0
-  " g:solarized_underline =   1        " |   0
-  " g:solarized_italic    =   1        " |   0
-  " g:solarized_contrast  =   "normal" " |   "high" or "low"
-  " g:solarized_visibility=   "normal" " |   "high" or "low"
-  " g:solarized_hitrail   =   0        " |   1
-  " g:solarized_menu      =   1        " |   0
 
 Plug 'kamwitsta/nordisk'
 Plug 'airblade/vim-gitgutter'
@@ -377,7 +365,7 @@ if has("gui_macvim")
   let macvim_skip_colorscheme=1
   colorscheme nordisk
 else
-  colorscheme molokai
+  colorscheme gruvbox
 endif
 
 " Ayu theme config
