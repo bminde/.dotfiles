@@ -380,8 +380,10 @@ Plug 'neomake/neomake'
         \ }
 
 " Easily manage tags files
-Plug 'ludovicchabant/vim-gutentags'
-  let g:gutentags_cache_dir = '~/.tags_cache'
+if executable('ctags')
+  Plug 'ludovicchabant/vim-gutentags'
+    let g:gutentags_cache_dir = '~/.tags_cache'
+endif
 
 " navigate up a directory with '-' in netrw, among other things
 Plug 'tpope/vim-vinegar'
