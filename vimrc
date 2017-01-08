@@ -389,6 +389,8 @@ endif
 Plug 'tpope/vim-vinegar'
   let g:netrw_list_hide = &wildignore
 
+Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
+
 call plug#end()
 """""""""""""" End Plugins
 
