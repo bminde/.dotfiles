@@ -250,7 +250,7 @@ Plug 'vim-airline/vim-airline-themes'
   if has("gui_macvim")
     let g:airline_theme='nordisk'
   else
-    let g:airline_theme='gruvbox'
+    let g:airline_theme='luna'
   endif
   let g:bufferline_echo = 0
   let g:airline_powerline_fonts=0
@@ -409,13 +409,13 @@ if has("gui_macvim")
   let macvim_skip_colorscheme=1
   colorscheme nordisk
 else
-  colorscheme gruvbox
+  colorscheme molokai
 endif
 
 " Ayu theme config
 " let ayucolor="light"  " for light version of theme
-let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
+" let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
 "colorscheme ayu
 
 """ Keyboard
