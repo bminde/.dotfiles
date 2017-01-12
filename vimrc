@@ -117,10 +117,10 @@ call plug#begin()
 """ Filetypes #filetypes
 " Polyglot loads language support on demand!
 Plug 'sheerun/vim-polyglot'
-  let g:polyglot_disabled = ['elm', 'elixir']
+  let g:polyglot_disabled = ['elm']
 
 " Elixir
-Plug 'elixir-lang/vim-elixir'
+" Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 
 " Phoenix
