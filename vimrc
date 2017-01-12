@@ -305,7 +305,7 @@ if executable('fzf')
       \ '.shellescape(<q-args>), 1, <bang>0)
     command! -bang -nargs=* GGrep
       \ call fzf#vim#grep(
-      \   'git grep --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+      \   'git grep --line-number --color=always '.shellescape(<q-args>), 0,
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
