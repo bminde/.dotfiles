@@ -175,10 +175,10 @@ Plug 'tomtom/tcomment_vim'
 
 Plug 'godlygeek/tabular'
   if exists(":Tabularize")
-    nmap <Leader>a= :Tabularize /=<CR>
-    vmap <Leader>a= :Tabularize /=<CR>
-    nmap <Leader>a: :Tabularize /:\zs<CR>
-    vmap <Leader>a: :Tabularize /:\zs<CR>
+    nmap <Leader>= :Tabularize /=<CR>
+    vmap <Leader>= :Tabularize /=<CR>
+    nmap <Leader>: :Tabularize /:\zs<CR>
+    vmap <Leader>: :Tabularize /:\zs<CR>
   endif
 
 Plug 'terryma/vim-expand-region'
@@ -190,9 +190,11 @@ Plug 'janko-m/vim-test'                " Run tests with varying granularity
   nmap <silent> <leader>T :TestFile<CR>
   nmap <silent> <leader>a :TestSuite<CR>
   nmap <silent> <leader>l :TestLast<CR>
-  nmap <silent> <leader>g :TestVisit<CR>
-  " run tests in neovim strategy
-  let g:test#strategy = 'neovim'
+  " nmap <silent> <leader>g :TestVisit<CR>
+  if has('nvim')
+    " run tests in neovim strategy
+    let g:test#strategy = 'neovim'
+  endif
   " I use spinach, not cucumber!
   let g:test#ruby#cucumber#executable = 'spinach'
 
@@ -294,8 +296,8 @@ if executable('fzf')
   Plug 'junegunn/fzf.vim'
     let g:fzf_layout = { 'window': 'enew' }
     let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-    nnoremap <silent> <leader>p :FZF<cr>
-    nnoremap <silent> <leader>a :Ag<cr>
+    nnoremap <silent> <leader>o :FZF<cr>
+    nnoremap <silent> <leader>r :Ag<cr>
     if has('nvim')
       augroup localfzf
         autocmd!
@@ -303,44 +305,43 @@ if executable('fzf')
         autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
       augroup END
     endif
-else
-  " Ctrlp fallback
-  Plug 'ctrlpvim/ctrlp.vim'
-    nnoremap <Leader>p :CtrlP<CR>
-    let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
-    let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
-    let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
-    let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
-    let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
-    let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
-    let g:ctrlp_arg_map = 0
-    let g:ctrlp_dotfiles = 0               " do not show (.) dotfiles in match list
-    let g:ctrlp_showhidden = 0             " do not show hidden files in match list
-    let g:ctrlp_split_window = 0
-    let g:ctrlp_max_height = 40            " restrict match list to a maxheight of 40
-    let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
-    let g:ctrlp_max_files = 0              " no restriction on results/file list
-    let g:ctrlp_working_path_mode = 'r'
-    let g:ctrlp_dont_split = 'NERD_tree_2' " don't split these buffers
-    let g:ctrlp_user_command = {
-      \ 'types': {
-      \ 1: ['.git', 'cd %s && git ls-files'],
-      \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-      \ }
-      \ }
-    let g:ctrlp_prompt_mappings = {
-      \ 'AcceptSelection("e")': ['<c-e>', '<c-space>'],
-      \ 'AcceptSelection("h")': ['<c-h>', '<c-x>', '<c-cr>', '<c-s>'],
-      \ 'AcceptSelection("v")': ['<c-v>'],
-      \ 'AcceptSelection("t")': ['<c-t>'],
-      \ 'AcceptSelection("r")': ['<cr>'],
-      \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
-      \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
-      \ 'PrtHistory(-1)':       ['<c-n>'],
-      \ 'PrtHistory(1)':        ['<c-p>'],
-      \ 'ToggleFocus()':        ['<c-tab>'],
-      \}
 endif
+" Ctrlp
+Plug 'ctrlpvim/ctrlp.vim'
+  nnoremap <Leader>p :CtrlP<CR>
+  let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
+  let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
+  let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
+  let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
+  let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
+  let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
+  let g:ctrlp_arg_map = 0
+  let g:ctrlp_dotfiles = 0               " do not show (.) dotfiles in match list
+  let g:ctrlp_showhidden = 0             " do not show hidden files in match list
+  let g:ctrlp_split_window = 0
+  let g:ctrlp_max_height = 40            " restrict match list to a maxheight of 40
+  let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
+  let g:ctrlp_max_files = 0              " no restriction on results/file list
+  let g:ctrlp_working_path_mode = 'r'
+  let g:ctrlp_dont_split = 'NERD_tree_2' " don't split these buffers
+  let g:ctrlp_user_command = {
+    \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files'],
+    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ }
+    \ }
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-e>', '<c-space>'],
+    \ 'AcceptSelection("h")': ['<c-h>', '<c-x>', '<c-cr>', '<c-s>'],
+    \ 'AcceptSelection("v")': ['<c-v>'],
+    \ 'AcceptSelection("t")': ['<c-t>'],
+    \ 'AcceptSelection("r")': ['<cr>'],
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+    \ 'PrtHistory(-1)':       ['<c-n>'],
+    \ 'PrtHistory(1)':        ['<c-p>'],
+    \ 'ToggleFocus()':        ['<c-tab>'],
+    \}
 
 " Open files where you last left them
 Plug 'dietsche/vim-lastplace'
