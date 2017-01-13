@@ -246,7 +246,6 @@ Plug 'henrik/vim-indexed-search'
 """ UI Plugins #ui-plugins
 " Molokai theme makes me cozy
 Plug 'tomasr/molokai'
-Plug 'fmoralesc/molokayo'
 " Try out the ayu theme - https://github.com/ayu-theme/ayu-vim
 Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox'
