@@ -163,6 +163,9 @@ endif
 Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
   " Example: Reformat a comment with `gqac` (ac is "a comment")
 
+" Change vim working directory to project root
+Plug 'airblade/vim-rooter'
+
 " EditorConfig support
 Plug 'editorconfig/editorconfig-vim'
 
