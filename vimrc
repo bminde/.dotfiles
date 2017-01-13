@@ -214,6 +214,8 @@ Plug 'tpope/vim-fugitive'
   nnoremap <silent> <leader>gw :Gwrite<CR>
   nnoremap <silent> <leader>ge :Gedit<CR>
 
+Plug 'jreybert/vimagit'
+
 " github support from dat tpope
 Plug 'tpope/vim-rhubarb'
 
