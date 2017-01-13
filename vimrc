@@ -47,6 +47,9 @@ set omnifunc=syntaxcomplete#Complete
 " turn off mouse
 " set mouse=""
 
+" Cursor shape
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 " Set GUI font
 set guifont=Sauce\ Code\ Powerline:h13
 
