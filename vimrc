@@ -339,6 +339,10 @@ if executable('fzf')
     endif
 endif
 
+Plug 'dyng/ctrlsf.vim'
+  let g:ctrlsf_default_root = 'project'
+  nnoremap <c-p> :CtrlSF<space>
+
 " Open files where you last left them
 Plug 'dietsche/vim-lastplace'
 
