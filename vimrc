@@ -1,4 +1,5 @@
 scriptencoding utf-8
+" Inspired by https://github.com/knewter/dotfiles
 
 " Table of Contents
 " 1) Basics #basics
