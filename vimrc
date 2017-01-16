@@ -305,8 +305,16 @@ if executable('fzf')
     " let g:fzf_layout = { 'window': 'enew' }
     let g:fzf_layout = { 'right': '~30%' }
     let $FZF_DEFAULT_COMMAND = '(git ls-tree -r --name-only HEAD ||
-      \ find . -path "*/\.*" -prune -o -type f -print -o -type l -print
+      \ find . -name "*.*" -not \(
+      \ -path "*_build*" -o
+      \ -path "*deps*" -o
+      \ -path "*.lock" -o
+      \ -name .
+      \ \)
       \ | sed s/^..//) 2> /dev/null'
+    " let $FZF_DEFAULT_COMMAND = '(git ls-tree -r --name-only HEAD ||
+    "   \ find . -path "*/\.*" -prune -o -type f -print -o -type l -print
+    "   \ | sed s/^..//) 2> /dev/null'
     command! -bang -nargs=* Ripgrep call fzf#vim#grep('rg --column
       \ --line-number --no-heading --fixed-strings --ignore-case --no-ignore
       \ --hidden --follow --glob "!.git/*" --color "always"
