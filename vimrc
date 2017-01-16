@@ -195,7 +195,7 @@ Plug 'janko-m/vim-test'                " Run tests with varying granularity
   nmap <silent> <leader>t :TestNearest<CR>
   nmap <silent> <leader>T :TestFile<CR>
   nmap <silent> <leader>a :TestSuite<CR>
-  nmap <silent> <leader>l :TestLast<CR>
+  " nmap <silent> <leader>l :TestLast<CR>
   " nmap <silent> <leader>g :TestVisit<CR>
   if has('nvim')
     " run tests in neovim strategy
@@ -449,8 +449,8 @@ set splitright
 set diffopt+=vertical
 
 " Buffers
-nnoremap <leader>l :ls<CR>:b<Space>
-nmap <Leader>n :enew<cr>
+" nnoremap <leader>l :ls<CR>:b<Space>
+" nmap <Leader>n :enew<cr>
 nmap <Leader>f :bnext<CR>
 nmap <Leader>d :bprevious<CR>
 
@@ -475,7 +475,7 @@ map 0 ^
 nnoremap <leader>s :mksession<CR>
 
 " Format the entire file
-nmap <leader>fef ggVG=
+" nmap <leader>fef ggVG=
 
 " Create/edit file in the current directory
 nmap :ed :edit %:p:h/
