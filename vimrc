@@ -124,12 +124,14 @@ Plug 'sheerun/vim-polyglot'
   let g:polyglot_disabled = ['elm']
 
 " Elixir
-" Plug 'elixir-lang/vim-elixir'
+Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
+Plug 'tpope/vim-projectionist' " required for some navigation features
+Plug 'andyl/vim-projectionist-elixir' "requires vim-projectionist
+Plug 'andyl/vim-textobj-elixir' "requires vim-textobj-user
 
 " Phoenix
 Plug 'c-brenn/phoenix.vim'
-Plug 'tpope/vim-projectionist' " required for some navigation features
 Plug 'powerman/vim-plugin-AnsiEsc'
 
 " Elm
