@@ -51,6 +51,9 @@ set omnifunc=syntaxcomplete#Complete
 " Cursor shape
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
+" Turn of cursor blinking
+set gcr=n:blinkon0
+
 " Set GUI font
 set guifont=Sauce\ Code\ Powerline:h13
 
