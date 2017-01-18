@@ -612,6 +612,10 @@ augroup FastEscape
   au InsertEnter * set timeoutlen=0
   au InsertLeave * set timeoutlen=1000
 augroup END
+
+" enter terminal mode when entering window with terminal buffer
+:au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
 """"" End Normalization ================
 """ End Auto Commands ==================
 
