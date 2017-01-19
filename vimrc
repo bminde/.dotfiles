@@ -621,6 +621,7 @@ augroup END
 
 """ Navigation ====================== #navigation
 " Navigate terminal with C-h,j,k,l
+" Fix <c-h> mapping http://stackoverflow.com/questions/33833642/ctrl-h-mapping-in-neovims-terminal-emulator
 if has('nvim')
   tnoremap <C-h> <C-\><C-n><C-w>h
   tnoremap <C-j> <C-\><C-n><C-w>j
