@@ -654,7 +654,7 @@ nnoremap <leader>l :tabnext<cr>
 
 """ Project-Specific Items =============
 
-" Enable per-project vimrcs
+
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
 
