@@ -616,7 +616,13 @@ augroup FastEscape
 augroup END
 
 " enter terminal mode when entering window with terminal buffer
-:au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+" hide cursorline/-column when loosing focus
+" au VimEnter,WinEnter,BufWinEnter,FocusGained,CmdwinEnter * setlocal cursorline
+" au VimEnter,WinEnter,BufWinEnter,FocusGained,CmdwinEnter * setlocal cursorcolumn
+" au WinLeave,FocusLost,CmdwinLeave * setlocal nocursorline
+" au WinLeave,FocusLost,CmdwinLeave * setlocal nocursorcolumn
 
 """"" End Normalization ================
 """ End Auto Commands ==================
