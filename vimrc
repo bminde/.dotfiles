@@ -256,11 +256,16 @@ Plug 'szw/vim-maximizer'
 Plug 'henrik/vim-indexed-search'
 
 """ UI Plugins #ui-plugins
-" Molokai theme makes me cozy
+" Themes
 Plug 'tomasr/molokai'
-" Try out the ayu theme - https://github.com/ayu-theme/ayu-vim
 Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-two-firewatch'
+Plug 'albertorestifo/github.vim'
+Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'w0ng/vim-hybrid'
+  let g:hybrid_reduced_contrast = 1
+Plug 'rakr/vim-one'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -269,6 +274,7 @@ Plug 'vim-airline/vim-airline-themes'
     let g:airline_theme='nordisk'
   else
     let g:airline_theme='luna'
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   endif
   let g:bufferline_echo = 0
   let g:airline_powerline_fonts=0
