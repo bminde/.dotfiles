@@ -69,6 +69,9 @@ set ignorecase smartcase
 " Ignore case when searching lowercase
 set smartcase
 
+" Nicer vertical window delimiter
+set fillchars=fold:-,vert:│
+
 " Tab completion
 set wildmode=list:longest,list:full
 set wildignore+=.DS_Store
