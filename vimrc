@@ -479,6 +479,7 @@ set laststatus=2
 
 Plug 'kamwitsta/nordisk'
 Plug 'airblade/vim-gitgutter'
+Plug 'roman/golden-ratio'
 
 """ Code Navigation #code-navigation
 if executable('fzf')
