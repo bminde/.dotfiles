@@ -177,7 +177,8 @@ Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
 Plug 'airblade/vim-rooter'
 
 " EditorConfig support
-Plug 'editorconfig/editorconfig-vim'
+" Slows vim start up time, turned off until necessary
+" Plug 'editorconfig/editorconfig-vim'
 
 " Jump between quicklist, location (syntastic, etc) items with ease, among other things
 Plug 'tpope/vim-unimpaired'
