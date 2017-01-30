@@ -525,9 +525,9 @@ if executable('fzf')
       \   <bang>0 ? fzf#vim#with_preview('up:60%')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
-    nnoremap <silent> <leader>p :FZF<cr>
-    nnoremap <silent> <leader>r :Ag!<cr>
-    nnoremap <silent> <leader>o :Rg!<cr>
+    " nnoremap <silent> <leader>p :FZF<cr>
+    nnoremap <silent> <leader>o :Ag!<cr>
+    nnoremap <silent> <leader>r :Rg!<cr>
     nnoremap <silent> <leader>u :Ripgrep<cr>
     nnoremap <silent> <leader>i :GGrep!<cr>
     if has('nvim')
@@ -539,9 +539,76 @@ if executable('fzf')
     endif
 endif
 
+" Ctrlp
+Plug 'ctrlpvim/ctrlp.vim'
+  nnoremap <Leader>p :CtrlP<CR>
+  let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
+  let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
+  let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
+  let g:ctrlp_jump_to_buffer = 2         " Jump to tab AND buffer if already open
+  let g:ctrlp_open_new_file = 'v'        " open selections in a vertical split
+  let g:ctrlp_open_multiple_files = 'vr' " opens multiple selections in vertical splits to the right
+  let g:ctrlp_arg_map = 0
+  let g:ctrlp_dotfiles = 1               " do not show (.) dotfiles in match list
+  let g:ctrlp_showhidden = 1             " do not show hidden files in match list
+  let g:ctrlp_split_window = 0
+  let g:ctrlp_max_height = 30            " restrict match list to a maxheight of 40
+  let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
+  let g:ctrlp_max_files = 0              " no restriction on results/file list
+  let g:ctrlp_working_path_mode = 'r'
+  let g:ctrlp_dont_split = 'NERD_tree_2' " don't split these buffers
+  if executable( 'ag' )
+    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+    \ --ignore out
+    \ --ignore _build
+    \ --ignore deps
+    \ --ignore node_modules
+    \ --ignore Session.vim
+    \ --ignore .git
+    \ --ignore .gitkeep
+    \ --ignore .svn
+    \ --ignore .hg
+    \ --ignore .DS_Store
+    \ --ignore .lock
+    \ --ignore .codekit-cache
+    \ --ignore .codekit
+    \ --ignore "*/*.swp"
+    \ --ignore "*/.pyc"
+    \ -g ""'
+  else
+    let g:ctrlp_user_command = {
+      \ 'types': {
+      \ 1: ['.git', 'cd %s && git ls-files'],
+      \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+      \ }
+      \ }
+  endif
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-e>', '<c-space>'],
+    \ 'AcceptSelection("h")': ['<c-h>', '<c-x>', '<c-cr>', '<c-s>'],
+    \ 'AcceptSelection("v")': ['<c-v>'],
+    \ 'AcceptSelection("t")': ['<c-t>'],
+    \ 'AcceptSelection("r")': ['<cr>'],
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+    \ 'PrtHistory(-1)':       ['<c-n>'],
+    \ 'PrtHistory(1)':        ['<c-p>'],
+    \ 'ToggleFocus()':        ['<c-tab>'],
+    \}
+
+  " Open CtrlP on VimEnter in directory
+  function! MaybeCtrlP()
+      if argc() == 1 && isdirectory(argv()[0])
+          " Uncomment this to remove the Netrw buffer (optional)
+          " execute "bdelete"
+          execute "CtrlP"
+      endif
+  endfunction
+  autocmd VimEnter * :call MaybeCtrlP()
+
 Plug 'dyng/ctrlsf.vim'
   let g:ctrlsf_default_root = 'project'
-  nnoremap <c-p> :CtrlSF<space>
+  nnoremap <c-s> :CtrlSF<space>
 
 " Open files where you last left them
 Plug 'dietsche/vim-lastplace'
