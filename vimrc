@@ -486,11 +486,14 @@ if executable('fzf')
   " fzf fuzzy finder
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-    " let g:fzf_layout = { 'window': 'enew' }
-    let g:fzf_layout = { 'right': '~30%' }
-    let $FZF_DEFAULT_COMMAND = '(git ls-tree -r --name-only HEAD ||
+    let g:fzf_layout = { 'window': 'enew' }
+    " let g:fzf_layout = { 'right': '~30%' }
+    let $FZF_DEFAULT_COMMAND = '
+      \ (ag --hidden --ignore .git -g "" ||
+      \ git ls-tree -r --name-only HEAD ||
       \ find . -name "*.*" -not \(
       \ -path "*_build*" -o
+      \ -path "*/node_modules/*" -o
       \ -path "*deps*" -o
       \ -path "*.lock" -o
       \ -name .
@@ -499,6 +502,7 @@ if executable('fzf')
     " let $FZF_DEFAULT_COMMAND = '(git ls-tree -r --name-only HEAD ||
     "   \ find . -path "*/\.*" -prune -o -type f -print -o -type l -print
     "   \ | sed s/^..//) 2> /dev/null'
+    " let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
     command! -bang -nargs=* Ripgrep call fzf#vim#grep('rg --column
       \ --line-number --no-heading --fixed-strings --ignore-case --no-ignore
       \ --hidden --follow --glob "!.git/*" --color "always"
