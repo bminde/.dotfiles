@@ -97,6 +97,9 @@ set undodir=./.vim-undo//
 set undodir+=~/.vim/undo//
 set undofile
 
+" No swap
+set noswapfile
+
 """""""""""""" End Basics
 
 """""""""""""" Plugins #plugins
