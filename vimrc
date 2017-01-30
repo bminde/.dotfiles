@@ -60,11 +60,6 @@ set guifont=Sauce\ Code\ Powerline:h13
 " Turn off menu in gui
 set guioptions="agimrLt"
 
-" NOTE: I stopped highlighting cursor position because it makes redrawing
-" super slow.
-set cursorline
-set cursorcolumn
-
 " Highlight search results
 set hlsearch
 " Incremental search, search as you type
