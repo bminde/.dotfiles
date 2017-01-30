@@ -608,15 +608,17 @@ set background=dark
 syntax enable
 if has("gui_macvim")
   let macvim_skip_colorscheme=1
-  colorscheme nordisk
+endif
+if has("nvim") || has("gui_macvim")
+  colorscheme two-firewatch
 else
   colorscheme molokai
 endif
 
 " Ayu theme config
 " let ayucolor="light"  " for light version of theme
-" let ayucolor="mirage" " for mirage version of theme
-let ayucolor="dark"   " for dark version of theme
+let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
 "colorscheme ayu
 
 """ Keyboard
