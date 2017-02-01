@@ -173,6 +173,10 @@ endif
 Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
   " Example: Reformat a comment with `gqac` (ac is "a comment")
 
+" Auto completion of quotes, parens, brackets++
+Plug 'raimondi/delimitmate'
+  let delimitMate_expand_cr = 1
+
 " Change vim working directory to project root
 Plug 'airblade/vim-rooter'
 
