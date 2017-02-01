@@ -229,19 +229,19 @@ Plug 'jreybert/vimagit'
   nnoremap <silent> <leader>m :Magit<CR>
 
 " github support from dat tpope
-Plug 'tpope/vim-rhubarb'
+" Plug 'tpope/vim-rhubarb'
 
 " vim interface to web apis.  Required for gist-vim
-Plug 'mattn/webapi-vim'
+" Plug 'mattn/webapi-vim'
 
 " create gists trivially from buffer, selection, etc.
-Plug 'mattn/gist-vim'
-  let g:gist_open_browser_after_post = 1
-  let g:gist_detect_filetype = 2
-  let g:gist_post_private = 1
-  if has('macunix')
-    let g:gist_clip_command = 'pbcopy'
-  endif
+" Plug 'mattn/gist-vim'
+"   let g:gist_open_browser_after_post = 1
+"   let g:gist_detect_filetype = 2
+"   let g:gist_post_private = 1
+"   if has('macunix')
+"     let g:gist_clip_command = 'pbcopy'
+"   endif
 
 " visualize your undo tree
 Plug 'sjl/gundo.vim'
