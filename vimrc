@@ -163,10 +163,76 @@ if has('nvim')
     if !exists('g:deoplete#omni#input_patterns')
       let g:deoplete#omni#input_patterns = {}
     endif
+    " inoremap <expr><c-j> pumvisible() ? "\<c-n>" : "\<Tab>"
+    " inoremap <expr><c-k> pumvisible() ? "\<c-p>" : "\<S-Tab>"
     " use tab for completion
     inoremap <expr><Tab> pumvisible() ? "\<c-n>" : "\<Tab>"
     inoremap <expr><S-Tab> pumvisible() ? "\<c-p>" : "\<S-Tab>"
 endif
+
+" Delimitmate
+  let g:delimitMate_expand_cr = 1
+  let g:delimitMate_expand_space = 1
+  let g:delimitMate_smart_quotes = 1
+  let g:delimitMate_expand_inside_quotes = 1
+  let delimitMate_nesting_quotes = ['"']
+  let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
+
+  imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+
+" ultisnips
+  function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+      if pumvisible()
+        return "\<C-n>"
+      else
+        call UltiSnips#JumpForwards()
+        if g:ulti_jump_forwards_res == 0
+          return "\<TAB>"
+        endif
+      endif
+    endif
+    return ""
+  endfunction
+
+  function! g:UltiSnips_Reverse()
+    call UltiSnips#JumpBackwards()
+    if g:ulti_jump_backwards_res == 0
+      return "\<C-P>"
+    endif
+
+    return ""
+  endfunction
+
+
+  if !exists("g:UltiSnipsJumpForwardTrigger")
+    let g:UltiSnipsJumpForwardTrigger = "<tab>"
+  endif
+
+  if !exists("g:UltiSnipsJumpBackwardTrigger")
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  endif
+
+  au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+  au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+  " let g:UltiSnipsExpandTrigger="<c-l>"
+  " let g:UltiSnipsJumpForwardTrigger="<tab>"
+  " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+  " " let g:UltiSnipsExpandTrigger="<c-l>"
+  " " let g:UltiSnipsJumpForwardTrigger="<tab>"
+  " " let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+
+  " If you want :UltiSnipsEdit to split your window.
+  " let g:UltiSnipsEditSplit="vertical"
+
+" Neosnippet
+  " " Enable snipMate compatibility feature.
+  " let g:neosnippet#enable_snipmate_compatibility = 1
+  " " Tell Neosnippet about the other snippets
+  " let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+  " imap <C-l>  <Plug>(neosnippet_expand_or_jump)
+  " imap <S-Tab>  <Plug>(neosnippet_expand_or_jump)
 
 " Add comment textobjects (I really want to reformat comments without affecting
 " the next line of code)
