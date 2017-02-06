@@ -169,9 +169,9 @@ else
   let g:rehash256 = 1
 endif
 
-" if (has('termguicolors'))
-"   set termguicolors
-" endif
+if (has('termguicolors'))
+  set termguicolors
+endif
 
 set background=dark
 if has("nvim") || has("gui_macvim")
