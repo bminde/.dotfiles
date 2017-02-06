@@ -759,7 +759,10 @@ map <leader>n :tabnew .<CR><C-P>
 noremap gV `[v`]
 
 " Toggle paste
-set pastetoggle=<F5>
+set pastetoggle=<F4>
+
+" Source (reload configuration)
+nnoremap <silent> <F5> :source $MYVIMRC<CR>
 
 " Jump to end of pasted text
 vnoremap <silent> y y`]
