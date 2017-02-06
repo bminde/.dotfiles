@@ -706,7 +706,7 @@ nnoremap <silent> <leader>ge :Gedit<CR>
 nnoremap <silent> <leader>m :Magit<CR>
 
 " gundo.vim - visualize your undo tree
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F6> :GundoToggle<CR>
 
 "vim-maximizer
 nnoremap <silent><F6> :MaximizerToggle<CR>
