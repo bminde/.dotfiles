@@ -1,3 +1,4 @@
+"================= PLUGINS =========================== {{{
 scriptencoding utf-8
 
 " Plug automatic installation
@@ -74,8 +75,8 @@ endif
 
 call plug#end()
 
-"=====================================================
-"===================== SETTINGS ======================
+" }}}
+"================= SETTINGS ========================== {{{
 
 " Sane defaults for vim (these are default on NeoVim)
 if !has('nvim')
@@ -134,6 +135,7 @@ set title " Set the title of the iterm tab
 set fillchars=fold:-,vert:│ " Nicer vertical window delimiter (unicode)
 set omnifunc=syntaxcomplete#complete " enable omni syntax completion
 set gcr=n:blinkon0 " Turn of cursor blinking
+set foldmethod=marker
 set wildmode=list:longest,list:full " Tab completion
 set wildignore+=.DS_Store
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.psd,*.o,*.obj,*.min.js,*.codekit
@@ -242,8 +244,8 @@ augroup END
 " enter terminal mode when entering window with terminal buffer
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
-"=====================================================
-"===================== mappings ======================
+" }}}
+"================= MAPPINGS ========================== {{{
 
 let g:mapleader=' ' " use space for leader
 
@@ -372,12 +374,12 @@ nnoremap <silent> <BS> <C-w>h
 nnoremap <leader>h :tabprev<cr>
 nnoremap <leader>l :tabnext<cr>
 
-"=====================================================
-"===================== STATUSLINE ====================
+" }}}
+"================= STATUSLINE ======================== {{{
 
 " https://github.com/blaenk/dots/blob/master/vim/.vimrc
 
-" Status Function: {{{2
+" Status Function:
 function! Status(winnum)
   let active = a:winnum == winnr()
   let bufnum = winbufnr(a:winnum)
@@ -499,9 +501,8 @@ function! Status(winnum)
 
   return stat
 endfunction
-" }}}
 
-" Status AutoCMD: {{{
+" Status AutoCMD:
 function! s:ToggleStatusProgress()
   if !exists('w:statusline_progress')
     let w:statusline_progress = 0
@@ -541,7 +542,6 @@ augroup status
   autocmd VimEnter,VimLeave,WinEnter,WinLeave,BufWinEnter,BufWinLeave * :RefreshStatus
 augroup END
 
-" }}}
 
 " vim-airline
 "   set laststatus=2
@@ -578,8 +578,8 @@ augroup END
 "   let g:airline_symbols.paste = 'ρ'
 "   let g:airline_symbols.whitespace = 'Ξ'
 
-"=====================================================
-"===================== PLUGINS =======================
+" }}}
+"================= PLUGINS SETTINGS ================== {{{
 
 " Polyglot
 let g:polyglot_disabled = ['elm']
@@ -883,8 +883,9 @@ endif
 " vim-vinegar - navigate up a directory with '-' in netrw, among other things
 let g:netrw_list_hide = &wildignore
 
-"=====================================================
-"================= PROJECT SETTINGS ==================
+" }}}
+"================= PROJECT SETTINGS ================== {{{
 
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
+" }}}
