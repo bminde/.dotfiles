@@ -741,7 +741,7 @@ map <leader>ba :bufdo bd<cr>
 map 0 ^
 
 " Save session (assortment of windows) - reopen with vim -S
-nnoremap <leader>s :mksession<CR>
+nnoremap <leader>s :mksession!<CR>
 
 " Format the entire file
 " nmap <leader>fef ggVG=
