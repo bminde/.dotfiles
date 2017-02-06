@@ -1,21 +1,176 @@
 scriptencoding utf-8
-" Inspired by https://github.com/knewter/dotfiles
 
-" Table of Contents
-" 1) Basics #basics
-"   1.1) Tabs #tabs
-"   1.2) Format Options #format-options
-"   1.3) Leader #leader
-"   1.4) Omni #omni
-"   1.5) UI Basics #ui-basics
-" 2) Plugins #plugins
-"   2.1) Filetypes #filetypes
-"   2.2) Utilities #utilities
-"   2.3) UI Plugins #ui-plugins
-"   2.4) Code Navigation #code-navigation
-" 3) UI Tweaks #ui-tweaks
-"   3.1) Theme #theme
-" 4) Navigation #navigation
+" Plug automatic installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+call plug#begin()
+
+Plug 'sheerun/vim-polyglot'
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+Plug 'tpope/vim-projectionist' " required for some navigation features
+Plug 'andyl/vim-projectionist-elixir' "requires vim-projectionist
+Plug 'andyl/vim-textobj-elixir' "requires vim-textobj-user
+Plug 'c-brenn/phoenix.vim'
+Plug 'powerman/vim-plugin-AnsiEsc'
+Plug 'ElmCast/elm-vim'
+Plug 'davidoc/taskpaper.vim'
+Plug 'vim-scripts/vim-auto-save'
+Plug 'djoshea/vim-autoread'
+Plug 'raimondi/delimitmate'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'kana/vim-textobj-user'
+Plug 'glts/vim-textobj-comment'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'airblade/vim-rooter'
+Plug 'tomtom/tcomment_vim'
+Plug 'godlygeek/tabular'
+Plug 'terryma/vim-expand-region'
+Plug 'janko-m/vim-test'                " Run tests with varying granularity
+Plug 'tpope/vim-fugitive'
+Plug 'sjl/gundo.vim'
+Plug 'szw/vim-maximizer'
+Plug 'henrik/vim-indexed-search'
+Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-two-firewatch'
+Plug 'albertorestifo/github.vim'
+Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'w0ng/vim-hybrid'
+Plug 'rakr/vim-one'
+Plug 'kamwitsta/nordisk'
+Plug 'airblade/vim-gitgutter'
+Plug 'roman/golden-ratio'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'dietsche/vim-lastplace'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-vinegar'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+endif
+
+" Beta - things I'm testing
+Plug 'jreybert/vimagit'
+Plug 'neomake/neomake'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'ayu-theme/ayu-vim'
+" Plug 'AndrewRadev/splitjoin.vim' " multiline <--> single-line code
+" Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'tpope/vim-rhubarb'
+" Plug 'mattn/webapi-vim'
+" Plug 'mattn/gist-vim'
+" Plug 'editorconfig/editorconfig-vim'
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'Shougo/neosnippet-snippets'
+" Plug 'jiangmiao/auto-pairs'
+
+call plug#end()
+
+"=====================================================
+"===================== SETTINGS ======================
+
+" Sane defaults for vim (these are default on NeoVim)
+if !has('nvim')
+  set nocompatible
+  filetype off
+  filetype plugin indent on
+
+  set ttyfast
+  set ttymouse=xterm2
+  set ttyscroll=3
+
+  set laststatus=2                " Always show statusline
+  set encoding=utf-8              " Set default encoding to UTF-8
+  set autoread                    " Automatically reread changed files without asking me anything
+  set autoindent
+  set backspace=indent,eol,start  " Makes backspace key more powerful.
+  set incsearch                   " Shows the match while typing
+  set hlsearch                    " Highlight found searches
+  set mouse=a
+endif
+
+set noerrorbells             " No beeps
+set number                   " Show line numbers
+set showcmd                  " Show me what I'm typing
+set noswapfile               " Don't use swapfile
+set nobackup                 " Don't create annoying backup files
+set splitright               " Split vertical windows right to the current windows
+set splitbelow               " Split horizontal windows below to the current windows
+set autowrite                " Automatically save before :next, :make etc.
+set hidden
+set fileformats=unix,dos,mac " Prefer Unix over Windows over OS 9 formats
+set noshowmatch              " Do not show matching brackets by flickering
+set noshowmode               " We show the mode with airline or lightline
+set ignorecase               " Search case insensitive...
+set smartcase                " ... but not it begins with upper case
+set completeopt=menu,menuone
+set nocursorcolumn           " speed up syntax highlighting
+set nocursorline
+set updatetime=400
+
+set pumheight=10             " Completion window max size
+
+"http://stackoverflow.com/questions/20186975/vim-mac-how-to-copy-to-clipboard-without-pbcopy
+set clipboard^=unnamed
+set clipboard^=unnamedplus
+
+set viminfo='200
+
+set lazyredraw          " Wait to redraw
+
+if has('persistent_undo')
+  set undofile
+  set undodir=~/.config/nvim/tmp/undo//
+endif
+
+if has("gui_macvim")
+  " No toolbars, menu or scrollbars in the GUI
+  set guifont=Source\ Code\ Pro:h13
+  set clipboard+=unnamed
+  set vb t_vb=
+  set guioptions-=m  "no menu
+  set guioptions-=T  "no toolbar
+  set guioptions-=l
+  set guioptions-=L
+  set guioptions-=r  "no scrollbar
+  set guioptions-=R
+
+  let macvim_skip_colorscheme=1
+  colorscheme two-firewatch
+
+else
+  if has('!nvim')
+    syntax enable
+    set t_Co=256
+    set term=ansi
+  endif
+
+  let g:rehash256 = 1
+  set background=dark
+  let g:molokai_original = 1
+  colorscheme molokai
+endif
+
+" open help vertically
+command! -nargs=* -complete=help Help vertical belowright help <args>
+autocmd FileType help wincmd L
+
+" autocmd BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
+" autocmd BufNewFile,BufRead *.md setlocal noet ts=4 sw=4
+" autocmd BufNewFile,BufRead *.vim setlocal expandtab shiftwidth=2 tabstop=2
+
+
+"#########################################
 
 """""""""""""" Basics #basics
 """ Tabs #tabs
@@ -83,6 +238,7 @@ set fillchars=fold:-,vert:│
 
 " Tab completion
 set wildmode=list:longest,list:full
+" Ignore
 set wildignore+=.DS_Store
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.psd,*.o,*.obj,*.min.js,*.codekit
 set wildignore+=*/bower_components/*,*/node_modules/*,*/_build/*,*/build/*,*/deps/*
@@ -123,37 +279,20 @@ set noswapfile
 " PlugStatus        - check the status of plugins
 " PlugDiff          - examine changes from the previous update and the pending changes
 
-" Plug automatic installation
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-call plug#begin()
 
 """ Filetypes #filetypes
 " Polyglot loads language support on demand!
-Plug 'sheerun/vim-polyglot'
   let g:polyglot_disabled = ['elm']
 
 " Elixir
-Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-Plug 'tpope/vim-projectionist' " required for some navigation features
-Plug 'andyl/vim-projectionist-elixir' "requires vim-projectionist
-Plug 'andyl/vim-textobj-elixir' "requires vim-textobj-user
 
 " Phoenix
-Plug 'c-brenn/phoenix.vim'
-Plug 'powerman/vim-plugin-AnsiEsc'
 
 " Elm
-Plug 'ElmCast/elm-vim'
   let g:elm_format_autosave = 1
 
 " Markdown
 " Use fenced code blocks in markdown
-" Plug 'jtratner/vim-flavored-markdown'
 "   let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'clojure', 'sh', 'html', 'sass', 'scss', 'haml', 'erlang', 'go']
 
 " .md is markdown, not Modula-2
@@ -161,13 +300,9 @@ Plug 'ElmCast/elm-vim'
 " autocmd FileType markdown set tw=80
 
 """""" Taskpaper
-Plug 'davidoc/taskpaper.vim'
-Plug 'vim-scripts/vim-auto-save'
-Plug 'djoshea/vim-autoread'
 
 """ Utilities #utilities
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     let g:deoplete#enable_at_startup = 1
     if !exists('g:deoplete#omni#input_patterns')
       let g:deoplete#omni#input_patterns = {}
@@ -245,28 +380,25 @@ endif
 
 " Add comment textobjects (I really want to reformat comments without affecting
 " the next line of code)
-Plug 'kana/vim-textobj-user' | Plug 'glts/vim-textobj-comment'
+" Text objet
   " Example: Reformat a comment with `gqac` (ac is "a comment")
 
+" Auto pairs
 " Auto completion of quotes, parens, brackets++
-Plug 'raimondi/delimitmate'
-  let delimitMate_expand_cr = 1
+
+" Change 'surroundings'
 
 " Change vim working directory to project root
-Plug 'airblade/vim-rooter'
 
 " EditorConfig support
 " Slows vim start up time, turned off until necessary
-" Plug 'editorconfig/editorconfig-vim'
 
 " Jump between quicklist, location (syntastic, etc) items with ease, among other things
-Plug 'tpope/vim-unimpaired'
 
 " Line commenting
-Plug 'tomtom/tcomment_vim'
   " By default, `gc` will toggle comments
 
-Plug 'godlygeek/tabular'
+" Tabular
   if exists(":Tabularize")
     nmap <Leader>= :Tabularize /=<CR>
     vmap <Leader>= :Tabularize /=<CR>
@@ -274,11 +406,11 @@ Plug 'godlygeek/tabular'
     vmap <Leader>: :Tabularize /:\zs<CR>
   endif
 
-Plug 'terryma/vim-expand-region'
+" vim-expand-region
   vmap v <Plug>(expand_region_expand)
   vmap <C-v> <Plug>(expand_region_shrink)
 
-Plug 'janko-m/vim-test'                " Run tests with varying granularity
+" vim-test
   nmap <silent> <leader>t :TestNearest<CR>
   nmap <silent> <leader>T :TestFile<CR>
   nmap <silent> <leader>a :TestSuite<CR>
@@ -292,7 +424,7 @@ Plug 'janko-m/vim-test'                " Run tests with varying granularity
   let g:test#ruby#cucumber#executable = 'spinach'
 
 " git support from dat tpope
-Plug 'tpope/vim-fugitive'
+" vim-fugitive
   nnoremap <silent> <leader>gs :Gstatus<CR>
   nnoremap <silent> <leader>gd :Gdiff<CR>
   nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -304,17 +436,17 @@ Plug 'tpope/vim-fugitive'
   nnoremap <silent> <leader>gw :Gwrite<CR>
   nnoremap <silent> <leader>ge :Gedit<CR>
 
-Plug 'jreybert/vimagit'
+" vimagit
   nnoremap <silent> <leader>m :Magit<CR>
 
 " github support from dat tpope
-" Plug 'tpope/vim-rhubarb'
+" vim-rhubarb
 
 " vim interface to web apis.  Required for gist-vim
-" Plug 'mattn/webapi-vim'
+"webapi-vim
 
 " create gists trivially from buffer, selection, etc.
-" Plug 'mattn/gist-vim'
+" gist-vim
 "   let g:gist_open_browser_after_post = 1
 "   let g:gist_detect_filetype = 2
 "   let g:gist_post_private = 1
@@ -323,32 +455,24 @@ Plug 'jreybert/vimagit'
 "   endif
 
 " visualize your undo tree
-Plug 'sjl/gundo.vim'
+" gundo.vim
   nnoremap <F5> :GundoToggle<CR>
 
-Plug 'szw/vim-maximizer'
+"vim-maximizer
   nnoremap <silent><F6> :MaximizerToggle<CR>
   vnoremap <silent><F6> :MaximizerToggle<CR>gv
   inoremap <silent><F6> <C-o>:MaximizerToggle<CR>
 
 " Indexed search
-Plug 'henrik/vim-indexed-search'
+" vim-indexed-searh
 
 """ UI Plugins #ui-plugins
 " Themes
-Plug 'tomasr/molokai'
-Plug 'ayu-theme/ayu-vim'
-Plug 'morhetz/gruvbox'
-Plug 'rakr/vim-two-firewatch'
-Plug 'albertorestifo/github.vim'
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'w0ng/vim-hybrid'
+" vim-hybrid
   let g:hybrid_reduced_contrast = 1
-Plug 'rakr/vim-one'
 
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-" Plug 'vim-airline/vim-airline'
 
 " Status Line: {{{
 " https://github.com/blaenk/dots/blob/master/vim/.vimrc
@@ -521,7 +645,7 @@ augroup END
 " }}}
 set laststatus=2
 
-" Plug 'vim-airline/vim-airline-themes'
+" vim-airline-themes
 "   set laststatus=2
 "   let g:airline_theme='nordisk'
 "   let g:bufferline_echo = 0
@@ -556,15 +680,11 @@ set laststatus=2
 "   let g:airline_symbols.paste = 'ρ'
 "   let g:airline_symbols.whitespace = 'Ξ'
 
-Plug 'kamwitsta/nordisk'
-Plug 'airblade/vim-gitgutter'
-Plug 'roman/golden-ratio'
 
 """ Code Navigation #code-navigation
+" fzf
 if executable('fzf')
   " fzf fuzzy finder
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
     let g:fzf_layout = { 'window': 'enew' }
     " let g:fzf_layout = { 'right': '~30%' }
     let $FZF_DEFAULT_COMMAND = '
@@ -619,7 +739,6 @@ if executable('fzf')
 endif
 
 " Ctrlp
-Plug 'ctrlpvim/ctrlp.vim'
   nnoremap <Leader>p :CtrlP<CR>
   let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
   let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
@@ -685,15 +804,13 @@ Plug 'ctrlpvim/ctrlp.vim'
   endfunction
   autocmd VimEnter * :call MaybeCtrlP()
 
-Plug 'dyng/ctrlsf.vim'
+" ctrlsf - search project
   let g:ctrlsf_default_root = 'project'
   nnoremap <c-s> :CtrlSF<space>
 
-" Open files where you last left them
-Plug 'dietsche/vim-lastplace'
 
 " Execute code checks, find mistakes, in the background
-Plug 'neomake/neomake'
+" neomake
   " Run Neomake when I save any buffer
   augroup localneomake
     autocmd! BufWritePost * Neomake
@@ -727,19 +844,17 @@ Plug 'neomake/neomake'
         \ 'postprocess': function('NeomakeCredoErrorType')
         \ }
 
+" vim-gutentags
 " Easily manage tags files
 if executable('ctags')
-  Plug 'ludovicchabant/vim-gutentags'
     let g:gutentags_cache_dir = '~/.tags_cache'
 endif
 
+" vim-vinegar
 " navigate up a directory with '-' in netrw, among other things
-Plug 'tpope/vim-vinegar'
   let g:netrw_list_hide = &wildignore
 
-Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
 
-call plug#end()
 """""""""""""" End Plugins
 
 """""""""""""" UI Tweaks #ui-tweaks
