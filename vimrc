@@ -180,7 +180,7 @@ else
   colorscheme molokai
 endif
 
-let $nvim_tui_enable_cursor_shape=1 " cursor shape
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1   " cursor shape
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " open help vertically
