@@ -28,11 +28,11 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'airblade/vim-rooter'       " Change vim working directory to project root
+Plug 'airblade/vim-rooter'   " Change vim working dir to project root
 Plug 'tomtom/tcomment_vim'
 Plug 'godlygeek/tabular'
 Plug 'terryma/vim-expand-region'
-Plug 'janko-m/vim-test'                " Run tests with varying granularity
+Plug 'janko-m/vim-test'             " Run tests with varying granularity
 Plug 'tpope/vim-fugitive'
 Plug 'sjl/gundo.vim'
 Plug 'szw/vim-maximizer'
@@ -162,7 +162,7 @@ if has("gui_macvim")
 
   let macvim_skip_colorscheme=1
 else
-  if has('!nvim')
+  if !has('nvim')
     syntax enable
     set t_Co=256
     set term=ansi
