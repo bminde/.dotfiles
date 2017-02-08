@@ -322,9 +322,8 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
-" 45<Enter> to go to line 45
-nnoremap <CR> G
-nnoremap <BS> gg
+" toggle fold
+:nnoremap <CR> za
 
 " Save with sudo
 ca w!! w !sudo tee "%"
