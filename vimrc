@@ -62,8 +62,6 @@ if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 " Plug 'AndrewRadev/splitjoin.vim' " multiline <--> single-line code
-" Plug 'Shougo/neosnippet-snippets'
-" Plug 'Shougo/neosnippet.vim'
 " Plug 'editorconfig/editorconfig-vim'  " Slows vim start up time, off until needed
 " Plug 'jiangmiao/auto-pairs'
 " Plug 'mattn/gist-vim'
@@ -747,14 +745,6 @@ augroup localneomake
 augroup END
 " Don't tell me to use smartquotes in markdown
 let g:neomake_markdown_enabled_makers = []
-
-" Neosnippet
-" " Enable snipMate compatibility feature.
-" let g:neosnippet#enable_snipmate_compatibility = 1
-" " Tell Neosnippet about the other snippets
-" let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-" imap <C-l>  <Plug>(neosnippet_expand_or_jump)
-" imap <S-Tab>  <Plug>(neosnippet_expand_or_jump)
 
 " Configure a nice credo setup, courtesy https://github.com/neomake/neomake/pull/300
 let g:neomake_elixir_enabled_makers = ['mix', 'mycredo']
