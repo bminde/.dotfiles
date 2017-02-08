@@ -661,8 +661,6 @@ if has('nvim')
   if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
   endif
-  " inoremap <expr><c-j> pumvisible() ? "\<c-n>" : "\<Tab>"
-  " inoremap <expr><c-k> pumvisible() ? "\<c-p>" : "\<S-Tab>"
   " use tab for completion
   inoremap <expr><Tab> pumvisible() ? "\<c-n>" : "\<Tab>"
   inoremap <expr><S-Tab> pumvisible() ? "\<c-p>" : "\<S-Tab>"
