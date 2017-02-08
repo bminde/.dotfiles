@@ -165,7 +165,7 @@ else
   if !has('nvim')
     syntax enable
     set t_Co=256
-    set term=ansi
+    " set term=ansi
   endif
 
   let g:rehash256 = 1
