@@ -581,7 +581,7 @@ augroup END
 "================= PLUGINS SETTINGS ================== {{{
 
 " Polyglot
-let g:polyglot_disabled = ['elm']
+let g:polyglot_disabled = ['elm', 'elixir']
 
 " Elm
 let g:elm_format_autosave = 1
