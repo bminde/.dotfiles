@@ -255,7 +255,7 @@ nnoremap N Nzzzv
 noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
 
-" Clear the search buffer when hitting return
+" Clear the search buffer when hitting `å`
 nnoremap <silent> å :nohlsearch<cr>
 
 " Move vertically by visual line
