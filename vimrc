@@ -9,69 +9,69 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin()
 
-Plug 'sheerun/vim-polyglot'
-Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-Plug 'tpope/vim-projectionist' " required for some navigation features
+Plug 'ElmCast/elm-vim'
+Plug 'SirVer/ultisnips'
+Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'   " Change vim working dir to project root
+Plug 'albertorestifo/github.vim'
 Plug 'andyl/vim-projectionist-elixir' "requires vim-projectionist
 Plug 'andyl/vim-textobj-elixir' "requires vim-textobj-user
-Plug 'kana/vim-textobj-user'
-Plug 'glts/vim-textobj-comment'
 Plug 'c-brenn/phoenix.vim'
-Plug 'powerman/vim-plugin-AnsiEsc'
-Plug 'ElmCast/elm-vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'davidoc/taskpaper.vim'
-Plug 'vim-scripts/vim-auto-save'
+Plug 'dietsche/vim-lastplace'
 Plug 'djoshea/vim-autoread'
-Plug 'raimondi/delimitmate'
-Plug 'SirVer/ultisnips'
+Plug 'dyng/ctrlsf.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'glts/vim-textobj-comment'
+Plug 'godlygeek/tabular'
+Plug 'henrik/vim-indexed-search'
 Plug 'honza/vim-snippets'
+Plug 'janko-m/vim-test'             " Run tests with varying granularity
+Plug 'kamwitsta/nordisk'
+Plug 'kana/vim-textobj-user'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'morhetz/gruvbox'
+Plug 'powerman/vim-plugin-AnsiEsc'
+Plug 'raimondi/delimitmate'
+Plug 'rakr/vim-one'
+Plug 'rakr/vim-two-firewatch'
+Plug 'roman/golden-ratio'
+Plug 'sheerun/vim-polyglot'
+Plug 'sjl/gundo.vim'
+Plug 'slashmili/alchemist.vim'
+Plug 'szw/vim-maximizer'
+Plug 'terryma/vim-expand-region'
+Plug 'tomasr/molokai'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist' " required for some navigation features
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'airblade/vim-rooter'   " Change vim working dir to project root
-Plug 'tomtom/tcomment_vim'
-Plug 'godlygeek/tabular'
-Plug 'terryma/vim-expand-region'
-Plug 'janko-m/vim-test'             " Run tests with varying granularity
-Plug 'tpope/vim-fugitive'
-Plug 'sjl/gundo.vim'
-Plug 'szw/vim-maximizer'
-Plug 'henrik/vim-indexed-search'
-Plug 'tomasr/molokai'
-Plug 'morhetz/gruvbox'
-Plug 'rakr/vim-two-firewatch'
-Plug 'albertorestifo/github.vim'
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'w0ng/vim-hybrid'
-Plug 'rakr/vim-one'
-Plug 'kamwitsta/nordisk'
-Plug 'airblade/vim-gitgutter'
-Plug 'roman/golden-ratio'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dyng/ctrlsf.vim'
-Plug 'dietsche/vim-lastplace'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-vinegar'
+Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'vim-scripts/vim-auto-save'
+Plug 'w0ng/vim-hybrid'
 
 " Beta - things I'm testing
 Plug 'jreybert/vimagit'
-Plug 'neomake/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'neomake/neomake'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 " Plug 'AndrewRadev/splitjoin.vim' " multiline <--> single-line code
+" Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'editorconfig/editorconfig-vim'  " Slows vim start up time, off until needed
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'mattn/gist-vim'
+" Plug 'mattn/webapi-vim'
 " Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
+" Plug 'tpope/vim-rhubarb'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
-" Plug 'tpope/vim-rhubarb'
-" Plug 'mattn/webapi-vim'
-" Plug 'mattn/gist-vim'
-" Plug 'editorconfig/editorconfig-vim'  " Slows vim start up time, off until needed
-" Plug 'Shougo/neosnippet.vim'
-" Plug 'Shougo/neosnippet-snippets'
-" Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
@@ -88,54 +88,54 @@ if !has('nvim')
   set ttymouse=xterm2
   set ttyscroll=3
 
-  set laststatus=2                " Always show statusline
-  set encoding=utf-8              " Set default encoding to UTF-8
-  set autoread                    " Automatically reread changed files without asking me anything
   set autoindent
+  set autoread                    " Automatically reread changed files without asking me anything
   set backspace=indent,eol,start  " Makes backspace key more powerful.
-  set incsearch                   " Shows the match while typing
+  set encoding=utf-8              " Set default encoding to UTF-8
   set hlsearch                    " Highlight found searches
+  set incsearch                   " Shows the match while typing
+  set laststatus=2                " Always show statusline
   set mouse=a
 endif
 
-set noerrorbells             " No beeps
-set number                   " Show line numbers
-set showcmd                  " Show me what I'm typing
-set noswapfile               " Don't use swapfile
-set nobackup                 " Don't create annoying backup files
-set splitright               " Split vertical windows right to the current windows
-set splitbelow               " Split horizontal windows below to the current windows
-set autowrite                " Automatically save before :next, :make etc.
-set hidden
-set fileformats=unix,dos,mac " Prefer Unix over Windows over OS 9 formats
-set noshowmatch              " Do not show matching brackets by flickering
 " set noshowmode               " We show the mode with airline or lightline
-set ignorecase               " Search case insensitive...
-set smartcase                " ... but not it begins with upper case
-set completeopt=menu,menuone
-set nocursorcolumn           " speed up syntax highlighting
-set nocursorline
-set updatetime=400
-set tabstop=2
-set softtabstop=2
-set expandtab
-set shiftwidth=2             " - Indent by 2 spaces by default
-set formatoptions=tcrq
 " set textwidth=80
-set scrolloff=8
-set sidescrolloff=15
-set sidescroll=1
-set pumheight=10             " Completion window max size
+set autowrite                " Automatically save before :next, :make etc.
 set clipboard^=unnamed
 set clipboard^=unnamedplus
-set viminfo='200
-set lazyredraw          " Wait to redraw
-set nrformats= " Treat 0-padded numbers as decimal, not octal
-set title " Set the title of the iterm tab
+set completeopt=menu,menuone
+set expandtab
+set fileformats=unix,dos,mac " Prefer Unix over Windows over OS 9 formats
 set fillchars=fold:-,vert:│ " Nicer vertical window delimiter (unicode)
-set omnifunc=syntaxcomplete#complete " enable omni syntax completion
-set gcr=n:blinkon0 " Turn of cursor blinking
 set foldmethod=marker
+set formatoptions=tcrq
+set gcr=n:blinkon0 " Turn of cursor blinking
+set hidden
+set ignorecase               " Search case insensitive...
+set lazyredraw          " Wait to redraw
+set nobackup                 " Don't create annoying backup files
+set nocursorcolumn           " speed up syntax highlighting
+set nocursorline
+set noerrorbells             " No beeps
+set noshowmatch              " Do not show matching brackets by flickering
+set noswapfile               " Don't use swapfile
+set nrformats= " Treat 0-padded numbers as decimal, not octal
+set number                   " Show line numbers
+set omnifunc=syntaxcomplete#complete " enable omni syntax completion
+set pumheight=10             " Completion window max size
+set scrolloff=8
+set shiftwidth=2             " - Indent by 2 spaces by default
+set showcmd                  " Show me what I'm typing
+set sidescroll=1
+set sidescrolloff=15
+set smartcase                " ... but not it begins with upper case
+set softtabstop=2
+set splitbelow               " Split horizontal windows below to the current windows
+set splitright               " Split vertical windows right to the current windows
+set tabstop=2
+set title " Set the title of the iterm tab
+set updatetime=400
+set viminfo='200
 set wildmode=list:longest,list:full " Tab completion
 set wildignore+=.DS_Store
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.psd,*.o,*.obj,*.min.js,*.codekit
@@ -322,7 +322,7 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
-" toggle fold
+" Toggle fold
 :nnoremap <CR> za
 
 " Save with sudo
@@ -580,196 +580,6 @@ augroup END
 " }}}
 "================= PLUGINS SETTINGS ================== {{{
 
-" Polyglot
-let g:polyglot_disabled = ['elm', 'elixir']
-
-" Elm
-let g:elm_format_autosave = 1
-
-" Markdown - Use fenced code blocks in markdown
-let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'sh', 'html']
-
-" Deoplete
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-  if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-  endif
-  " inoremap <expr><c-j> pumvisible() ? "\<c-n>" : "\<Tab>"
-  " inoremap <expr><c-k> pumvisible() ? "\<c-p>" : "\<S-Tab>"
-  " use tab for completion
-  inoremap <expr><Tab> pumvisible() ? "\<c-n>" : "\<Tab>"
-  inoremap <expr><S-Tab> pumvisible() ? "\<c-p>" : "\<S-Tab>"
-endif
-
-" Delimitmate
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-let g:delimitMate_smart_quotes = 1
-let g:delimitMate_expand_inside_quotes = 1
-let delimitMate_nesting_quotes = ['"']
-let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
-
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
-
-" Ultisnips
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res == 0
-    if pumvisible()
-      return "\<C-n>"
-    else
-      call UltiSnips#JumpForwards()
-      if g:ulti_jump_forwards_res == 0
-        return "\<TAB>"
-      endif
-    endif
-  endif
-  return ""
-endfunction
-
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
-
-  return ""
-endfunction
-
-
-if !exists("g:UltiSnipsJumpForwardTrigger")
-  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
-
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
-
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-" let g:UltiSnipsExpandTrigger="<c-l>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-" " let g:UltiSnipsExpandTrigger="<c-l>"
-" " let g:UltiSnipsJumpForwardTrigger="<tab>"
-" " let g:UltiSnipsJumpBackwardTrigger="<c-h>"
-
-" If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
-
-" Neosnippet
-" " Enable snipMate compatibility feature.
-" let g:neosnippet#enable_snipmate_compatibility = 1
-" " Tell Neosnippet about the other snippets
-" let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-" imap <C-l>  <Plug>(neosnippet_expand_or_jump)
-" imap <S-Tab>  <Plug>(neosnippet_expand_or_jump)
-
-" Tabular
-if exists(":Tabularize")
-  nmap <Leader>= :Tabularize /=<CR>
-  vmap <Leader>= :Tabularize /=<CR>
-  nmap <Leader>: :Tabularize /:\zs<CR>
-  vmap <Leader>: :Tabularize /:\zs<CR>
-endif
-
-" vim-expand-region
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
-" vim-test
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-" nmap <silent> <leader>l :TestLast<CR>
-" nmap <silent> <leader>g :TestVisit<CR>
-if has('nvim')
-  " run tests in neovim strategy
-  let g:test#strategy = 'neovim'
-endif
-
-" vim-fugitive
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gt :Gcommit -v -q %:p<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Git lg<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-nnoremap <silent> <leader>gr :Gread<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>ge :Gedit<CR>
-
-" vimagit
-nnoremap <silent> <leader>m :Magit<CR>
-
-" gundo.vim - visualize your undo tree
-nnoremap <F6> :GundoToggle<CR>
-
-"vim-maximizer
-nnoremap <silent><F6> :MaximizerToggle<CR>
-vnoremap <silent><F6> :MaximizerToggle<CR>gv
-inoremap <silent><F6> <C-o>:MaximizerToggle<CR>
-
-" vim-hybrid
-let g:hybrid_reduced_contrast = 1
-
-" fzf
-if executable('fzf')
-  let g:fzf_layout = { 'window': 'enew' }
-  " let g:fzf_layout = { 'right': '~30%' }
-  let $FZF_DEFAULT_COMMAND = '
-    \ (ag --hidden --ignore .git -g "" ||
-    \ git ls-tree -r --name-only HEAD ||
-    \ find . -name "*.*" -not \(
-    \ -path "*_build*" -o
-    \ -path "*/node_modules/*" -o
-    \ -path "*deps*" -o
-    \ -path "*.lock" -o
-    \ -name .
-    \ \)
-    \ | sed s/^..//) 2> /dev/null'
-  " let $FZF_DEFAULT_COMMAND = '(git ls-tree -r --name-only HEAD ||
-  "   \ find . -path "*/\.*" -prune -o -type f -print -o -type l -print
-  "   \ | sed s/^..//) 2> /dev/null'
-  " let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-  command! -bang -nargs=* Ripgrep call fzf#vim#grep('rg --column
-    \ --line-number --no-heading --fixed-strings --ignore-case --no-ignore
-    \ --hidden --follow --glob "!.git/*" --color "always"
-    \ '.shellescape(<q-args>), 1, <bang>0)
-  command! -bang -nargs=* GGrep
-    \ call fzf#vim#grep(
-    \   'git grep --line-number --color=always '.shellescape(<q-args>), 0,
-    \   <bang>0 ? fzf#vim#with_preview('up:60%')
-    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-    \   <bang>0)
-  autocmd VimEnter * command! -bang -nargs=* Ag
-    \ call fzf#vim#ag(<q-args>,
-    \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-    \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-    \                 <bang>0)
-  command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always
-    \ '.shellescape(<q-args>), 1,
-    \   <bang>0 ? fzf#vim#with_preview('up:60%')
-    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-    \   <bang>0)
-  " nnoremap <silent> <leader>p :FZF<cr>
-  nnoremap <silent> <leader>o :Ag!<cr>
-  nnoremap <silent> <leader>r :Rg!<cr>
-  nnoremap <silent> <leader>u :Ripgrep<cr>
-  nnoremap <silent> <leader>i :GGrep!<cr>
-  if has('nvim')
-    augroup localfzf
-      autocmd!
-      autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
-      autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
-    augroup END
-  endif
-endif
-
 " Ctrlp
 nnoremap <Leader>p :CtrlP<CR>
 let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
@@ -840,6 +650,93 @@ autocmd VimEnter * :call MaybeCtrlP()
 let g:ctrlsf_default_root = 'project'
 nnoremap <c-s> :CtrlSF<space>
 
+" Delimitmate
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+let g:delimitMate_smart_quotes = 1
+let g:delimitMate_expand_inside_quotes = 1
+let delimitMate_nesting_quotes = ['"']
+let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
+
+imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+
+" Deoplete
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+  if !exists('g:deoplete#omni#input_patterns')
+    let g:deoplete#omni#input_patterns = {}
+  endif
+  " inoremap <expr><c-j> pumvisible() ? "\<c-n>" : "\<Tab>"
+  " inoremap <expr><c-k> pumvisible() ? "\<c-p>" : "\<S-Tab>"
+  " use tab for completion
+  inoremap <expr><Tab> pumvisible() ? "\<c-n>" : "\<Tab>"
+  inoremap <expr><S-Tab> pumvisible() ? "\<c-p>" : "\<S-Tab>"
+endif
+
+" Elm
+let g:elm_format_autosave = 1
+
+" fzf
+if executable('fzf')
+  let g:fzf_layout = { 'window': 'enew' }
+  " let g:fzf_layout = { 'right': '~30%' }
+  let $FZF_DEFAULT_COMMAND = '
+    \ (ag --hidden --ignore .git -g "" ||
+    \ git ls-tree -r --name-only HEAD ||
+    \ find . -name "*.*" -not \(
+    \ -path "*_build*" -o
+    \ -path "*/node_modules/*" -o
+    \ -path "*deps*" -o
+    \ -path "*.lock" -o
+    \ -name .
+    \ \)
+    \ | sed s/^..//) 2> /dev/null'
+  " let $FZF_DEFAULT_COMMAND = '(git ls-tree -r --name-only HEAD ||
+  "   \ find . -path "*/\.*" -prune -o -type f -print -o -type l -print
+  "   \ | sed s/^..//) 2> /dev/null'
+  " let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+  command! -bang -nargs=* Ripgrep call fzf#vim#grep('rg --column
+    \ --line-number --no-heading --fixed-strings --ignore-case --no-ignore
+    \ --hidden --follow --glob "!.git/*" --color "always"
+    \ '.shellescape(<q-args>), 1, <bang>0)
+  command! -bang -nargs=* GGrep
+    \ call fzf#vim#grep(
+    \   'git grep --line-number --color=always '.shellescape(<q-args>), 0,
+    \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    \   <bang>0)
+  autocmd VimEnter * command! -bang -nargs=* Ag
+    \ call fzf#vim#ag(<q-args>,
+    \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+    \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+    \                 <bang>0)
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always
+    \ '.shellescape(<q-args>), 1,
+    \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    \   <bang>0)
+  " nnoremap <silent> <leader>p :FZF<cr>
+  nnoremap <silent> <leader>o :Ag!<cr>
+  nnoremap <silent> <leader>r :Rg!<cr>
+  nnoremap <silent> <leader>u :Ripgrep<cr>
+  nnoremap <silent> <leader>i :GGrep!<cr>
+  if has('nvim')
+    augroup localfzf
+      autocmd!
+      autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
+      autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
+    augroup END
+  endif
+endif
+
+" gundo.vim - visualize your undo tree
+nnoremap <F6> :GundoToggle<CR>
+
+" Markdown - Use fenced code blocks in markdown
+let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'sh', 'html']
+
 " Neomake - Execute code checks, find mistakes, in the background
 " Run Neomake when I save any buffer
 augroup localneomake
@@ -847,6 +744,14 @@ augroup localneomake
 augroup END
 " Don't tell me to use smartquotes in markdown
 let g:neomake_markdown_enabled_makers = []
+
+" Neosnippet
+" " Enable snipMate compatibility feature.
+" let g:neosnippet#enable_snipmate_compatibility = 1
+" " Tell Neosnippet about the other snippets
+" let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+" imap <C-l>  <Plug>(neosnippet_expand_or_jump)
+" imap <S-Tab>  <Plug>(neosnippet_expand_or_jump)
 
 " Configure a nice credo setup, courtesy https://github.com/neomake/neomake/pull/300
 let g:neomake_elixir_enabled_makers = ['mix', 'mycredo']
@@ -874,9 +779,104 @@ let g:neomake_elixir_mycredo_maker = {
   \ 'postprocess': function('NeomakeCredoErrorType')
   \ }
 
+" Polyglot
+let g:polyglot_disabled = ['elm', 'elixir']
+
+" Tabular
+if exists(":Tabularize")
+  nmap <Leader>= :Tabularize /=<CR>
+  vmap <Leader>= :Tabularize /=<CR>
+  nmap <Leader>: :Tabularize /:\zs<CR>
+  vmap <Leader>: :Tabularize /:\zs<CR>
+endif
+
+" Ultisnips
+function! g:UltiSnips_Complete()
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res == 0
+    if pumvisible()
+      return "\<C-n>"
+    else
+      call UltiSnips#JumpForwards()
+      if g:ulti_jump_forwards_res == 0
+        return "\<TAB>"
+      endif
+    endif
+  endif
+  return ""
+endfunction
+
+function! g:UltiSnips_Reverse()
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
+
+  return ""
+endfunction
+
+
+if !exists("g:UltiSnipsJumpForwardTrigger")
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
+
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
+
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+" let g:UltiSnipsExpandTrigger="<c-l>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" " let g:UltiSnipsExpandTrigger="<c-l>"
+" " let g:UltiSnipsJumpForwardTrigger="<tab>"
+" " let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+
+" If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
+
+" vimagit
+nnoremap <silent> <leader>m :Magit<CR>
+
+" vim-expand-region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" vim-fugitive
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Git lg<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gr :Gread<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ge :Gedit<CR>
+
 " vim-gutentags - easily manage tags files
 if executable('ctags')
   let g:gutentags_cache_dir = '~/.tags_cache'
+endif
+
+" vim-hybrid
+let g:hybrid_reduced_contrast = 1
+
+"vim-maximizer
+nnoremap <silent><F6> :MaximizerToggle<CR>
+vnoremap <silent><F6> :MaximizerToggle<CR>gv
+inoremap <silent><F6> <C-o>:MaximizerToggle<CR>
+
+" vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+" nmap <silent> <leader>l :TestLast<CR>
+" nmap <silent> <leader>g :TestVisit<CR>
+if has('nvim')
+  " run tests in neovim strategy
+  let g:test#strategy = 'neovim'
 endif
 
 " vim-vinegar - navigate up a directory with '-' in netrw, among other things
