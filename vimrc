@@ -37,8 +37,6 @@ Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
 Plug 'slashmili/alchemist.vim'
