@@ -654,7 +654,8 @@ let g:delimitMate_expand_inside_quotes = 1
 let delimitMate_nesting_quotes = ['"']
 let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+" FIXME Interfers with enter when pum is visible - do I need it at all?
+" imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 " Deoplete
 if has('nvim')
