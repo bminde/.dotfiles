@@ -591,8 +591,8 @@ let g:ctrlp_dotfiles = 1               " do not show (.) dotfiles in match list
 let g:ctrlp_showhidden = 1             " do not show hidden files in match list
 let g:ctrlp_split_window = 0
 let g:ctrlp_max_height = 30            " restrict match list to a maxheight of 40
-let g:ctrlp_use_caching = 0            " don't cache, we want new list immediately each time
-let g:ctrlp_max_files = 0              " no restriction on results/file list
+let g:ctrlp_use_caching = 1            " use cache, we want new list immediately each time
+let g:ctrlp_max_files = 500              " no restriction on results/file list
 let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_dont_split = 'NERD_tree_2' " don't split these buffers
 if executable( 'ag' )
