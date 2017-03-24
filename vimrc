@@ -30,13 +30,11 @@ Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test'             " Run tests with varying granularity
 Plug 'kamwitsta/nordisk'
 Plug 'kana/vim-textobj-user'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'morhetz/gruvbox'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'raimondi/delimitmate'
 Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
-Plug 'roman/golden-ratio'
 Plug 'sheerun/vim-polyglot'
 Plug 'sjl/gundo.vim'
 Plug 'slashmili/alchemist.vim'
@@ -62,14 +60,10 @@ if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 " Plug 'AndrewRadev/splitjoin.vim' " multiline <--> single-line code
+" Plug 'kassio/neoterm' " nicer api for neovim terminal
+" Plug 'ludovicchabant/vim-gutentags'
+" Plug 'roman/golden-ratio'
 " Plug 'editorconfig/editorconfig-vim'  " Slows vim start up time, off until needed
-" Plug 'jiangmiao/auto-pairs'
-" Plug 'mattn/gist-vim'
-" Plug 'mattn/webapi-vim'
-" Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
-" Plug 'tpope/vim-rhubarb'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
