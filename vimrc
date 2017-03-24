@@ -10,7 +10,7 @@ endif
 call plug#begin()
 
 Plug 'ElmCast/elm-vim'
-Plug 'SirVer/ultisnips'
+Plug 'ervandew/supertab'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'   " Change vim working dir to project root
 Plug 'albertorestifo/github.vim'
@@ -36,18 +36,24 @@ Plug 'raimondi/delimitmate'
 Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
 Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim'
 Plug 'slashmili/alchemist.vim'
 Plug 'szw/vim-maximizer'
 Plug 'terryma/vim-expand-region'
 Plug 'tomasr/molokai'
 Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist' " required for some navigation features
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
 Plug 'vim-scripts/vim-auto-save'
 Plug 'w0ng/vim-hybrid'
 Plug 'w0rp/ale'
@@ -308,7 +314,7 @@ vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
 " Toggle fold
-:nnoremap <CR> za
+nnoremap <CR> za
 
 " Save with sudo
 ca w!! w !sudo tee "%"
