@@ -787,9 +787,7 @@ au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " 
 " let g:UltiSnipsExpandTrigger="<c-l>"
 " let g:UltiSnipsJumpForwardTrigger="<tab>"
 " let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-" " let g:UltiSnipsExpandTrigger="<c-l>"
-" " let g:UltiSnipsJumpForwardTrigger="<tab>"
-" " let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
 " If you want :UltiSnipsEdit to split your window.
 " let g:UltiSnipsEditSplit="vertical"
