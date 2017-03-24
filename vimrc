@@ -50,16 +50,12 @@ Plug 'tpope/vim-vinegar'
 Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'w0ng/vim-hybrid'
+Plug 'w0rp/ale'
 
 " Beta - things I'm testing
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'neomake/neomake'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-endif
-" Plug 'AndrewRadev/splitjoin.vim' " multiline <--> single-line code
 " Plug 'kassio/neoterm' " nicer api for neovim terminal
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'roman/golden-ratio'
@@ -487,6 +483,10 @@ function! Status(winnum)
     let stat .= Color(active, 'SLBranch', ' ← ') . head . ' '
   endif
 
+  " ale linter
+  let ale = ALEGetStatusLine()
+  let stat .= Color(active, 'SLBranch', ' ') . ale . ' '
+
   return stat
 endfunction
 
@@ -568,6 +568,9 @@ augroup END
 
 " }}}
 "================= PLUGINS SETTINGS ================== {{{
+
+" Ale
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 " Ctrlp
 nnoremap <Leader>p :CtrlP<CR>
@@ -729,40 +732,6 @@ nnoremap <F6> :GundoToggle<CR>
 
 " Markdown - Use fenced code blocks in markdown
 let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'sh', 'html']
-
-" Neomake - Execute code checks, find mistakes, in the background
-" Run Neomake when I save any buffer
-augroup localneomake
-  autocmd! BufWritePost * Neomake
-augroup END
-" Don't tell me to use smartquotes in markdown
-let g:neomake_markdown_enabled_makers = []
-
-" Configure a nice credo setup, courtesy https://github.com/neomake/neomake/pull/300
-let g:neomake_elixir_enabled_makers = ['mix', 'mycredo']
-function! NeomakeCredoErrorType(entry)
-  if a:entry.type ==# 'F'      " Refactoring opportunities
-    let l:type = 'W'
-  elseif a:entry.type ==# 'D'  " Software design suggestions
-    let l:type = 'I'
-  elseif a:entry.type ==# 'W'  " Warnings
-    let l:type = 'W'
-  elseif a:entry.type ==# 'R'  " Readability suggestions
-    let l:type = 'I'
-  elseif a:entry.type ==# 'C'  " Convention violation
-    let l:type = 'W'
-  else
-    let l:type = 'M'           " Everything else is a message
-  endif
-  let a:entry.type = l:type
-endfunction
-
-let g:neomake_elixir_mycredo_maker = {
-  \ 'exe': 'mix',
-  \ 'args': ['credo', 'list', '%:p', '--format=oneline'],
-  \ 'errorformat': '[%t] %. %f:%l:%c %m,[%t] %. %f:%l %m',
-  \ 'postprocess': function('NeomakeCredoErrorType')
-  \ }
 
 " Polyglot
 let g:polyglot_disabled = ['elm', 'elixir']
