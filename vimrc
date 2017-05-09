@@ -194,6 +194,15 @@ autocmd FileType markdown set tw=80
 " autocmd bufnewfile,bufread *.md setlocal noet ts=4 sw=4
 " autocmd bufnewfile,bufread *.vim setlocal expandtab shiftwidth=2 tabstop=2
 
+" pyhton
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python2_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
+" django
+autocmd FileType python set ft=python.django " For SnipMate
+autocmd FileType html set ft=htmldjango.html " For SnipMate
+
 augroup elm
   autocmd!
   autocmd BufNewFile,BufRead *.elm setlocal tabstop=4
