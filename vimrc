@@ -425,7 +425,7 @@ nnoremap <leader>l :tabnext<cr>
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 " Ctrlp
-nnoremap <Leader>p :CtrlP<CR>
+" nnoremap <Leader>p :CtrlP<CR>
 let g:ctrlp_match_window_bottom = 1    " Show at bottom of window
 let g:ctrlp_working_path_mode = 'ra'   " Our working path is our VCS project or the current directory
 let g:ctrlp_mru_files = 1              " Enable Most Recently Used files feature
@@ -485,7 +485,7 @@ function! MaybeCtrlP()
   if argc() == 1 && isdirectory(argv()[0])
     " Uncomment this to remove the Netrw buffer (optional)
     " execute "bdelete"
-    execute "CtrlP"
+    execute "FZF"
   endif
 endfunction
 autocmd VimEnter * :call MaybeCtrlP()
@@ -566,7 +566,7 @@ if executable('fzf')
     \   <bang>0 ? fzf#vim#with_preview('up:60%')
     \           : fzf#vim#with_preview('right:50%:hidden', '?'),
     \   <bang>0)
-  " nnoremap <silent> <leader>p :FZF<cr>
+  nnoremap <silent> <leader>p :FZF<cr>
   nnoremap <silent> <leader>o :Ag!<cr>
   nnoremap <silent> <leader>r :Rg!<cr>
   nnoremap <silent> <leader>u :Ripgrep<cr>
