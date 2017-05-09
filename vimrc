@@ -30,11 +30,15 @@ Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test'             " Run tests with varying granularity
 Plug 'kamwitsta/nordisk'
 Plug 'kana/vim-textobj-user'
+Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
+Plug 'neovim/python-client'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'raimondi/delimitmate'
 Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
+Plug 'rizzatti/dash.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'SirVer/ultisnips'
@@ -42,6 +46,7 @@ Plug 'sjl/gundo.vim'
 Plug 'slashmili/alchemist.vim'
 Plug 'szw/vim-maximizer'
 Plug 'terryma/vim-expand-region'
+Plug 'thinca/vim-localrc'
 Plug 'tomasr/molokai'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
@@ -51,16 +56,19 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
 Plug 'vim-scripts/vim-auto-save'
 Plug 'w0ng/vim-hybrid'
 Plug 'w0rp/ale'
+Plug 'zchee/deoplete-jedi'
 
 " Beta - things I'm testing
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'kassio/neoterm' " nicer api for neovim terminal
+Plug 'kassio/neoterm' " nicer api for neovim terminal
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'roman/golden-ratio'
 " Plug 'editorconfig/editorconfig-vim'  " Slows vim start up time, off until needed
