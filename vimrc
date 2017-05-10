@@ -312,7 +312,7 @@ nmap :ed :edit %:p:h/
 map <C-N> :vsp<CR><C-P>
 map <C-C> :q<CR>
 " Custom tab opening behaviour
-map <leader>n :tabnew .<CR><C-P>
+" map <leader>n :tabnew .<CR><C-P>
 
 " reselect pasted content:
 noremap gV `[v`]
@@ -585,6 +585,13 @@ nnoremap <F6> :GundoToggle<CR>
 
 " Markdown - Use fenced code blocks in markdown
 let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'sh', 'html']
+
+" NerdTre
+map <leader>n :NERDTreeToggle<CR>
+let NERDTreeHighlightCursorline=1
+let NERDTreeRespectWildIgnore=1
+let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__']
+let g:NERDTreeWinSize = 30
 
 " Polyglot
 let g:polyglot_disabled = ['elm', 'elixir']
