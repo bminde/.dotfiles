@@ -384,10 +384,38 @@ nnoremap <leader>l :tabnext<cr>
 
 " vim-airline
   set laststatus=2
-  let g:airline_theme='twofirewatch'
   let g:two_firewatch_italics=1
   let g:bufferline_echo = 0
-  let g:airline_powerline_fonts=0
+  if ($TERM_PROGRAM == "iTerm.app" || has("gui_macvim"))
+    let g:airline_powerline_fonts=1
+    let g:airline_theme='tomorrow'
+    " base16_grayscale
+    " distinguished
+    " hybrid
+    " lucius
+    " monochrome
+    " papercolor
+    " silver
+    " tomorrow
+  else
+    let g:airline_theme='luna'
+    let g:airline_powerline_fonts=0
+    let g:airline_left_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_left_alt_sep = '|'
+    let g:airline_right_alt_sep = '|'
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
+    let g:airline_symbols.linenr = '␊'
+    let g:airline_symbols.linenr = '␤'
+    let g:airline_symbols.linenr = '¶'
+    let g:airline_symbols.branch = '⎇ '
+    let g:airline_symbols.paste = 'Þ'
+    let g:airline_symbols.paste = '∥'
+    let g:airline_symbols.paste = 'ρ'
+    let g:airline_symbols.whitespace = 'Ξ'
+  endif
   let g:airline_enable_branch=1
   let g:airline_enable_syntastic=1
   let g:airline_branch_prefix = '⎇ '
@@ -402,21 +430,6 @@ nnoremap <leader>l :tabnext<cr>
         \ 'c' : 'CMD   ',
         \ '': 'V-BLCK',
         \ }
-  let g:airline_left_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_left_alt_sep = '|'
-  let g:airline_right_alt_sep = '|'
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-  let g:airline_symbols.linenr = '␊'
-  let g:airline_symbols.linenr = '␤'
-  let g:airline_symbols.linenr = '¶'
-  let g:airline_symbols.branch = '⎇ '
-  let g:airline_symbols.paste = 'Þ'
-  let g:airline_symbols.paste = '∥'
-  let g:airline_symbols.paste = 'ρ'
-  let g:airline_symbols.whitespace = 'Ξ'
 
 " }}}
 "================= PLUGINS SETTINGS ================== {{{
