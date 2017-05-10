@@ -649,7 +649,7 @@ au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " 
 " let g:UltiSnipsEditSplit="vertical"
 
 " vimagit
-nnoremap <silent> <leader>m :Magit<CR>
+nnoremap <silent> <leader>m :MagitOnly<CR>
 
 " vim-expand-region
 vmap v <Plug>(expand_region_expand)
