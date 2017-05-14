@@ -23,6 +23,7 @@ Plug 'dietsche/vim-lastplace'
 Plug 'djoshea/vim-autoread'
 Plug 'dyng/ctrlsf.vim'
 Plug 'elixir-lang/vim-elixir'
+Plug 'embear/vim-localvimrc'
 Plug 'glts/vim-textobj-comment'
 Plug 'godlygeek/tabular'
 Plug 'henrik/vim-indexed-search'
@@ -46,7 +47,6 @@ Plug 'sjl/gundo.vim'
 Plug 'slashmili/alchemist.vim'
 Plug 'szw/vim-maximizer'
 Plug 'terryma/vim-expand-region'
-Plug 'thinca/vim-localrc'
 Plug 'tomasr/molokai'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
@@ -707,9 +707,4 @@ endif
 " vim-vinegar - navigate up a directory with '-' in netrw, among other things
 let g:netrw_list_hide = &wildignore
 
-" }}}
-"================= PROJECT SETTINGS ================== {{{
-
-set exrc   " enable per-directory .vimrc files
-set secure " disable unsafe commands in local .vimrc files
 " }}}
