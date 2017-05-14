@@ -33,6 +33,7 @@ Plug 'kamwitsta/nordisk'
 Plug 'kana/vim-textobj-user'
 Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
+Plug 'mtth/scratch.vim'
 Plug 'neovim/python-client'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'raimondi/delimitmate'
@@ -608,6 +609,9 @@ let g:NERDTreeWinSize = 30
 
 " Polyglot
 let g:polyglot_disabled = ['elm', 'elixir']
+
+" Scratch
+let g:scratch_insert_autohide = 0
 
 " Tabular
 if exists(":Tabularize")
