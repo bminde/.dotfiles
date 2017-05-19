@@ -621,7 +621,7 @@ let g:markdown_fenced_languages=['ruby', 'javascript', 'elixir', 'sh', 'html']
 map <leader>n :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeRespectWildIgnore=1
-let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__']
+let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
 let g:NERDTreeWinSize = 30
 
 " Polyglot
