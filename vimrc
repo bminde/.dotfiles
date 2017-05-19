@@ -546,59 +546,70 @@ let g:elm_setup_keybindings = 1
 let elm_format_autosave = 1
 
 " fzf
-if executable('fzf')
-  let g:fzf_layout = { 'window': 'enew' }
-  " let g:fzf_layout = { 'right': '~30%' }
-  let $FZF_DEFAULT_COMMAND = '
-    \ (ag --hidden --ignore .git -g "" ||
-    \ git ls-tree -r --name-only HEAD ||
-    \ find . -name "*.*" -not \(
-    \ -path "*_build*" -o
-    \ -path "*/node_modules/*" -o
-    \ -path "*deps*" -o
-    \ -path "*.lock" -o
-    \ -name .
-    \ \)
-    \ | sed s/^..//) 2> /dev/null'
-  " let $FZF_DEFAULT_COMMAND = '(git ls-tree -r --name-only HEAD ||
-  "   \ find . -path "*/\.*" -prune -o -type f -print -o -type l -print
-  "   \ | sed s/^..//) 2> /dev/null'
-  " let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-  command! -bang -nargs=* Ripgrep call fzf#vim#grep('rg --column
-    \ --line-number --no-heading --fixed-strings --ignore-case --no-ignore
-    \ --hidden --follow --glob "!.git/*" --color "always"
-    \ '.shellescape(<q-args>), 1, <bang>0)
-  command! -bang -nargs=* GGrep
-    \ call fzf#vim#grep(
-    \   'git grep --line-number --color=always '.shellescape(<q-args>), 0,
-    \   <bang>0 ? fzf#vim#with_preview('up:60%')
-    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-    \   <bang>0)
+let g:fzf_layout = { 'window': 'enew' }
+nnoremap <silent> <leader>p :FZF<cr>
+nnoremap <silent> <leader>o :Ag<cr>
+" let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+augroup localfzf
+  autocmd!
+  autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
+  autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
   autocmd VimEnter * command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
     \                 <bang>0 ? fzf#vim#with_preview('up:60%')
     \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
     \                 <bang>0)
-  command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always
-    \ '.shellescape(<q-args>), 1,
-    \   <bang>0 ? fzf#vim#with_preview('up:60%')
-    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-    \   <bang>0)
-  nnoremap <silent> <leader>p :FZF<cr>
-  nnoremap <silent> <leader>o :Ag!<cr>
+augroup END
+" if executable('fzf')
+"   let g:fzf_layout = { 'window': 'enew' }
+"   " let g:fzf_layout = { 'right': '~30%' }
+"   let $FZF_DEFAULT_COMMAND = '
+"     \ (ag --hidden --ignore .git -g "" ||
+"     \ git ls-tree -r --name-only HEAD ||
+"     \ find . -name "*.*" -not \(
+"     \ -name .
+"     \ \)
+"     \ | sed s/^..//) 2> /dev/null'
+"   " let $FZF_DEFAULT_COMMAND = '(git ls-tree -r --name-only HEAD ||
+"   "   \ find . -path "*/\.*" -prune -o -type f -print -o -type l -print
+"   "   \ | sed s/^..//) 2> /dev/null'
+"   " let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+"   command! -bang -nargs=* Ripgrep call fzf#vim#grep('rg --column
+"     \ --line-number --no-heading --fixed-strings --ignore-case --no-ignore
+"     \ --hidden --follow --glob "!.git/*" --color "always"
+"     \ '.shellescape(<q-args>), 1, <bang>0)
+"   command! -bang -nargs=* GGrep
+"     \ call fzf#vim#grep(
+"     \   'git grep --line-number --color=always '.shellescape(<q-args>), 0,
+"     \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"     \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"     \   <bang>0)
+"   autocmd VimEnter * command! -bang -nargs=* Ag
+"     \ call fzf#vim#ag(<q-args>,
+"     \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+"     \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+"     \                 <bang>0)
+"   command! -bang -nargs=* Rg
+"     \ call fzf#vim#grep(
+"     \   'rg --column --line-number --no-heading --color=always
+"     \ '.shellescape(<q-args>), 1,
+"     \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"     \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"     \   <bang>0)
+"   nnoremap <silent> <leader>p :FZF<cr>
+"   nnoremap <silent> <leader>o :Ag!<cr>
   nnoremap <silent> <leader>r :Rg!<cr>
   nnoremap <silent> <leader>u :Ripgrep<cr>
   nnoremap <silent> <leader>i :GGrep!<cr>
-  if has('nvim')
-    augroup localfzf
-      autocmd!
-      autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
-      autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
-    augroup END
-  endif
-endif
+"   if has('nvim')
+"     augroup localfzf
+"       autocmd!
+"       autocmd FileType fzf :tnoremap <buffer> <C-J> <C-J>
+"       autocmd FileType fzf :tnoremap <buffer> <C-K> <C-K>
+"     augroup END
+"   endif
+" endif
 
 " gundo.vim - visualize your undo tree
 nnoremap <F6> :GundoToggle<CR>
