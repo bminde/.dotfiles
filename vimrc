@@ -57,6 +57,7 @@ Plug 'tpope/vim-projectionist' " required for some navigation features
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
+Plug 'trusktr/seti.vim'
 Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
