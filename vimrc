@@ -356,7 +356,8 @@ map ,, <C-^>
 set iskeyword+=-
 
 " Fast save
-nnoremap <Leader>w :w<CR>
+nnoremap ,w :w<CR>
+nnoremap <leader>fs :w<CR>
 
 " Fast quit
 nnoremap <Leader>q :q<CR>
