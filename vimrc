@@ -449,6 +449,8 @@ nnoremap <leader>l :tabnext<cr>
 " Ale
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_sign_column_always = 1
+noremap <leader>en :ALENextWrap<cr>
+noremap <leader>ep :ALEPreviousWrap<cr>
 
 " Ctrlp
 " nnoremap <Leader>p :CtrlP<CR>
