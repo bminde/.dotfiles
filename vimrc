@@ -67,6 +67,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
 Plug 'vim-scripts/vim-auto-save'
+Plug 'vimwiki/vimwiki'
 Plug 'w0ng/vim-hybrid'
 Plug 'w0rp/ale'
 Plug 'zchee/deoplete-jedi'
@@ -731,5 +732,8 @@ endif
 
 " vim-vinegar - navigate up a directory with '-' in netrw, among other things
 let g:netrw_list_hide = &wildignore
+
+" vimwiki/vimwiki
+let g:vimwiki_list = [{'path': '~/Dropbox/tekst/wiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 " }}}
