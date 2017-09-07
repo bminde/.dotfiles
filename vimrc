@@ -39,21 +39,9 @@ Plug 'raimondi/delimitmate'
   " imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
   " }}}
 Plug 'lifepillar/vim-solarized8'
-Plug 'joshdick/onedark.vim'
-Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
 Plug 'tomasr/molokai'
 Plug 'morhetz/gruvbox'
-Plug 'endel/vim-github-colorscheme'
-Plug 'arcticicestudio/nord-vim'
-Plug 'kamwitsta/nordisk'
-Plug 'dikiaap/minimalist'
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'AlessandroYorba/Alduin'
-  " {{{
-  let g:alduin_Contract_Vampirism = 1
-  " }}}
-Plug 'AlessandroYorba/Arcadia'
 Plug 'AlessandroYorba/Despacio'
   " {{{
   let g:despacio_Campfire = 1
@@ -72,10 +60,15 @@ Plug 'w0rp/ale'
   " }}}
 Plug 'sheerun/vim-polyglot'
   " {{{
-  let g:polyglot_disabled = ['elm', 'elixir']
+  " let g:polyglot_disabled = ['elm', 'elixir']
   " }}}
+" Plug 'elixir-lang/vim-elixir'
+" Plug 'avdgaag/vim-phoenix'
+" Plug 'slashmili/alchemist.vim'
+" Plug 'lambdatoast/elm.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise' " puts closing constructs on <CR>
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
   " {{{
   nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -89,6 +82,21 @@ Plug 'tpope/vim-fugitive'
   nnoremap <silent> <leader>gw :Gwrite<CR>
   nnoremap <silent> <leader>ge :Gedit<CR>
   " }}}
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw
+  " {{{
+  " hide dotfiles by defautl - toggle with gh
+  let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+  " }}}
+Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  " {{{
+  map <leader>n :NERDTreeToggle<CR>
+  let NERDTreeHighlightCursorline=1
+  let NERDTreeRespectWildIgnore=1
+  let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
+  let g:NERDTreeWinSize = 30
+  " }}}
 Plug 'airblade/vim-gitgutter'
   " {{{
   if exists('&signcolumn')  " Vim 7.4.2201
@@ -97,34 +105,40 @@ Plug 'airblade/vim-gitgutter'
     let g:gitgutter_sign_column_always = 1
   endif
   " }}}
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw
+Plug 'janko-m/vim-test'             " Run tests with varying granularity
   " {{{
-  " hide dotfiles by defautl - toggle with gh
-  let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+  nmap <silent> <leader>tt :TestFile<CR>
+  nmap <silent> <leader>T :TestNearest<CR>
+  nmap <silent> <leader>a :TestSuite<CR>
+  " nmap <silent> <leader>l :TestLast<CR>
+  " nmap <silent> <leader>g :TestVisit<CR>
+  if has('nvim')
+    " run tests in neovim strategy
+    let test#strategy = 'vimux'
+  endif
   " }}}
-
 Plug 'ctrlpvim/ctrlp.vim'
   " {{{
-  nnoremap <Leader>p :CtrlP<CR>
+  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
   if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    " let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
+    let g:ctrlp_user_command = 'ag -Q -l --nocolor -g "" %s'
+
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+
+    if !exists(":Ag")
+      command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+      nnoremap \ :Ag<SPACE>
+    endif
   endif
+  nnoremap <Leader>p :CtrlP<CR>
   " if executable('ag')
-  "   " Use Ag over Grep
-  "   set grepprg=ag\ --nogroup\ --nocolor
-
-  "   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  "   let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
-
-  "   " ag is fast enough that CtrlP doesn't need to cache
-  "   let g:ctrlp_use_caching = 0
-
-  "   if !exists(":Ag")
-  "     command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-  "     nnoremap \ :Ag<SPACE>
-  "   endif
+  "   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   " endif
   " }}}
 Plug 'vimwiki/vimwiki'
@@ -142,7 +156,11 @@ Plug 'godlygeek/tabular'
     vmap ,: :Tabularize /:\zs<CR>
   endif
   " }}}
+" rails
+Plug 'tpope/vim-rails'
+Plug 'thoughtbot/vim-rspec'
 
+" Plug 'tpope/vim-dispatch'
 " }}}
 "================= PLUGINS - DEACTIVATED ============= {{{
 " Plug 'ElmCast/elm-vim'
@@ -182,24 +200,11 @@ Plug 'godlygeek/tabular'
 " Plug 'dietsche/vim-lastplace'
 " Plug 'djoshea/vim-autoread'
 " Plug 'dyng/ctrlsf.vim'
-" Plug 'elixir-lang/vim-elixir'
 " Plug 'embear/vim-localvimrc'
 " Plug 'glts/vim-textobj-comment'
 " Plug 'henrik/vim-indexed-search'
 " Plug 'honza/vim-snippets'
 " Plug 'jacoborus/tender.vim'
-" Plug 'janko-m/vim-test'             " Run tests with varying granularity
-  " {{{
-  nmap <silent> <leader>tt :TestFile<CR>
-  nmap <silent> <leader>T :TestNearest<CR>
-  nmap <silent> <leader>a :TestSuite<CR>
-  " nmap <silent> <leader>l :TestLast<CR>
-  " nmap <silent> <leader>g :TestVisit<CR>
-  if has('nvim')
-    " run tests in neovim strategy
-    let g:test#strategy = 'neovim'
-  endif
-  " }}}
 " Plug 'kana/vim-textobj-user'
 " Plug 'mhinz/vim-startify'
 " Plug 'mtth/scratch.vim'
@@ -298,7 +303,6 @@ Plug 'godlygeek/tabular'
 " Plug 'tyrannicaltoucan/vim-quantum'
 " Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
 " Plug 'vim-scripts/vim-auto-save'
-" Plug 'w0ng/vim-hybrid'
 " Plug 'zchee/deoplete-jedi'
 "
 " " Beta - things I'm testing
@@ -465,6 +469,7 @@ set splitright               " split vertical windows right to the current windo
 " set title                    " set the title of the iterm tab
 set updatetime=400
 set viminfo='200
+set breakindent              " indent wrapped lines
 " get rid of the ex mode
 map q <nop>
 set wildignore+=.DS_Store
@@ -539,6 +544,9 @@ let $nvim_tui_enable_true_color=1
 "   let &t_si = "\<esc>]50;cursorshape=1\x7"
 "   let &t_ei = "\<esc>]50;cursorshape=0\x7"
 " endif
+
+" Don't add the comment prefix when I hit enter or o/O on a comment line.
+" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " open help vertically
 " FIXME - errors when sourcing file
