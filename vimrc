@@ -367,6 +367,10 @@
   endif
 
   colorscheme solarized8_dark
+  nnoremap  <F2> :<c-u>exe "colors" (g:colors_name =~# "dark"
+    \ ? substitute(g:colors_name, 'dark', 'light', '')
+    \ : substitute(g:colors_name, 'light', 'dark', '')
+    \ )<cr>
 "
   "================= MAPPINGS ==========================
   " Tab completion
