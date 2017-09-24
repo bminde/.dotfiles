@@ -14,7 +14,6 @@
   set autowrite     " Automatically :write before running commands
   " set backspace=2 " Backspace deletes like most programs in insert mode
   set backspace=indent,eol,start  " Backspace works like in other apps
-  set breakindent   " indent wrapped lines
   set history=50
   set hlsearch      " highlight found searches
   set ignorecase    " search case insensitive...
@@ -258,8 +257,6 @@
       autocmd CursorHoldI * call ale#Lint()
       autocmd InsertEnter * call ale#Lint()
       autocmd InsertLeave * call ale#Lint()
-    else
-      echoerr "No async support"
     endif
   augroup END
 
@@ -267,6 +264,9 @@
   " shell for syntax highlighting purposes.
   let g:is_posix = 1
 
+  if g:has_async
+    set breakindent   " indent wrapped lines if supported (version > 800)
+  endif
   " Softtabs, 2 spaces
   set tabstop=2
   set shiftwidth=2
