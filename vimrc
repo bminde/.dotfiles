@@ -351,7 +351,9 @@
   set statusline+=%=        " Switch to the right side
   set statusline+=%l        " current line
   set statusline+=/%L       " Total lines
-  set statusline+=\ -\ %{ALEGetStatusLine()}
+  if g:has_async
+    set statusline+=\ -\ %{ALEGetStatusLine()}
+  endif
   set statusline+=\ "
 
   " if has('gui_running') || has('nvim') || has('termguicolors')
