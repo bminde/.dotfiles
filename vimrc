@@ -274,6 +274,9 @@
   set shiftround
   set expandtab
 
+  " highlight current line
+  set cursorline
+
   " Makes foo-bar considered one word
   set iskeyword+=-
 
@@ -302,8 +305,8 @@
   set nojoinspaces
 
   " Make it obvious where 80 characters is
-  set textwidth=80
-  set colorcolumn=+1
+  " set textwidth=80
+  " set colorcolumn=+1
 
   set wildignore+=.DS_Store
   set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.psd,*.o,*.obj,*.min.js,*.codekit
