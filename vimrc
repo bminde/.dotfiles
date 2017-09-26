@@ -110,6 +110,7 @@
     nmap <leader>rt :ReformatTable<cr>
     vmap <cr> <Plug>(EasyAlign)
   Plug 'kamwitsta/nordisk'
+  Plug 'kristijanhusak/vim-hybrid-material'
   Plug 'lifepillar/vim-solarized8'
   Plug 'ludovicchabant/vim-gutentags'
     " vim-gutentags - easily manage tags files
