@@ -65,6 +65,8 @@
     map <leader>vz :VimuxZoomRunner<CR>
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'cohama/lexima.vim'      " auto close parens, quotes, brackets
+  Plug 'edkolev/tmuxline.vim'
+    let g:tmuxline_powerline_separators = 0
   Plug 'editorconfig/editorconfig-vim'
   Plug 'ervandew/supertab'
   Plug 'honza/vim-snippets'
@@ -210,6 +212,8 @@
     "   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     " endif
   Plug 'sheerun/vim-polyglot'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
   " Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'       " automatic ctag management
   Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
