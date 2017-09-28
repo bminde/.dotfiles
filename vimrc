@@ -21,6 +21,7 @@
   set laststatus=2  " Always display the status line
   set lazyredraw    " wait to redraw
   set nobackup
+  set noshowmode    " don't show mode, already shown in airline
   set noswapfile
   set nowritebackup
   set ruler         " show the cursor position all the time
