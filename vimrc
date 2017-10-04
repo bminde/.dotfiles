@@ -221,6 +221,8 @@
   Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     map <leader>n :NERDTreeToggle<CR>
     let NERDTreeHighlightCursorline=1
+    " expand/open with one click
+    let NERDTreeMouseMode=3
     let NERDTreeRespectWildIgnore=1
     let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
     let g:NERDTreeWinSize = 30
