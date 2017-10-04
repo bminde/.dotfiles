@@ -24,6 +24,7 @@
   set noshowmode    " don't show mode, already shown in airline
   set noswapfile
   set nowritebackup
+  set relativenumber
   set ruler         " show the cursor position all the time
   set showcmd       " display incomplete commands
   set smartcase     " don't ignore case when it begins with upper case
