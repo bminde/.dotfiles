@@ -398,7 +398,7 @@
   Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
   Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     map <leader>n :NERDTreeToggle<CR>
-    let NERDTreeHighlightCursorline=1
+    let NERDTreeHighlightCursorline=0
     " expand/open with one click
     let NERDTreeMouseMode=3
     let NERDTreeRespectWildIgnore=1
