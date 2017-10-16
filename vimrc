@@ -1,4 +1,5 @@
 " Misc Settings {{{1
+set enc=utf-8
 set backspace=indent,eol,start
 set clipboard^=unnamed    " use system clipboard
 set diffopt+=vertical     " always use vertical diffs
