@@ -405,6 +405,7 @@ Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different synta
 "   " Move between linting errors
 "   noremap <leader>en :ALENextWrap<cr>
 "   noremap <leader>ep :ALEPreviousWrap<cr>
+" }}}
 call plug#end()
 " Colors {{{1
 syntax enable           " enable syntax processing
