@@ -407,6 +407,7 @@ Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different synta
 call plug#end()
 " Colors {{{1
 syntax enable           " enable syntax processing
+set bg=dark
 if (has("termguicolors"))
   colorscheme two-firewatch
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
