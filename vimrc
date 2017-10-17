@@ -63,7 +63,7 @@ set ignorecase          " ignore case when searching
 set incsearch           " search as characters are entered
 set hlsearch            " highlight all matches
 set smartcase
-nnoremap å :nohlsearch<CR>
+nnoremap <silent> å :nohlsearch<cr>
 " Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
@@ -103,7 +103,7 @@ nnoremap ,, <c-^>
 " zoom a vim pane, <C-w>= to re-balance
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>ev :e $MYVIMRC<CR>
 " nnoremap <leader>et :exec ":vsp /Users/dblack/notes/vim/" . strftime('%m-%d-%y') . ".md"<CR>
 " Format the entire file
 nmap <leader>fef ggVG=
@@ -244,9 +244,11 @@ endif
 " }}}2
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
-Plug 'jiangmiao/auto-pairs'
 Plug 'tomasiser/vim-code-dark'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'cohama/lexima.vim'      " auto close parens, quotes, brackets
+  " lexima config {{{2
+  " }}}
 Plug 'ctrlpvim/ctrlp.vim'
   " ctrlp config {{{2
   " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
@@ -271,50 +273,59 @@ Plug 'ctrlpvim/ctrlp.vim'
   "   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   " endif
   " }}}
-Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-  " fzf config {{{2
-  let g:fzf_files_options =
-    \ '--reverse ' .
-      \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
-      nnoremap <C-o> :Files<cr>
-      let $FZF_DEFAULT_COMMAND = 'ag -g "" --hidden'
-
-  let branch_files_options = { 'source': '( git status --porcelain | awk ''{print $2}''; git diff --name-only HEAD $(git merge-base HEAD master) ) | sort | uniq'}
-  let uncommited_files_options = { 'source': '( git status --porcelain | awk ''{print $2}'' ) | sort | uniq'}
-
-  let s:diff_options =
-    \ '--reverse ' .
-    \ '--preview "(git diff --color=always master -- {} | tail -n +5 || cat {}) 2> /dev/null | head -'.&lines.'"'
-  command! BranchFiles call fzf#run(fzf#wrap('BranchFiles',
-        \ extend(branch_files_options, { 'options': s:diff_options }), 0))
-  command! UncommitedFiles call fzf#run(fzf#wrap('UncommitedFiles',
-        \ extend(uncommited_files_options, { 'options': s:diff_options }), 0))
-  " nnoremap <silent> <leader>gp :BranchFiles<cr>
-  " nnoremap <silent> <leader>GP :UncommitedFiles<cr>
-
-
-  " nnoremap <leader>ga :Files app/<cr>
-  " nnoremap <leader>gm :Files app/models/<cr>
-  " nnoremap <leader>gv :Files app/views/<cr>
-  " nnoremap <leader>gc :Files app/controllers/<cr>
-  " nnoremap <leader>gy :Files app/assets/stylesheets/<cr>
-  " nnoremap <leader>gj :Files app/assets/javascripts/<cr>
-  " nnoremap <leader>gs :Files spec/<cr>
-
-  function! s:all_help_files()
-      return join(map(split(&runtimepath, ','), 'v:val ."\/doc\/tags"'), ' ')
-    endfunction
-    let full_help_cmd = "cat ". s:all_help_files() ." 2> /dev/null \| grep -i '^[a-z]' \| awk '{print $1}' \| sort"
-
-    nnoremap <silent> <leader>he :Helptags<cr>
-    " }}}
 Plug 'kamwitsta/nordisk'
 Plug 'arcticicestudio/nord-vim'
+Plug 'janko-m/vim-test'
+  " vim-test config {{{2
+  nnoremap <silent> <Leader>t :TestFile<CR>
+  nnoremap <silent> <Leader>s :TestNearest<CR>
+  nnoremap <silent> <Leader>l :TestLast<CR>
+  nnoremap <silent> <Leader>a :TestSuite<CR>
+  nnoremap <silent> <Leader>gt :TestVisit<CR>
+
+  let test#strategy = 'vimux'
+  " }}}
 Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" fzf config {{{3
+let g:fzf_files_options =
+  \ '--reverse ' .
+    \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+    nnoremap <C-o> :Files<cr>
+    let $FZF_DEFAULT_COMMAND = 'ag -g "" --hidden'
+
+let branch_files_options = { 'source': '( git status --porcelain | awk ''{print $2}''; git diff --name-only HEAD $(git merge-base HEAD master) ) | sort | uniq'}
+let uncommited_files_options = { 'source': '( git status --porcelain | awk ''{print $2}'' ) | sort | uniq'}
+
+let s:diff_options =
+  \ '--reverse ' .
+  \ '--preview "(git diff --color=always master -- {} | tail -n +5 || cat {}) 2> /dev/null | head -'.&lines.'"'
+command! BranchFiles call fzf#run(fzf#wrap('BranchFiles',
+      \ extend(branch_files_options, { 'options': s:diff_options }), 0))
+command! UncommitedFiles call fzf#run(fzf#wrap('UncommitedFiles',
+      \ extend(uncommited_files_options, { 'options': s:diff_options }), 0))
+" nnoremap <silent> <leader>gp :BranchFiles<cr>
+" nnoremap <silent> <leader>GP :UncommitedFiles<cr>
+
+
+" nnoremap <leader>ga :Files app/<cr>
+" nnoremap <leader>gm :Files app/models/<cr>
+" nnoremap <leader>gv :Files app/views/<cr>
+" nnoremap <leader>gc :Files app/controllers/<cr>
+" nnoremap <leader>gy :Files app/assets/stylesheets/<cr>
+" nnoremap <leader>gj :Files app/assets/javascripts/<cr>
+" nnoremap <leader>gs :Files spec/<cr>
+
+function! s:all_help_files()
+    return join(map(split(&runtimepath, ','), 'v:val ."\/doc\/tags"'), ' ')
+  endfunction
+  let full_help_cmd = "cat ". s:all_help_files() ." 2> /dev/null \| grep -i '^[a-z]' \| awk '{print $1}' \| sort"
+
+  nnoremap <silent> <leader>he :Helptags<cr>
+  " }}}
   " Easy Align - operators for aligning characters across lines {{{2
   command! ReformatTable normal vip<cr>**|
   nmap <leader>rt :ReformatTable<cr>
@@ -332,16 +343,6 @@ Plug 'nelstrom/vim-markdown-folding'    " folding based on md heading levels
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'rakr/vim-one'
-Plug 'janko-m/vim-test'
-  " vim-test config {{{2
-  nnoremap <silent> <Leader>t :TestFile<CR>
-  nnoremap <silent> <Leader>s :TestNearest<CR>
-  nnoremap <silent> <Leader>l :TestLast<CR>
-  nnoremap <silent> <Leader>a :TestSuite<CR>
-  nnoremap <silent> <Leader>gt :TestVisit<CR>
-
-  let test#strategy = 'vimux'
-  " }}}
 Plug 'rakr/vim-two-firewatch'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   " Nerdtree config {{{2
@@ -353,8 +354,19 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
   let g:NERDTreeWinSize = 30
   " }}}2
+Plug 'SirVer/ultisnips'
+  " ultisnips config {{{2
+  let g:UltiSnipsSnippetsDir='~/.vim/snippets'
+  let g:UltiSnipsEditSplit='vertical'
+  let g:UltiSnipsExpandTrigger           = '<S-Tab>'
+  let g:UltiSnipsJumpForwardTrigger      = '<S-Tab>'
+  let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
+  nnoremap <leader>ue :UltiSnipsEdit<cr>
+  " }}}
+Plug 'tomasr/molokai'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
   " vim-fugitive config {{{2
@@ -399,12 +411,17 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw
 Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
 " Unused Plugins {{{2
+" Plug 'editorconfig/editorconfig-vim'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'w0rp/ale'
 "   " let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 "   let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
 "   " Move between linting errors
 "   noremap <leader>en :ALENextWrap<cr>
 "   noremap <leader>ep :ALEPreviousWrap<cr>
+" Plug 'sjl/gundo.vim'
+"   " gundo - visualize your undo tree
+"   nnoremap <F6> :GundoToggle<CR>
 " }}}
 call plug#end()
 " Colors {{{1
@@ -439,8 +456,8 @@ endif
 "   " set statusline+=\%{ALEGetStatusLine()}
 " endif
 " set fillchars=vert:\ ,stl:\ ,stlnc:\ "
-" set laststatus=2
-" set noshowmode
+set laststatus=2
+set noshowmode
 
 " Custom Functions {{{1
 " strips trailing whitespace at the end of files. this
