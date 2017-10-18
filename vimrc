@@ -92,9 +92,11 @@ endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 " inoremap <S-Tab> <c-n>
 set pumheight=10             " completion window max size
-" Line Shortcuts {{{1
-nnoremap j gj       " Move vertically by visual line
+" " Line Shortcuts {{{1
+" Move vertically by visual line
+nnoremap j gj
 nnoremap k gk
+" reselect pasted content
 nnoremap gV `[v`]
 " Leader Shortcuts {{{1
 let mapleader=" "
