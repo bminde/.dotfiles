@@ -21,7 +21,6 @@ set noswapfile
 set nowritebackup
 set nrformats=            " treat 0-padded numbers as decimal, not octal
 set pastetoggle=<F4>      " toggle paste
-set scrolloff=8
 set shiftround
 set splitbelow            " open new split panes to right and bottom
 set splitright
@@ -30,6 +29,7 @@ set tabstop=2           " 2 space tab
 set expandtab           " use spaces for tabs
 set softtabstop=2       " 2 space tab
 set shiftwidth=2
+set scrolloff=8
 set sidescroll=1
 set sidescrolloff=15
 set modelines=1
