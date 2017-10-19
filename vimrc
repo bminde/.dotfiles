@@ -359,6 +359,10 @@ Plug 'SirVer/ultisnips'
   let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
   nnoremap <leader>ue :UltiSnipsEdit<cr>
   " }}}
+Plug 'sjl/gundo.vim'
+  " gundo config - visualize your undo tree {{{2
+  nnoremap <F6> :GundoToggle<CR>
+  " }}}
 Plug 'tomasr/molokai'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
@@ -415,9 +419,6 @@ Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different synta
 "   " Move between linting errors
 "   noremap <leader>en :ALENextWrap<cr>
 "   noremap <leader>ep :ALEPreviousWrap<cr>
-" Plug 'sjl/gundo.vim'
-"   " gundo - visualize your undo tree
-"   nnoremap <F6> :GundoToggle<CR>
 " }}}
 call plug#end()
 " Colors {{{1
