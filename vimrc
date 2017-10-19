@@ -446,7 +446,7 @@ endif
 " hi GitGutterChange ctermbg=235 ctermfg=245
 " hi GitGutterDelete ctermbg=235 ctermfg=245
 " hi GitGutterChangeDelete ctermbg=235 ctermfg=245
-hi EndOfBuffer ctermfg=237 ctermbg=235
+" hi EndOfBuffer ctermfg=237 ctermbg=235
 
 set statusline=\ %f\ %m%=%P\ " comment to add space at the end
 if g:is_modern
