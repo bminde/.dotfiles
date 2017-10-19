@@ -186,14 +186,8 @@ let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|target/|\.(o|swp|pyc|egg)$'
 augroup configgroup
   autocmd!
   autocmd VimEnter * highlight clear SignColumn
-  autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md,*.rb :call <SID>StripTrailingWhitespaces()
-  autocmd BufEnter *.cls setlocal filetype=java
   autocmd BufEnter *.zsh-theme setlocal filetype=zsh
   autocmd BufEnter Makefile setlocal noexpandtab
-  autocmd BufEnter *.sh setlocal tabstop=2
-  autocmd BufEnter *.sh setlocal shiftwidth=2
-  autocmd BufEnter *.sh setlocal softtabstop=2
-  autocmd BufEnter *.py setlocal tabstop=4
   autocmd BufEnter *.md setlocal ft=markdown
 augroup END
 
@@ -496,7 +490,6 @@ endfunction
 " Local config {{{1
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
-
 endif
 " }}}
 " vim:foldmethod=marker:foldlevel=0
