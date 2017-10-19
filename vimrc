@@ -446,13 +446,14 @@ endif
 " hi GitGutterChange ctermbg=235 ctermfg=245
 " hi GitGutterDelete ctermbg=235 ctermfg=245
 " hi GitGutterChangeDelete ctermbg=235 ctermfg=245
-" hi EndOfBuffer ctermfg=237 ctermbg=235
+hi EndOfBuffer ctermfg=237 ctermbg=235
 
-" set statusline=%=%P\ %f\ %m
-" if g:is_modern
-"   " set statusline+=\%{ALEGetStatusLine()}
-" endif
-" set fillchars=vert:\ ,stl:\ ,stlnc:\ "
+set statusline=\ %f\ %m%=%P\ " comment to add space at the end
+if g:is_modern
+  " set statusline+=\%{ALEGetStatusLine()}
+endif
+" invisible vertical split line
+set fillchars=vert:\ ,stl:\ ,stlnc:\ " comment to add space at the end
 set laststatus=2
 set noshowmode
 
