@@ -344,6 +344,7 @@ Plug 'morhetz/gruvbox'
 Plug 'nelstrom/vim-markdown-folding'    " folding based on md heading levels
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'pbrisbin/vim-mkdir'
+Plug 'raimondi/delimitmate'
 Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
