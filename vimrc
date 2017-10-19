@@ -242,7 +242,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'tomasiser/vim-code-dark'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'cohama/lexima.vim'      " auto close parens, quotes, brackets
   " lexima config {{{2
   " }}}
 Plug 'ctrlpvim/ctrlp.vim'
