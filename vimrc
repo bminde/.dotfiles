@@ -6,7 +6,6 @@ set diffopt+=vertical     " always use vertical diffs
 set guicursor+=a:blinkon0 " turn of cursor blinking
 set iskeyword+=-          " makes foo-bar considered one word
 set path+=**              " search down into subfolders
-let g:is_modern = v:version >= 800 || has('nvim')
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
 let g:is_posix = 1
@@ -36,8 +35,8 @@ set modelines=1
 filetype indent on
 filetype plugin on
 set autoindent
-if g:is_modern
-  set breakindent   " indent wrapped lines if supported (version > 800)
+if v:version >= 800
+  set breakindent   " indent wrapped lines if supported
 endif
 " UI Layout {{{1
 set number              " show line numbers
@@ -449,7 +448,7 @@ endif
 " hi EndOfBuffer ctermfg=237 ctermbg=235
 
 set statusline=\ %f\ %m%=%P\ " comment to add space at the end
-if g:is_modern
+if v:version >= 800 || has('nvim')
   " set statusline+=\%{ALEGetStatusLine()}
 endif
 " invisible vertical split line
