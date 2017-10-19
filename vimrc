@@ -430,7 +430,7 @@ if (has("termguicolors"))
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 else
-  colorscheme gruvbox
+  colorscheme solarized8_dark
 endif
 " Statusline {{{1
 " hi vertsplit ctermfg=238 ctermbg=235
