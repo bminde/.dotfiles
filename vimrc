@@ -1,3 +1,4 @@
+" vim:foldmethod=marker:foldlevel=0
 " Misc Settings {{{1
 set enc=utf-8
 set backspace=indent,eol,start
@@ -492,4 +493,3 @@ if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
 " }}}
-" vim:foldmethod=marker:foldlevel=0
