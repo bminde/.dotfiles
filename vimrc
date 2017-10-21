@@ -41,7 +41,6 @@ if v:version >= 800
 endif
 " UI Layout {{{1
 set number              " show line numbers
-set showcmd             " show command in bottom bar
 set nocursorline        " highlight current line
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to
