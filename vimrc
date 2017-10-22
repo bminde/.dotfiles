@@ -167,6 +167,9 @@ nnoremap J mzJ`z
 " The normal use of S is covered by cc, so don't worry about shadowing it.
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
+" cycle between splits
+nnoremap <tab> <c-w><c-w>
+
 " Resize buffers
 if bufwinnr(1)
   nmap ø <C-W><<C-W><
