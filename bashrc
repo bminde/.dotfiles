@@ -62,9 +62,9 @@ alias vimin='vim -u ~/.vimin'
 alias vimed='vim -u ~/.vimed'
 alias vimax='vim -u ~/.vimax -N'
 
-alias ls='ls -G'
-alias ll='ls -lF'
-alias la='ls -laF'
+alias ls='ls -GF'
+alias ll='ls -l'
+alias la='ls -la'
 
 # Reload .bashrc
 alias reload='. ~/.bashrc'
