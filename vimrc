@@ -65,6 +65,8 @@ ca w! w !sudo tee "%"
 map 0 ^
 map q <nop>
 
+vmap <cr> <Plug>(EasyAlign)
+
 nnoremap ,w :w<CR>
 nnoremap ,q :q<CR>
 nnoremap ,x :x<CR>
@@ -95,4 +97,11 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
 
-vmap <cr> <Plug>(EasyAlign)
+" Nerdtree config
+map <leader>n :NERDTreeToggle<CR>
+let NERDTreeHighlightCursorline=0
+" expand/open with one click
+let NERDTreeMouseMode=3
+let NERDTreeRespectWildIgnore=1
+let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
+let g:NERDTreeWinSize = 30
