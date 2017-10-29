@@ -38,12 +38,6 @@ shopt -s histappend   # append history to ~\.bash_history when exiting shell
 # Prepend cd to directory names automatically
 shopt -s autocd 2> /dev/null
 
-# Bookmarks - l g s d
-source ~/.local/bin/bashmarks.sh
-
-# export LC_ALL=en_US.UTF-8
-# export LANG=en_US.UTF-8
-
 # Aliases
 alias c='clear'
 alias ..='cd ..'
@@ -101,13 +95,3 @@ reset="\[\e[0m\]"
 
 # export PS1="${yellow}» $blue\W$magenta\$(ps1_branch)\n$yellow\$$reset "
 export PS1="${yellow}» $blue\W$green\$(ps1_branch)\n$yellow\$$reset "
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH="$HOME/.rbenv/bin:$PATH"
-
-# Path
-export dotfiles="$HOME/.dotfiles"
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
-export PATH="/usr/local/opt/node@6/bin:$PATH"
