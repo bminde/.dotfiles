@@ -53,7 +53,6 @@ alias gss='git status -s'
 alias gl='git lg'
 
 alias t='tmux'
-alias tmux='TERM=screen-256color-bce tmux'
 alias ts='tmux new-session -s'
 alias tns='tmux new-session -s'
 alias tl='tmux list-sessions'
