@@ -11,6 +11,7 @@ set termguicolors
 set background=light
 colorscheme solarized8_light
 
+set encoding=utf-8
 set number
 set laststatus=2
 set modelines=5
