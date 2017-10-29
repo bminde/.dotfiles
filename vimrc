@@ -105,3 +105,11 @@ let NERDTreeMouseMode=3
 let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
 let g:NERDTreeWinSize = 30
+
+" Ultisnips config
+let g:UltiSnipsSnippetsDir='~/.vim/snippets'
+let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsExpandTrigger           = '<S-Tab>'
+let g:UltiSnipsJumpForwardTrigger      = '<S-Tab>'
+let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
+nnoremap <leader>ue :UltiSnipsEdit<cr>
