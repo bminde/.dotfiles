@@ -46,6 +46,7 @@ alias gs='git status'
 alias gss='git status -s'
 alias gl='git lg'
 
+alias tmux='tmux -u'
 alias t='tmux'
 alias ts='tmux new-session -s'
 alias tns='tmux new-session -s'
