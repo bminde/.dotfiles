@@ -91,6 +91,7 @@ if bufwinnr(1)
   nmap Ø <C-W>+<C-W>+
 endif
 
+nnoremap gb :ls<CR>:b<Space>
 nnoremap ,, <c-^>         " toggle between last two files
 nnoremap gV `[v`]
 nnoremap J mzJ`z          " keep cursor in place while joining
