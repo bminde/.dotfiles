@@ -121,3 +121,16 @@ let g:UltiSnipsExpandTrigger           = '<S-Tab>'
 let g:UltiSnipsJumpForwardTrigger      = '<S-Tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
 nnoremap <leader>ue :UltiSnipsEdit<cr>
+
+" Ctrlp + ripgrep
+if executable('rg')
+  " let g:ctrlp_user_command = 'rg --files %s'
+  let g:ctrlp_user_command = 'rg %s --files --glob ""'
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_switch_buffer = 'et'
+endif
+nnoremap <Leader>p :CtrlP<CR>
+
+" Delimitmate config
+let delimitMate_expand_cr = 1
