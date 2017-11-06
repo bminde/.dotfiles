@@ -185,6 +185,10 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 " Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
 Plug 'w0rp/ale', { 'on': 'ALEEnable' }
 call plug#end()
+
+if has('packages')
+  packadd matchit
+endif
 map <leader>n :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=0
 " expand/open with one click
