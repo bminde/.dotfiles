@@ -67,10 +67,12 @@ if has("gui_macvim")
   set guifont=source\ code\ pro\ for\ powerline:h14
   set clipboard+=unnamed
   set vb t_vb=
-  set guioptions-=m  "no menu
-  set guioptions-=t  "no toolbar
-  set guioptions-=l
-  set guioptions-=r  "no scrollbar
+  set guioptions-=m  " no menu
+  set guioptions-=t  " no toolbar
+  set guioptions-=l  " no left scrollbar
+  set guioptions-=L  " no left scrollbar
+  set guioptions-=r  " no right scrollbar
+  set guioptions-=R  " no right scrollbar
 endif
 
 if has("folding")
