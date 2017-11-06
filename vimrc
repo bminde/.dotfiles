@@ -186,8 +186,8 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'w0rp/ale', { 'on': 'ALEEnable' }
 call plug#end()
 
-if has('packages')
-  packadd matchit
+if has('syntax') && has('eval')
+  packadd! matchit
 endif
 
 " Plugin config {{{1
