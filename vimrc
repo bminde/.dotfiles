@@ -42,6 +42,16 @@ set fillchars+=vert:┃
 set synmaxcol=200         " Only highlight the first 200 columns
 set regexpengine=1        " Use old engine to fix slow ruby syntax highlighting
 
+" Cursor shape
+set timeoutlen=1000 ttimeoutlen=0
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
 if v:version >= 800
   set breakindent   " indent wrapped lines if supported
 endif
