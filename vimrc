@@ -130,7 +130,61 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
 
-" Nerdtree config
+" Vim Plug {{{1
+" plug automatic installation {{{2
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+" }}}2
+
+call plug#begin('~/.vim/plugged')
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/supertab'
+Plug 'haya14busa/is.vim'
+Plug 'honza/vim-snippets'
+Plug 'janko-m/vim-test'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+Plug 'kristijanhusak/vim-hybrid-material'
+" Plug 'lifepillar/vim-solarized8'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'mattn/emmet-vim', { 'for': ['html','css', 'scss', 'eruby','javascript']}
+Plug 'morhetz/gruvbox'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'raimondi/delimitmate'
+Plug 'rakr/vim-one'
+Plug 'rakr/vim-two-firewatch'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'sheerun/vim-polyglot'
+Plug 'SirVer/ultisnips'
+Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+Plug 'skammer/vim-css-color', { 'for': ['css', 'scss'] }
+Plug 'tomasr/molokai'
+" Plug 'tpope/vim-bundler', { 'for': 'ruby' }
+Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
+" Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'tpope/vim-rake', { 'for': 'ruby' }
+Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+" Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
+Plug 'w0rp/ale', { 'on': 'ALEEnable' }
+call plug#end()
 map <leader>n :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=0
 " expand/open with one click
