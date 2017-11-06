@@ -1,17 +1,20 @@
-" vim
+" vim:ft=vim foldmethod=marker foldlevel=0
+" Basics {{{1
 set nocompatible
 filetype plugin indent on
 syntax on
 
+" Colors {{{1
 if &term =~# '^screen'
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-set background=light
 colorscheme solarized8_light
 
+" Settings {{{1
 set encoding=utf-8
+set ttyfast
 set number
 set laststatus=2
 set modelines=5
@@ -36,6 +39,8 @@ set guicursor+=a:blinkon0 " turn of cursor blinking
 set scrolloff=5
 set sidescrolloff=5
 set fillchars+=vert:┃
+set synmaxcol=200         " Only highlight the first 200 columns
+set regexpengine=1        " Use old engine to fix slow ruby syntax highlighting
 
 if v:version >= 800
   set breakindent   " indent wrapped lines if supported
