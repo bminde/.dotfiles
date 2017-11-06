@@ -1,5 +1,8 @@
 # Settings
 
+# Use vi mode
+set -o vi
+
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
 
