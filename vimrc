@@ -88,7 +88,11 @@ endif
 " Save with sudo
 ca w! w !sudo tee "%"
 
-map 0 ^
+nnoremap 0 ^
+nnoremap ^ 0
+nnoremap ' `
+nnoremap ` '
+
 map q <nop>
 
 vmap <cr> <Plug>(EasyAlign)
