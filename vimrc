@@ -80,8 +80,10 @@ if has("folding")
   set foldnestmax=10      " max 10 depth
   set foldenable          " don't fold files by default on open
   set foldlevelstart=10   " start with fold level of 1
-  nnoremap <CR> za
+"   nnoremap <CR> za
 endif
+
+" Mappings {{{1
 
 " Save with sudo
 ca w! w !sudo tee "%"
@@ -90,6 +92,11 @@ map 0 ^
 map q <nop>
 
 vmap <cr> <Plug>(EasyAlign)
+
+" toggle fold
+nnoremap <CR> za
+" close other folds
+map zo zMzv
 
 nnoremap ,w :w<CR>
 nnoremap ,q :q<CR>
@@ -108,6 +115,7 @@ if bufwinnr(1)
   nmap Ø <C-W>+<C-W>+
 endif
 
+nnoremap <silent> å :nohlsearch<cr>
 nnoremap gb :ls<CR>:b<Space>
 nnoremap ,, <c-^>         " toggle between last two files
 nnoremap gV `[v`]
