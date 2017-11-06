@@ -189,6 +189,31 @@ call plug#end()
 if has('packages')
   packadd matchit
 endif
+
+" Plugin config {{{1
+" Ale config {{{2
+" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
+" Move between linting errors
+noremap <leader>en :ALENextWrap<cr>
+noremap <leader>ep :ALEPreviousWrap<cr>
+
+" vim-fugitive config {{{2
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+" nnoremap <silent> <leader>gt :Gcommit -v -q %:p<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Git lg<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gr :Gread<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ge :Gedit<CR>
+
+" gundo config - visualize your undo tree {{{2
+nnoremap <F6> :GundoToggle<CR>
+
+" Nerdtree config {{{2
 map <leader>n :NERDTreeToggle<CR>
 let NERDTreeHighlightCursorline=0
 " expand/open with one click
@@ -197,7 +222,16 @@ let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
 let g:NERDTreeWinSize = 30
 
-" Ultisnips config
+" vim-test config {{{2
+nnoremap <silent> <Leader>tt :TestFile<CR>
+nnoremap <silent> <Leader>ts :TestNearest<CR>
+nnoremap <silent> <Leader>tl :TestLast<CR>
+nnoremap <silent> <Leader>ta :TestSuite<CR>
+nnoremap <silent> <Leader>gt :TestVisit<CR>
+
+let test#strategy = 'vimux'
+
+" Ultisnips config {{{2
 let g:UltiSnipsSnippetsDir='~/.vim/snippets'
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsExpandTrigger           = '<S-Tab>'
@@ -205,15 +239,33 @@ let g:UltiSnipsJumpForwardTrigger      = '<S-Tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
 nnoremap <leader>ue :UltiSnipsEdit<cr>
 
-" Ctrlp + ripgrep
-if executable('rg')
-  " let g:ctrlp_user_command = 'rg --files %s'
-  let g:ctrlp_user_command = 'rg %s --files --glob ""'
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_switch_buffer = 'et'
-endif
-nnoremap <Leader>p :CtrlP<CR>
+" FZF + ripgrep {{{2
+let $FZF_DEFAULT_COMMAND = "rg --files --no-ignore --hidden --follow --glob '!.git/*'"
+nnoremap <leader>p :Files<CR>
+" let g:fzf_prefer_vim_terminal = 1
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"   \   <bang>0)
 
-" Delimitmate config
+" " Likewise, Files command with preview window
+" command! -bang -nargs=? -complete=dir Files
+"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" Ctrlp + ripgrep {{{2
+" if executable('rg')
+"   " let g:ctrlp_user_command = 'rg --files %s'
+"   let g:ctrlp_user_command = 'rg %s --files --glob ""'
+"   let g:ctrlp_use_caching = 0
+"   let g:ctrlp_working_path_mode = 'ra'
+"   let g:ctrlp_switch_buffer = 'et'
+" endif
+" nnoremap <Leader>p :CtrlP<CR>
+
+" Delimitmate config {{{2
 let delimitMate_expand_cr = 1
+" Local config {{{1
+if filereadable($HOME . "/.vimrc.local")
+  source ~/.vimrc.local
+endif
