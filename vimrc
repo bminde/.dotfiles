@@ -106,10 +106,11 @@ nnoremap ,w :w<CR>
 nnoremap ,q :q<CR>
 nnoremap ,x :x<CR>
 
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
+" NOTE: not needed when using tmux-navigator plugin
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
+" nnoremap <c-l> <c-w>l
 nnoremap <tab> <c-w><c-w>
 
 if bufwinnr(1)
