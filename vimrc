@@ -135,60 +135,72 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
 
-" Vim Plug {{{1
-" plug automatic installation {{{2
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-" }}}2
+" Minpac {{{1
 
-call plug#begin('~/.vim/plugged')
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'editorconfig/editorconfig-vim'
-Plug 'ervandew/supertab'
-Plug 'haya14busa/is.vim'
-Plug 'honza/vim-snippets'
-Plug 'janko-m/vim-test'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-Plug 'kristijanhusak/vim-hybrid-material'
-" Plug 'lifepillar/vim-solarized8'
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'mattn/emmet-vim', { 'for': ['html','css', 'scss', 'eruby','javascript']}
-Plug 'morhetz/gruvbox'
-Plug 'nelstrom/vim-visual-star-search'
-Plug 'pbrisbin/vim-mkdir'
-" Plug 'raimondi/delimitmate'
-Plug 'rakr/vim-one'
-Plug 'rakr/vim-two-firewatch'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'sheerun/vim-polyglot'
-Plug 'SirVer/ultisnips'
-Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
-Plug 'tomasr/molokai'
-" Plug 'tpope/vim-bundler', { 'for': 'ruby' }
-Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-projectionist'
-" Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
-Plug 'tpope/vim-rake', { 'for': 'ruby' }
-Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar' " navigate up a directory with '-' in netrw
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-" Plug 'vim-scripts/SyntaxRange' " allow portions of a file to use different syntax
-Plug 'w0rp/ale', { 'on': 'ALEEnable' }
-call plug#end()
+" setup:
+" git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
+
+" Try to load minpac.
+silent! packadd minpac
+if exists('*minpac#init')
+  " minpac is not available.
+
+  " Settings for plugin-less environment.
+else
+  call minpac#init()
+  " minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+  " start
+  call minpac#add('SirVer/ultisnips')
+  call minpac#add('bronson/vim-trailing-whitespace')
+  call minpac#add('christoomey/vim-tmux-navigator')
+  call minpac#add('ctrlpvim/ctrlp.vim')
+  call minpac#add('ervandew/supertab')
+  call minpac#add('haya14busa/is.vim')
+  call minpac#add('honza/vim-snippets')
+  call minpac#add('janko-m/vim-test')
+  call minpac#add('junegunn/fzf')
+  call minpac#add('junegunn/fzf.vim')
+  call minpac#add('junegunn/vim-easy-align')
+  call minpac#add('mattn/emmet-vim')
+  call minpac#add('nelstrom/vim-visual-star-search')
+  call minpac#add('pbrisbin/vim-mkdir')
+  call minpac#add('sjl/gundo.vim')
+  call minpac#add('tpope/vim-commentary')
+  call minpac#add('tpope/vim-endwise')
+  call minpac#add('tpope/vim-fugitive')
+  call minpac#add('tpope/vim-projectionist')
+  call minpac#add('tpope/vim-rails')
+  call minpac#add('tpope/vim-rake')
+  call minpac#add('tpope/vim-repeat')
+  call minpac#add('tpope/vim-surround')
+  call minpac#add('tpope/vim-vinegar')
+  call minpac#add('vim-ruby/vim-ruby')
+
+  " opt
+  call minpac#add('editorconfig/editorconfig-vim', {'type': 'opt'})
+  call minpac#add('kristijanhusak/vim-hybrid-material', {'type': 'opt'})
+  call minpac#add('lifepillar/vim-solarized8', {'type': 'opt'})
+  call minpac#add('majutsushi/tagbar', {'type': 'opt'})
+  call minpac#add('morhetz/gruvbox', {'type': 'opt'})
+  call minpac#add('raimondi/delimitmate', {'type': 'opt'})
+  call minpac#add('rakr/vim-one', {'type': 'opt'})
+  call minpac#add('rakr/vim-two-firewatch', {'type': 'opt'})
+  call minpac#add('scrooloose/nerdtree', {'type': 'opt'})
+  call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
+  call minpac#add('tomasr/molokai', {'type': 'opt'})
+  call minpac#add('tpope/vim-bundler', {'type': 'opt'})
+  call minpac#add('tpope/vim-dispatch', {'type': 'opt'})
+  call minpac#add('tpope/vim-ragtag', {'type': 'opt'})
+  call minpac#add('tpope/vim-rhubarb', {'type': 'opt'})
+  call minpac#add('tpope/vim-unimpaired', {'type': 'opt'})
+  call minpac#add('vim-scripts/SyntaxRange', {'type': 'opt'})
+
+  command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
+  command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()all minpac#add('w0rp/ale')
+
+endif
 
 if has('syntax') && has('eval')
   packadd! matchit
