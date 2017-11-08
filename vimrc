@@ -163,14 +163,13 @@ Plug 'mattn/emmet-vim', { 'for': ['html','css', 'scss', 'eruby','javascript']}
 Plug 'morhetz/gruvbox'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'pbrisbin/vim-mkdir'
-Plug 'raimondi/delimitmate'
+" Plug 'raimondi/delimitmate'
 Plug 'rakr/vim-one'
 Plug 'rakr/vim-two-firewatch'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Plug 'sheerun/vim-polyglot'
 Plug 'SirVer/ultisnips'
 Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
-Plug 'skammer/vim-css-color', { 'for': ['css', 'scss'] }
 Plug 'tomasr/molokai'
 " Plug 'tpope/vim-bundler', { 'for': 'ruby' }
 Plug 'tpope/vim-commentary'
