@@ -142,7 +142,7 @@ nnoremap <silent> <F5> :source $MYVIMRC<CR>
 
 " Try to load minpac.
 silent! packadd minpac
-if exists('*minpac#init')
+if !exists('*minpac#init')
   " minpac is not available.
 
   " Settings for plugin-less environment.
