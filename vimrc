@@ -196,9 +196,10 @@ else
   call minpac#add('tpope/vim-rhubarb', {'type': 'opt'})
   call minpac#add('tpope/vim-unimpaired', {'type': 'opt'})
   call minpac#add('vim-scripts/SyntaxRange', {'type': 'opt'})
+  call minpac#add('w0rp/ale', {'type': 'opt'})
 
   command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
-  command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()all minpac#add('w0rp/ale')
+  command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
 endif
 
