@@ -254,7 +254,12 @@ let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
 nnoremap <leader>ue :UltiSnipsEdit<cr>
 
 " FZF + ripgrep {{{2
-let $FZF_DEFAULT_COMMAND = "rg --files --no-ignore --hidden --follow --glob '!.git/*'"
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = "rg --files --no-ignore --hidden --follow --glob '!.git/*'"
+elseif executable('ag')
+  let $FZF_DEFAULT_COMMAND = "ag --files --no-ignore --hidden --follow --glob '!.git/*'"
+endif
+
 nnoremap <leader>p :Files<CR>
 " let g:fzf_prefer_vim_terminal = 1
 " command! -bang -nargs=* Rg
