@@ -137,9 +137,6 @@ nnoremap <silent> <F5> :source $MYVIMRC<CR>
 
 " Minpac {{{1
 
-" setup:
-" git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
-
 " Try to load minpac.
 silent! packadd minpac
 if !exists('*minpac#init')
