@@ -257,7 +257,9 @@ nnoremap <leader>ue :UltiSnipsEdit<cr>
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = "rg --files --no-ignore --hidden --follow --glob '!.git/*'"
 elseif executable('ag')
-  let $FZF_DEFAULT_COMMAND = "ag --files --no-ignore --hidden --follow --glob '!.git/*'"
+  let $FZF_DEFAULT_COMMAND = "ag --hidden --ignore .git -l ''"
+else
+  let $FZF_DEFAULT_COMMAND = "find . -path '*/\.*' -type d -prune -o -type f -print -o -type l -print 2> /dev/null | sed s/^..//"
 endif
 
 nnoremap <leader>p :Files<CR>
