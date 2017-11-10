@@ -68,7 +68,7 @@ alias ll='ls -l'
 alias la='ls -la'
 
 # Reload .bashrc
-alias reload='. ~/.bashrc'
+alias reload='. ~/.bash_profile'
 
 # IP addresses
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
