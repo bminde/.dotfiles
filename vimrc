@@ -131,7 +131,7 @@ nnoremap ,, <c-^>         " toggle between last two files
 nnoremap gV `[v`]
 nnoremap J mzJ`z          " keep cursor in place while joining
 " split line
-nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+" nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
 
 let mapleader=" "
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
