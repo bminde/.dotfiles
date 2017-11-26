@@ -93,6 +93,11 @@ nnoremap ^ 0
 nnoremap ' `
 nnoremap ` '
 
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
 map q <nop>
 
 vmap <cr> <Plug>(EasyAlign)
