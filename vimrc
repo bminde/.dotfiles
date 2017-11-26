@@ -183,7 +183,9 @@ else
   " opt
   call minpac#add('editorconfig/editorconfig-vim', {'type': 'opt'})
   call minpac#add('kristijanhusak/vim-hybrid-material', {'type': 'opt'})
-  call minpac#add('lifepillar/vim-solarized8', {'type': 'opt'})
+  " NOTE: frozen at version 0.8 because of comment background bug
+  " delete from folder and reistall when fixed
+  call minpac#add('lifepillar/vim-solarized8', {'type': 'opt', 'frozen': '1'})
   call minpac#add('majutsushi/tagbar', {'type': 'opt'})
   call minpac#add('morhetz/gruvbox', {'type': 'opt'})
   call minpac#add('raimondi/delimitmate', {'type': 'opt'})
