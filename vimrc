@@ -10,7 +10,8 @@ if &term =~# '^screen'
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-colorscheme solarized8_light
+set bg=dark
+colorscheme gruvbox
 
 " Settings {{{1
 set encoding=utf-8
