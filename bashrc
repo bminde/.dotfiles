@@ -67,6 +67,8 @@ alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -la'
 
+alias note='jrnl'
+
 # Reload .bashrc
 alias reload='. ~/.bash_profile'
 
