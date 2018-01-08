@@ -185,6 +185,8 @@ else
   call minpac#add('vim-ruby/vim-ruby')
 
   " opt
+  call minpac#add('chrisbra/Colorizer', {'type': 'opt'})
+    ":ColorToggle
   call minpac#add('editorconfig/editorconfig-vim', {'type': 'opt'})
   call minpac#add('kristijanhusak/vim-hybrid-material', {'type': 'opt'})
   " NOTE: frozen at version 0.8 because of comment background bug
