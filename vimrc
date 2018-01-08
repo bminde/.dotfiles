@@ -167,6 +167,7 @@ else
   call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
   call minpac#add('junegunn/vim-easy-align')
+  call minpac#add('kopischke/vim-fetch')
   call minpac#add('mattn/emmet-vim')
   call minpac#add('nelstrom/vim-visual-star-search')
   call minpac#add('pbrisbin/vim-mkdir')
