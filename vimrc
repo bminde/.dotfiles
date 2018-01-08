@@ -23,6 +23,7 @@ set vb t_vb=
 set ts=2 sts=2 sw=2 expandtab
 set backspace=indent,eol,start
 set incsearch
+set hlsearch
 set ignorecase
 set smartcase
 set mouse=a
