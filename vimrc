@@ -277,11 +277,14 @@ endif
 let g:fzf_files_options =
    \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 
-nnoremap <leader>p :Files<CR>
+nnoremap <leader>i :Files<CR>
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --color=always
+  \   -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
+  \   -g "!{.git,.DS_Store,dist,node_modules,vendor}/*"
+  \   '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -289,14 +292,13 @@ command! -bang -nargs=* Rg
 nnoremap <leader>o :Rg<cr>
 
 " Ctrlp + ripgrep {{{2
-" if executable('rg')
-"   " let g:ctrlp_user_command = 'rg --files %s'
-"   let g:ctrlp_user_command = 'rg %s --files --glob ""'
-"   let g:ctrlp_use_caching = 0
-"   let g:ctrlp_working_path_mode = 'ra'
-"   let g:ctrlp_switch_buffer = 'et'
-" endif
-" nnoremap <Leader>p :CtrlP<CR>
+if executable('rg')
+  let g:ctrlp_user_command = 'Rg %s --files --glob ""'
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_switch_buffer = 'et'
+endif
+nnoremap <Leader>p :CtrlP<CR>
 
 " Delimitmate config {{{2
 let delimitMate_expand_cr = 1
