@@ -158,6 +158,8 @@ else
   " start
   call minpac#add('SirVer/ultisnips')
   call minpac#add('bronson/vim-trailing-whitespace')
+  call minpac#add('chrisbra/Colorizer')
+    ":ColorToggle
   call minpac#add('christoomey/vim-tmux-navigator')
   call minpac#add('ctrlpvim/ctrlp.vim')
   call minpac#add('ervandew/supertab')
@@ -185,8 +187,6 @@ else
   call minpac#add('vim-ruby/vim-ruby')
 
   " opt
-  call minpac#add('chrisbra/Colorizer', {'type': 'opt'})
-    ":ColorToggle
   call minpac#add('editorconfig/editorconfig-vim', {'type': 'opt'})
   call minpac#add('kristijanhusak/vim-hybrid-material', {'type': 'opt'})
   " NOTE: frozen at version 0.8 because of comment background bug
