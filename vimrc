@@ -241,7 +241,7 @@ nnoremap <F6> :GundoToggle<CR>
 
 " Nerdtree config {{{2
 map <leader>n :NERDTreeToggle<CR>
-let NERDTreeHighlightCursorline=0
+" let NERDTreeHighlightCursorline=0
 " expand/open with one click
 let NERDTreeMouseMode=3
 let NERDTreeRespectWildIgnore=1
