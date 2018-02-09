@@ -281,6 +281,9 @@ let g:UltiSnipsJumpForwardTrigger      = '<S-Tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
 nnoremap <leader>ue :UltiSnipsEdit<cr>
 
+" NOTE: temporary fix for macvim crash
+let g:UltiSnipsUsePythonVersion=2
+
 " FZF + ripgrep {{{2
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = "rg --files --follow --glob '!.git/*'"
