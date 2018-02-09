@@ -157,6 +157,7 @@ else
 
   " start
   call minpac#add('SirVer/ultisnips')
+  call minpac#add('benmills/vimux')
   call minpac#add('bronson/vim-trailing-whitespace')
   call minpac#add('chrisbra/Colorizer')
     ":ColorToggle
