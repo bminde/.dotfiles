@@ -284,6 +284,16 @@ nnoremap <leader>ue :UltiSnipsEdit<cr>
 " NOTE: temporary fix for macvim crash
 let g:UltiSnipsUsePythonVersion=2
 
+" Vimux config {{{2
+nnoremap <leader>r :VimuxInterruptRunner<cr>:VimuxRunCommand("clear; go run " . bufname("%"))<CR>
+nnoremap <leader>c :VimuxInterruptRunner<cr>
+map <Leader>vi :VimuxInspectRunner<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
+map <Leader>vm :VimuxPromptCommand("make ")<CR>
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vq :VimuxCloseRunner<CR>
+map <Leader>vs :VimuxInterruptRunner<CR>
+
 " FZF + ripgrep {{{2
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = "rg --files --follow --glob '!.git/*'"
