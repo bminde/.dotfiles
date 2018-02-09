@@ -162,6 +162,7 @@ else
     ":ColorToggle
   call minpac#add('christoomey/vim-tmux-navigator')
   call minpac#add('ctrlpvim/ctrlp.vim')
+  call minpac#add('easymotion/vim-easymotion')
   call minpac#add('ervandew/supertab')
   call minpac#add('fatih/vim-go')
   call minpac#add('haya14busa/is.vim')
@@ -227,6 +228,9 @@ let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
 " Move between linting errors
 noremap <leader>en :ALENextWrap<cr>
 noremap <leader>ep :ALEPreviousWrap<cr>
+
+" easymotion config {{{2
+nmap f <Plug>(easymotion-bd-w)
 
 " vim-fugitive config {{{2
 nnoremap <silent> <leader>gs :Gstatus<CR>
