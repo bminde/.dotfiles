@@ -156,7 +156,6 @@ else
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " start
-  call minpac#add('SirVer/ultisnips')
   call minpac#add('benmills/vimux')
   call minpac#add('bronson/vim-trailing-whitespace')
   call minpac#add('chrisbra/Colorizer')
@@ -164,8 +163,10 @@ else
   call minpac#add('christoomey/vim-tmux-navigator')
   call minpac#add('ctrlpvim/ctrlp.vim')
   call minpac#add('ervandew/supertab')
+  call minpac#add('fatih/vim-go')
   call minpac#add('haya14busa/is.vim')
   call minpac#add('honza/vim-snippets')
+  " call minpac#add('itchyny/lightline.vim')
   call minpac#add('janko-m/vim-test')
   call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
@@ -185,6 +186,7 @@ else
   call minpac#add('tpope/vim-repeat')
   call minpac#add('tpope/vim-surround')
   call minpac#add('tpope/vim-vinegar')
+  call minpac#add('SirVer/ultisnips')
   call minpac#add('vim-ruby/vim-ruby')
 
   " opt
@@ -238,8 +240,16 @@ nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
 
+" vim-go config {{{2
+let g:go_fmt_command = "goimports"
+
 " gundo config - visualize your undo tree {{{2
 nnoremap <F6> :GundoToggle<CR>
+
+" lightline config {{{2
+let g:lightline = {
+      \ 'colorscheme': 'seoul256',
+      \ }
 
 " Nerdtree config {{{2
 map <leader>n :NERDTreeToggle<CR>
