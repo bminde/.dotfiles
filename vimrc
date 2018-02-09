@@ -188,6 +188,7 @@ else
 
   " opt
   call minpac#add('editorconfig/editorconfig-vim', {'type': 'opt'})
+  call minpac#add('fxn/vim-monochrome', {'type': 'opt'})
   call minpac#add('kristijanhusak/vim-hybrid-material', {'type': 'opt'})
   " NOTE: frozen at version 0.8 because of comment background bug
   " delete from folder and reistall when fixed
