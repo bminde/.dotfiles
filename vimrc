@@ -34,6 +34,7 @@ set wildmenu
 set wildmode=list:longest,list:full
 set clipboard^=unnamed    " use system clipboard
 set noswapfile
+set noshowmode            " hide mode, e.g. --INSERT--
 set splitright
 set splitbelow
 set path+=**              " search down into subfolders
