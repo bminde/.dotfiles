@@ -59,7 +59,10 @@ if v:version >= 800
 endif
 
 if has('persistent_undo')
-  silent !mkdir ~/.vim/undo > /dev/null 2>&1
+  let s:vim_cache = expand('$HOME/.vim/undo')
+  if filewritable(s:vim_cache) == 0 && exists("*mkdir")
+    call mkdir(s:vim_cache, "p", 0700)
+  endif
   set undodir=~/.vim/undo
   set undofile
 endif
