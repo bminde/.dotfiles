@@ -10,8 +10,12 @@ if &term =~# '^screen'
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-set bg=dark
-colorscheme gruvbox
+
+let g:wwdc17_term_italics = 0
+let g:wwdc17_frame_color = 4
+
+set bg=light
+colorscheme wwdc17
 
 " Settings {{{1
 set encoding=utf-8
@@ -19,6 +23,7 @@ set ttyfast
 set number
 set laststatus=2
 set modelines=5
+set cursorline
 set vb t_vb=
 set ts=2 sts=2 sw=2 expandtab
 set backspace=indent,eol,start
@@ -201,8 +206,10 @@ else
   " NOTE: frozen at version 0.8 because of comment background bug
   " delete from folder and reistall when fixed
   call minpac#add('lifepillar/vim-solarized8', {'type': 'opt', 'frozen': '1'})
+  call minpac#add('lifepillar/vim-wwdc16-theme', {'type': 'opt'})
+  call minpac#add('lifepillar/vim-wwdc17-theme', {'type': 'opt'})
   call minpac#add('majutsushi/tagbar', {'type': 'opt'})
-  call minpac#add('morhetz/gruvbox', {'type': 'opt'})
+  call minpac#add('lifepillar/vim-gruvbox8', {'type': 'opt'})
   call minpac#add('rakr/vim-one', {'type': 'opt'})
   call minpac#add('rakr/vim-two-firewatch', {'type': 'opt'})
   call minpac#add('scrooloose/nerdtree', {'type': 'opt'})
@@ -226,6 +233,7 @@ if has('syntax') && has('eval')
 endif
 
 " Plugin config {{{1
+
 " Ale config {{{2
 " let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
@@ -234,7 +242,8 @@ noremap <leader>en :ALENextWrap<cr>
 noremap <leader>ep :ALEPreviousWrap<cr>
 
 " easymotion config {{{2
-nmap f <Plug>(easymotion-bd-w)
+nmap s <Plug>(easymotion-bd-w)
+let g:EasyMotion_keys='qwertyuiopåasdfghjkløæcvbnm'
 
 " vim-fugitive config {{{2
 nnoremap <silent> <leader>gs :Gstatus<CR>
@@ -254,23 +263,7 @@ let g:go_fmt_command = "goimports"
 " gundo config - visualize your undo tree {{{2
 nnoremap <F6> :GundoToggle<CR>
 
-" lightline config {{{2
-let g:lightline = {
-      \ 'colorscheme': 'seoul256',
-      \ 'mode_map': {
-      \     'n': 'N', 'i': 'I', 'R': 'R', 'v': 'V', 'V': 'V-LINE', "\<C-v>": 'V-BLOCK',
-      \     'c': 'COMMAND', 's': 'SELECT', 'S': 'S-LINE', "\<C-s>": 'S-BLOCK', 't': 'TERMINAL'
-      \   },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
-
-" Nerdtree config {{{2
+" nerdtree config {{{2
 map <leader>n :NERDTreeToggle<CR>
 " let NERDTreeHighlightCursorline=0
 " expand/open with one click
@@ -281,7 +274,7 @@ let g:NERDTreeWinSize = 30
 
 " vim-test config {{{2
 nnoremap <silent> <Leader>tt :TestFile<CR>
-nnoremap <silent> <Leader>ts :TestNearest<CR>
+nnoremap <silent> <Leader>tn :TestNearest<CR>
 nnoremap <silent> <Leader>tl :TestLast<CR>
 nnoremap <silent> <Leader>ta :TestSuite<CR>
 nnoremap <silent> <Leader>gt :TestVisit<CR>
@@ -346,6 +339,7 @@ nnoremap <Leader>p :CtrlP<CR>
 
 " Delimitmate config {{{2
 let delimitMate_expand_cr = 1
+
 " Local config {{{1
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
