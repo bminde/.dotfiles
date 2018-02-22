@@ -23,6 +23,12 @@ source /usr/local/share/chruby/auto.sh
 # vi mode
 bindkey -v
 
+# history substring search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
 # Path
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/usr/local/opt/node@6/bin:$PATH"
