@@ -201,7 +201,6 @@ else
 
   " opt
   call minpac#add('editorconfig/editorconfig-vim', {'type': 'opt'})
-  call minpac#add('fxn/vim-monochrome', {'type': 'opt'})
   call minpac#add('kristijanhusak/vim-hybrid-material', {'type': 'opt'})
   " NOTE: frozen at version 0.8 because of comment background bug
   " delete from folder and reistall when fixed
@@ -221,6 +220,7 @@ else
   call minpac#add('tpope/vim-rhubarb', {'type': 'opt'})
   call minpac#add('tpope/vim-unimpaired', {'type': 'opt'})
   call minpac#add('vim-scripts/SyntaxRange', {'type': 'opt'})
+  call minpac#add('whatyouhide/vim-gotham', {'type': 'opt'})
   call minpac#add('w0rp/ale', {'type': 'opt'})
 
   command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
@@ -242,7 +242,7 @@ noremap <leader>en :ALENextWrap<cr>
 noremap <leader>ep :ALEPreviousWrap<cr>
 
 " easymotion config {{{2
-nmap s <Plug>(easymotion-bd-w)
+nmap <leader>f <Plug>(easymotion-bd-w)
 let g:EasyMotion_keys='qwertyuiopåasdfghjkløæcvbnm'
 
 " vim-fugitive config {{{2
@@ -262,6 +262,11 @@ let g:go_fmt_command = "goimports"
 
 " gundo config - visualize your undo tree {{{2
 nnoremap <F6> :GundoToggle<CR>
+
+" lightline config {{{2
+" let g:lightline = {
+"       \ 'colorscheme': 'gotham',
+"       \ }
 
 " nerdtree config {{{2
 map <leader>n :NERDTreeToggle<CR>
