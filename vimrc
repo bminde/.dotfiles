@@ -10,20 +10,16 @@ if &term =~# '^screen'
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set termguicolors
-
-let g:wwdc17_term_italics = 0
-let g:wwdc17_frame_color = 4
-
-set bg=light
-colorscheme wwdc17
+let g:solarized_statusline = 'low'
+colorscheme solarized8_light
 
 " Settings {{{1
 set encoding=utf-8
 set ttyfast
 set number
 set laststatus=2
+" set showtabline=2
 set modelines=5
-set cursorline
 set vb t_vb=
 set ts=2 sts=2 sw=2 expandtab
 set backspace=indent,eol,start
@@ -75,7 +71,7 @@ endif
 
 if has("gui_macvim")
   " no toolbars, menu or scrollbars in the gui
-  set guifont=source\ code\ pro\ for\ powerline:h14
+  set guifont=SF\ Mono:h15
   set clipboard+=unnamed
   set vb t_vb=
   set guioptions-=m  " no menu
@@ -151,6 +147,140 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
 
+" Statusline {{{1
+
+" Status line {{
+  " See :h mode() (some of these are never used in the status line; 't' is from NeoVim)
+  let g:mode_map = {
+        \ 'n':  ['N',  'NormalMode' ], 'no':     ['PENDING', 'NormalMode' ], 'v': ['V',  'VisualMode' ],
+        \ 'V':  ['V-LINE',  'VisualMode' ], "\<c-v>": ['V-BLOCK', 'VisualMode' ], 's': ['S',  'VisualMode' ],
+        \ 'S':  ['S-LINE',  'VisualMode' ], "\<c-s>": ['S-BLOCK', 'VisualMode' ], 'i': ['I',  'InsertMode' ],
+        \ 'R':  ['REPLACE', 'ReplaceMode'], 'Rv':     ['REPLACE', 'ReplaceMode'], 'c': ['COMMAND', 'CommandMode'],
+        \ 'cv': ['COMMAND', 'CommandMode'], 'ce':     ['COMMAND', 'CommandMode'], 'r': ['PROMPT',  'CommandMode'],
+        \ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'],
+        \ 't':  ['TERMINAL', 'CommandMode']}
+
+  let g:ro_sym  = "RO"
+  let g:ma_sym  = "✗"
+  let g:mod_sym = "◇"
+  let g:ff_map  = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
+
+  " newMode may be a value as returned by mode(1) or the name of a highlight group
+  fun! s:updateStatusLineHighlight(newMode)
+    execute 'hi! link CurrMode' get(g:mode_map, a:newMode, ["", a:newMode])[1]
+    return 1
+  endf
+
+  " Setting highlight groups while computing the status line may cause the
+  " startup screen to disappear. See: https://github.com/powerline/powerline/issues/250
+  fun! SetupStl(nr)
+    " In a %{} context, winnr() always refers to the window to which the status line being drawn belongs.
+    return get(extend(w:, {
+          \ "lf_active": winnr() != a:nr
+            \ ? 0
+            \ : (mode(1) ==# get(g:, "lf_cached_mode", "")
+              \ ? 1
+              \ : s:updateStatusLineHighlight(get(extend(g:, { "lf_cached_mode": mode(1) }), "lf_cached_mode"))
+              \ ),
+          \ "lf_winwd": winwidth(winnr())
+          \ }), "", "")
+  endf
+
+  " Build the status line the way I want - no fat light plugins!
+  fun! BuildStatusLine(nr)
+    return '%{SetupStl('.a:nr.')}
+          \%#CurrMode#%{w:["lf_active"] ? "  " . get(g:mode_map, mode(1), [mode(1)])[0] . (&paste ? " PASTE " : " ") : ""}%*
+          \ %n %t %{&modified ? g:mod_sym : " "} %{&modifiable ? (&readonly ? g:ro_sym : "  ") : g:ma_sym}
+          \ %<%{w:["lf_winwd"] < 80 ? (w:["lf_winwd"] < 50 ? "" : expand("%:p:h:t")) : expand("%:p:h")}
+          \ %=
+          \ %w %{&ft} %{w:["lf_winwd"] < 80 ? "" : " " . (strlen(&fenc) ? &fenc : &enc) . (&bomb ? ",BOM " : " ")
+          \ . get(g:ff_map, &ff, "?") . (&expandtab ? " ˽ " : " ⇥ ") . &tabstop}
+          \ %#CurrMode#%{w:["lf_active"] ? (w:["lf_winwd"] < 60 ? ""
+          \ : printf(" %d:%-2d %2d%% ", line("."), virtcol("."), 100 * line(".") / line("$"))) : ""}
+          \%#Warnings#%{w:["lf_active"] ? get(b:, "lf_stl_warnings", "") : ""}%*'
+  endf
+" }}
+" Tabline {{
+  fun! BuildTabLabel(nr)
+    return " " . a:nr
+          \ . (empty(filter(tabpagebuflist(a:nr), 'getbufvar(v:val, "&modified")')) ? " " : " " . g:mod_sym . " ")
+          \ . (get(extend(t:, {
+          \ "tablabel": fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t")
+          \ }), "tablabel") == "" ? "[No Name]" : get(t:, "tablabel")) . "  "
+  endf
+
+  fun! BuildTabLine()
+    return join(map(
+          \ range(1, tabpagenr('$')),
+          \ '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.")}"'
+          \), '') . "%#TabLineFill#%T" . (tabpagenr('$') > 1 ? "%=%999X✕ " : "")
+  endf
+
+" }}
+" GUI {{
+  if has('gui_running')
+    let s:linespace=2
+    set guifont=SF\ Mono:h11
+    set guioptions-=aP " Do not use system clipboard by default
+    set guioptions-=T  " No toolbar
+    set guioptions-=lL " No left scrollbar
+    set guioptions-=e  " Use Vim tabline
+    set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+    let &linespace=s:linespace
+    set transparency=0
+  endif
+" }}
+" Helper functions {{
+  " See http://stackoverflow.com/questions/4064651/what-is-the-best-way-to-do-smooth-scrolling-in-vim
+  fun! s:smoothScroll(up)
+    execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
+    redraw
+    for l:count in range(3, &scroll, 2)
+      sleep 10m
+      execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
+      redraw
+    endfor
+  endf
+
+  fun! s:customizeTheme()
+    let g:lf_cached_mode = ""  " Force updating highlight groups
+    if strlen(get(g:, "colors_name", "")) " Inspired by AfterColors plugin
+      execute "runtime after/themes/" . g:colors_name . ".vim"
+    endif
+  endf
+
+  fun! s:enableStatusLine()
+    if exists("g:default_stl") | return | endif
+    set noshowmode " Do not show the current mode because it is displayed in status line
+    set noruler
+    let g:default_stl = &statusline
+    let g:default_tal = &tabline
+    set statusline=%!BuildStatusLine(winnr()) " winnr() is always the number of the *active* window
+    set tabline=%!BuildTabLine()
+  endf
+
+  fun! s:disableStatusLine()
+    if !exists("g:default_stl") | return | endif
+    let &tabline = g:default_tal
+    let &statusline = g:default_stl
+    unlet g:default_tal
+    unlet g:default_stl
+    set ruler
+    set showmode
+    autocmd! lf_warnings
+    augroup! lf_warnings
+  endf
+
+  " }}
+  "
+  " Custom status line
+  command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
+  command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
+
+EnableStatusLine
+
+set laststatus=2
+
 " Minpac {{{1
 
 " Try to load minpac.
@@ -176,7 +306,6 @@ else
   call minpac#add('fatih/vim-go')
   call minpac#add('haya14busa/is.vim')
   call minpac#add('honza/vim-snippets')
-  " call minpac#add('itchyny/lightline.vim')
   call minpac#add('janko-m/vim-test')
   call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
@@ -200,6 +329,8 @@ else
   call minpac#add('vim-ruby/vim-ruby')
 
   " opt
+  call minpac#add('ajmwagar/vim-deus', {'type': 'opt'})
+  call minpac#add('arcticicestudio/nord-vim', {'type': 'opt'})
   call minpac#add('editorconfig/editorconfig-vim', {'type': 'opt'})
   call minpac#add('kristijanhusak/vim-hybrid-material', {'type': 'opt'})
   " NOTE: frozen at version 0.8 because of comment background bug
@@ -263,11 +394,6 @@ let g:go_fmt_command = "goimports"
 " gundo config - visualize your undo tree {{{2
 nnoremap <F6> :GundoToggle<CR>
 
-" lightline config {{{2
-" let g:lightline = {
-"       \ 'colorscheme': 'gotham',
-"       \ }
-
 " nerdtree config {{{2
 map <leader>n :NERDTreeToggle<CR>
 " let NERDTreeHighlightCursorline=0
@@ -293,9 +419,6 @@ let g:UltiSnipsExpandTrigger           = '<S-Tab>'
 let g:UltiSnipsJumpForwardTrigger      = '<S-Tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
 nnoremap <leader>ue :UltiSnipsEdit<cr>
-
-" NOTE: temporary fix for macvim crash
-let g:UltiSnipsUsePythonVersion=2
 
 " Vimux config {{{2
 nnoremap <leader>r :VimuxInterruptRunner<cr>:VimuxRunCommand("clear; go run " . bufname("%"))<CR>
