@@ -10,7 +10,7 @@ ZSH_THEME="refined"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vim git tmux zshmarks zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting)
+plugins=(vim zshmarks zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -29,7 +29,9 @@ bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+
 # Path
+export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/usr/local/opt/node@6/bin:$PATH"
 export GOPATH=$HOME/go
@@ -70,6 +72,17 @@ alias r="ruby --version"
 alias reload="source ~/.zshrc"
 alias zsh="vim ~/.zshrc"
 alias omz="vim ~/.oh-my-zsh"
+
+# homebrew
+alias bubu="brew update && brew upgrade"
+
+# lynx
+alias hints='tmp_f(){ URL_PARAM=$(echo "$@" | sed "s/ /-/g"); lynx -accept_all_cookies https://devhints.io/"$URL_PARAM"; unset -f tmp_f; }; tmp_f'
+alias abbr='tmp_f(){ URL_PARAM=$(echo "$@" | sed "s/ /+/g"); lynx -accept_all_cookies https://www.acronymfinder.com/"$URL_PARAM".html; unset -f tmp_f; }; tmp_f'
+alias dict='tmp_f(){ URL_PARAM=$(echo "$@" | sed "s/ /+/g"); lynx -accept_all_cookies http://www.dictionary.com/browse/"$URL_PARAM"; unset -f tmp_f; }; tmp_f'
+alias ddg='tmp_f(){ URL_PARAM=$(echo "$@" | sed "s/ /+/g"); lynx -accept_all_cookies https://duckduckgo.com/lite/?q="$URL_PARAM"; unset -f tmp_f; }; tmp_f'
+alias duck='ddg'
+alias wiki='tmp_f(){ URL_PARAM=$(echo "$@" | sed "s/ /+/g"); lynx -accept_all_cookies https://en.wikipedia.org/w/index.php?search="$URL_PARAM"; unset -f tmp_f; }; tmp_f'
 
 # zshmarks like bashmarks
 alias g="jump"
