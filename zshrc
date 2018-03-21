@@ -4,7 +4,7 @@ export ZSH=/Users/bjarte/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="refined"
+ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -12,7 +12,10 @@ ZSH_THEME="refined"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(vim zshmarks zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting)
 
+
 source $ZSH/oh-my-zsh.sh
+
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=default"
 
 # chruby with auto switching
 source /usr/local/share/chruby/chruby.sh
