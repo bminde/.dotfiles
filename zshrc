@@ -21,6 +21,9 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=default"
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
+# gem_home
+source /usr/local/share/gem_home/gem_home.sh
+
 # User configuration
 
 # vi mode
