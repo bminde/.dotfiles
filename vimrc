@@ -10,8 +10,9 @@ if has('termguicolors') && $COLORTERM ==# 'truecolor'
   let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
   set termguicolors
 endif
+
 let g:solarized_statusline = 'low'
-colorscheme solarized8_light
+colorscheme solarized8_dark
 
 " Settings {{{1
 set encoding=utf-8
@@ -69,9 +70,10 @@ if has('persistent_undo')
   set undofile
 endif
 
+  set guifont=source\ code\ pro\ for\ powerline:h14
 if has("gui_macvim")
   " no toolbars, menu or scrollbars in the gui
-  set guifont=SF\ Mono:h15
+  " set guifont=SF\ Mono:h15
   set clipboard+=unnamed
   set vb t_vb=
   set guioptions-=m  " no menu
@@ -235,15 +237,15 @@ command! SolarSwap call Solar_swap()
 " }}
 " GUI {{
   if has('gui_running')
-    let s:linespace=2
-    set guifont=SF\ Mono:h11
-    set guioptions-=aP " Do not use system clipboard by default
-    set guioptions-=T  " No toolbar
-    set guioptions-=lL " No left scrollbar
-    set guioptions-=e  " Use Vim tabline
-    set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
-    let &linespace=s:linespace
-    set transparency=0
+    " let s:linespace=2
+    " set guifont=SF\ Mono:h11
+    " set guioptions-=aP " Do not use system clipboard by default
+    " set guioptions-=T  " No toolbar
+    " set guioptions-=lL " No left scrollbar
+    " set guioptions-=e  " Use Vim tabline
+    " set guicursor=n-v-c:ver20 " Use a thin vertical bar as the cursor
+    " let &linespace=s:linespace
+    " set transparency=0
   endif
 " }}
 " Helper functions {{
@@ -348,6 +350,7 @@ else
   call minpac#add('ajmwagar/vim-deus', {'type': 'opt'})
   call minpac#add('arcticicestudio/nord-vim', {'type': 'opt'})
   call minpac#add('editorconfig/editorconfig-vim', {'type': 'opt'})
+  call minpac#add('kamwitsta/nordisk', {'type': 'opt'})
   call minpac#add('kristijanhusak/vim-hybrid-material', {'type': 'opt'})
   " NOTE: frozen at version 0.8 because of comment background bug
   " delete from folder and reistall when fixed
@@ -445,6 +448,9 @@ map <Leader>vm :VimuxPromptCommand("make ")<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
+
+" wwdc 16 {{{2
+let g:wwdc16_term_italics = 0
 
 " FZF + ripgrep {{{2
 if executable('rg')
