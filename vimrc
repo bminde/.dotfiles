@@ -337,6 +337,7 @@ else
   call minpac#add('pbrisbin/vim-mkdir')
   call minpac#add('raimondi/delimitmate')
   call minpac#add('sjl/gundo.vim')
+  call minpac#add('sunaku/vim-dasht')
   call minpac#add('tpope/vim-commentary')
   call minpac#add('tpope/vim-endwise')
   call minpac#add('tpope/vim-fugitive')
@@ -393,6 +394,13 @@ let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
 " Move between linting errors
 noremap <leader>en :ALENextWrap<cr>
 noremap <leader>ep :ALEPreviousWrap<cr>
+
+" dasht config {{{2
+" search related docsets
+nnoremap <silent> <Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
+
+" search ALL the docsets
+nnoremap <silent> <Leader><Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
 
 " easymotion config {{{2
 nmap <leader>f <Plug>(easymotion-bd-w)
