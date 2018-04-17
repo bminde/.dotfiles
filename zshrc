@@ -10,7 +10,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vim zshmarks zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting)
+plugins=(bundler vim zshmarks zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting)
 
 
 source $ZSH/oh-my-zsh.sh
@@ -20,9 +20,6 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=default"
 # chruby with auto switching
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
-
-# gem_home
-source /usr/local/share/gem_home/gem_home.sh
 
 # User configuration
 
