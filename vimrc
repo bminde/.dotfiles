@@ -147,6 +147,22 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
 
+" Color swap {{{1
+" https://superuser.com/a/1246650
+
+function! Solar_swap()
+  if &background ==? 'dark'
+    set background=light
+    colorscheme solarized8_light
+  else
+    set background=dark
+    colorscheme solarized8_dark
+  endif
+  silent !osascript -e 'tell app "System Events" to keystroke "i" using {shift down,  command down}'
+endfunction
+
+command! SolarSwap call Solar_swap()
+
 " Statusline {{{1
 
 " Status line {{
