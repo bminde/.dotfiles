@@ -178,9 +178,12 @@ command! SolarSwap call Solar_swap()
         \ 'rm': ['-MORE-',  'CommandMode'], 'r?':     ['CONFIRM', 'CommandMode'], '!': ['SHELL',   'CommandMode'],
         \ 't':  ['TERMINAL', 'CommandMode']}
 
-  let g:ro_sym  = "RO"
+  " let g:ro_sym  = "RO"
+  " let g:ma_sym  = "✗"
+  " let g:mod_sym = "◇"
+  let g:ro_sym  = "▪"
   let g:ma_sym  = "✗"
-  let g:mod_sym = "◇"
+  let g:mod_sym = "◦"
   let g:ff_map  = { "unix": "␊", "mac": "␍", "dos": "␍␊" }
 
   " newMode may be a value as returned by mode(1) or the name of a highlight group
