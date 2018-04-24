@@ -93,6 +93,9 @@ if has("folding")
 "   nnoremap <CR> za
 endif
 
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_rails = 1
+
 " Mappings {{{1
 
 " Save with sudo
