@@ -46,6 +46,7 @@ set sidescrolloff=5
 set fillchars+=vert:┃
 set synmaxcol=200         " Only highlight the first 200 columns
 set regexpengine=1        " Use old engine to fix slow ruby syntax highlighting
+set cursorline
 
 " Cursor shape
 set timeoutlen=1000 ttimeoutlen=0
@@ -172,6 +173,13 @@ augroup Format-Options
   autocmd!
   au FileType * set fo-=c fo-=r fo-=o
 augroup END
+
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+
 " Statusline {{{1
 
 " Status line {{
