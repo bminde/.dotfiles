@@ -150,6 +150,9 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
 
+" Use Esc to enter terminal normal mode
+tnoremap <Esc> <C-W>N
+
 " Color swap {{{1
 " https://superuser.com/a/1246650
 
