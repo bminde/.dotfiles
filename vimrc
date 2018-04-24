@@ -460,8 +460,10 @@ map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
 
-" wwdc 16 {{{2
+" wwdc 16/17 {{{2
 let g:wwdc16_term_italics = 0
+let g:wwdc17_term_italics = 0
+let g:wwdc17_frame_color = 0
 
 " FZF + ripgrep {{{2
 if executable('rg')
