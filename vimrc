@@ -165,6 +165,13 @@ endfunction
 
 command! SolarSwap call Solar_swap()
 
+" Auto commands {{{1
+
+" Don't continue comment on new line
+augroup Format-Options
+  autocmd!
+  au FileType * set fo-=c fo-=r fo-=o
+augroup END
 " Statusline {{{1
 
 " Status line {{
