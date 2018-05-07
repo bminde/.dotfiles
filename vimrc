@@ -352,6 +352,7 @@ else
   call minpac#add('kopischke/vim-fetch')
   call minpac#add('mattn/emmet-vim')
   call minpac#add('nelstrom/vim-visual-star-search')
+  call minpac#add('pangloss/vim-javascript')
   call minpac#add('pbrisbin/vim-mkdir')
   call minpac#add('raimondi/delimitmate')
   call minpac#add('sjl/gundo.vim')
@@ -481,7 +482,7 @@ map <Leader>vs :VimuxInterruptRunner<CR>
 " wwdc 16/17 {{{2
 let g:wwdc16_term_italics = 0
 let g:wwdc17_term_italics = 0
-let g:wwdc17_frame_color = 0
+let g:wwdc17_frame_color = 4
 
 " FZF + ripgrep {{{2
 if executable('rg')
