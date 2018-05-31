@@ -393,7 +393,6 @@ else
   call minpac#add('tpope/vim-unimpaired', {'type': 'opt'})
   call minpac#add('vim-scripts/SyntaxRange', {'type': 'opt'})
   call minpac#add('whatyouhide/vim-gotham', {'type': 'opt'})
-  call minpac#add('w0rp/ale', {'type': 'opt'})
 
   command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
   command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
@@ -407,11 +406,16 @@ endif
 " Plugin config {{{1
 
 " Ale config {{{2
+let g:ale_enabled = 0 " Off by default
 " let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 " Move between linting errors
-noremap <leader>en :ALENextWrap<cr>
-noremap <leader>ep :ALEPreviousWrap<cr>
+noremap <leader>an :ALENextWrap<cr>
+noremap <leader>ap :ALEPreviousWrap<cr>
+noremap <leader>at :ALEToggle<cr>
 
 " dasht config {{{2
 " search related docsets
