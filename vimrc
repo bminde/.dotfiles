@@ -374,6 +374,7 @@ else
   call minpac#add('tpope/vim-vinegar')
   call minpac#add('SirVer/ultisnips')
   call minpac#add('vim-ruby/vim-ruby')
+  call minpac#add('w0rp/ale')
 
   " opt
   call minpac#add('ajmwagar/vim-deus', {'type': 'opt'})
