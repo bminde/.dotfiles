@@ -90,7 +90,6 @@ if has("folding")
   set foldnestmax=10      " max 10 depth
   set foldenable          " don't fold files by default on open
   set foldlevelstart=10   " start with fold level of 1
-"   nnoremap <CR> za
 endif
 
 let g:rubycomplete_buffer_loading = 1
@@ -116,7 +115,7 @@ map q <nop>
 vmap <cr> <Plug>(EasyAlign)
 
 " toggle fold
-nnoremap <CR> za
+" nnoremap <CR> za
 " close other folds
 map zo zMzv
 
