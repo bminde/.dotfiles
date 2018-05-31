@@ -344,6 +344,7 @@ else
   call minpac#add('christoomey/vim-tmux-navigator')
   call minpac#add('ctrlpvim/ctrlp.vim')
   call minpac#add('easymotion/vim-easymotion')
+  " call minpac#add('elzr/vim-json')
   call minpac#add('ervandew/supertab')
   call minpac#add('fatih/vim-go')
   call minpac#add('haya14busa/is.vim')
@@ -354,9 +355,11 @@ else
   call minpac#add('junegunn/vim-easy-align')
   call minpac#add('kopischke/vim-fetch')
   call minpac#add('mattn/emmet-vim')
+  call minpac#add('mxw/vim-jsx')
   call minpac#add('nelstrom/vim-visual-star-search')
   call minpac#add('pangloss/vim-javascript')
   call minpac#add('pbrisbin/vim-mkdir')
+  call minpac#add('prettier/vim-prettier')
   call minpac#add('raimondi/delimitmate')
   call minpac#add('sjl/gundo.vim')
   call minpac#add('sunaku/vim-dasht')
@@ -458,6 +461,11 @@ let NERDTreeMouseMode=3
 let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
 let g:NERDTreeWinSize = 30
+
+" prettier {{{2
+let g:prettier#autoformat = 0
+let g:prettier#config#trailing_comma = 'none'
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " vim-test config {{{2
 nnoremap <silent> <Leader>tt :TestFile<CR>
