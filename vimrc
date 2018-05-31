@@ -381,7 +381,6 @@ else
   call minpac#add('arcticicestudio/nord-vim', {'type': 'opt'})
   call minpac#add('editorconfig/editorconfig-vim', {'type': 'opt'})
   call minpac#add('kamwitsta/nordisk', {'type': 'opt'})
-  call minpac#add('kristijanhusak/vim-hybrid-material', {'type': 'opt'})
   " NOTE: frozen at version 0.8 because of comment background bug
   " delete from folder and reistall when fixed
   call minpac#add('lifepillar/vim-solarized8', {'type': 'opt', 'frozen': '1'})
@@ -389,11 +388,12 @@ else
   call minpac#add('lifepillar/vim-wwdc17-theme', {'type': 'opt'})
   call minpac#add('majutsushi/tagbar', {'type': 'opt'})
   call minpac#add('lifepillar/vim-gruvbox8', {'type': 'opt'})
+  call minpac#add('Lokaltog/vim-monotone', {'type': 'opt'})
   call minpac#add('rakr/vim-one', {'type': 'opt'})
   call minpac#add('rakr/vim-two-firewatch', {'type': 'opt'})
   call minpac#add('scrooloose/nerdtree', {'type': 'opt'})
   call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
-  call minpac#add('tomasr/molokai', {'type': 'opt'})
+  call minpac#add('crusoexia/vim-monokai', {'type': 'opt'})
   call minpac#add('tpope/vim-bundler', {'type': 'opt'})
   call minpac#add('tpope/vim-dispatch', {'type': 'opt'})
   call minpac#add('tpope/vim-ragtag', {'type': 'opt'})
@@ -401,6 +401,7 @@ else
   call minpac#add('tpope/vim-unimpaired', {'type': 'opt'})
   call minpac#add('vim-scripts/SyntaxRange', {'type': 'opt'})
   call minpac#add('whatyouhide/vim-gotham', {'type': 'opt'})
+  call minpac#add('w0ng/vim-hybrid', {'type': 'opt'})
 
   command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
   command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
@@ -462,6 +463,9 @@ let NERDTreeMouseMode=3
 let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
 let g:NERDTreeWinSize = 30
+
+" two-firwatch {{{2
+hi CursorLine   cterm=NONE
 
 " prettier {{{2
 let g:prettier#autoformat = 0
