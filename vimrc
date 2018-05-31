@@ -425,6 +425,7 @@ let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 noremap <leader>an :ALENextWrap<cr>
 noremap <leader>ap :ALEPreviousWrap<cr>
 noremap <leader>at :ALEToggle<cr>
+noremap <leader>ad :ALEDetail<cr>
 
 " dasht config {{{2
 " search related docsets
