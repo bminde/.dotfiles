@@ -129,6 +129,10 @@ nnoremap ,x :x<CR>
 " nnoremap <c-k> <c-w>k
 " nnoremap <c-l> <c-w>l
 nnoremap <tab> <c-w><c-w>
+tnoremap <c-h> <c-w>h
+tnoremap <c-j> <c-w>j
+tnoremap <c-k> <c-w>k
+tnoremap <c-l> <c-w>l
 
 if bufwinnr(1)
   nmap ø <C-W><<C-W><
@@ -463,6 +467,7 @@ nnoremap <silent> <Leader>ta :TestSuite<CR>
 nnoremap <silent> <Leader>gt :TestVisit<CR>
 
 let test#strategy = 'vimux'
+" let test#strategy = 'vimterminal'
 
 " Ultisnips config {{{2
 let g:UltiSnipsSnippetsDir='~/.vim/snippets'
