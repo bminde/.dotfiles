@@ -4,7 +4,7 @@ export ZSH=/Users/bjarte/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="refined"
 
 export NVM_LAZY_LOAD=true
 
@@ -12,7 +12,8 @@ export NVM_LAZY_LOAD=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bundler zsh-nvm zshmarks zsh-autosuggestions zsh-syntax-highlighting)
+# plugins=(bundler zsh-nvm zshmarks zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(bundler zsh-nvm zshmarks zsh-syntax-highlighting)
 
 
 source $ZSH/oh-my-zsh.sh
@@ -37,6 +38,8 @@ export PATH=$GOPATH/bin:$PATH
 # ymse
 alias c="clear"
 alias ..='cd ..'
+
+alias ssh='TERM=xterm-256color ssh'
 
 alias gs='git status'
 alias gss='git status -s'
