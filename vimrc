@@ -353,9 +353,7 @@ else
   call minpac#add('christoomey/vim-tmux-navigator')
   call minpac#add('ctrlpvim/ctrlp.vim')
   " call minpac#add('easymotion/vim-easymotion')
-  " call minpac#add('elzr/vim-json')
   call minpac#add('ervandew/supertab')
-  " call minpac#add('fatih/vim-go')
   call minpac#add('haya14busa/is.vim')
   call minpac#add('honza/vim-snippets')
   call minpac#add('janko-m/vim-test')
@@ -373,6 +371,7 @@ else
   call minpac#add('pbrisbin/vim-mkdir')
   call minpac#add('prettier/vim-prettier')
   call minpac#add('raimondi/delimitmate')
+  call minpac#add('sheerun/vim-polyglot')
   call minpac#add('sjl/gundo.vim')
   call minpac#add('sunaku/vim-dasht')
   call minpac#add('tpope/vim-commentary')
@@ -385,7 +384,6 @@ else
   call minpac#add('tpope/vim-surround')
   call minpac#add('tpope/vim-vinegar')
   call minpac#add('SirVer/ultisnips')
-  call minpac#add('vim-ruby/vim-ruby')
   call minpac#add('w0rp/ale')
 
   " opt
