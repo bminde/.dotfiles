@@ -12,7 +12,14 @@ if has('termguicolors') && $COLORTERM ==# 'truecolor'
 endif
 
 let g:solarized_statusline = 'low'
-colorscheme solarized8_dark
+
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_comment_brightness = 8
+let g:nord_uniform_diff_background = 1
+" let g:nord_uniform_status_lines = 1
+
+colorscheme nord
 
 " Settings {{{1
 set encoding=utf-8
@@ -72,7 +79,8 @@ if has('persistent_undo')
   set undofile
 endif
 
-  set guifont=source\ code\ pro\ for\ powerline:h14
+set guifont=fira\ code\ retina:h14
+
 if has("gui_macvim")
   " no toolbars, menu or scrollbars in the gui
   " set guifont=SF\ Mono:h15
