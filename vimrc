@@ -50,11 +50,17 @@ set path+=**              " search down into subfolders
 set guicursor+=a:blinkon0 " turn of cursor blinking
 set scrolloff=5
 set sidescrolloff=5
-set fillchars+=vert:┃
+" set fillchars+=vert:┃
+" set fillchars=vert:\│
+set fillchars+=vert:\ " space
 set synmaxcol=200         " Only highlight the first 200 columns
 set regexpengine=1        " Use old engine to fix slow ruby syntax highlighting
-set cursorline
 set title                 " set iTerm window title to file name and path
+
+" use italics for comments
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+highlight Comment cterm=italic
 
 " Cursor shape
 set timeoutlen=1000 ttimeoutlen=0
