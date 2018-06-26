@@ -364,6 +364,7 @@ else
   call minpac#add('junegunn/vim-easy-align')
   call minpac#add('kopischke/vim-fetch')
   call minpac#add('ludovicchabant/vim-gutentags')
+  call minpac#add('majutsushi/tagbar')
   call minpac#add('mattn/emmet-vim')
   call minpac#add('mxw/vim-jsx')
   call minpac#add('nelstrom/vim-visual-star-search')
