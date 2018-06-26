@@ -441,6 +441,13 @@ nnoremap <silent> <Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')])<
 " search ALL the docsets
 nnoremap <silent> <Leader><Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
 
+" easy align {{{2
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " easymotion config {{{2
 nmap <leader>f <Plug>(easymotion-bd-w)
 let g:EasyMotion_keys='qwertyuiopåasdfghjkløæcvbnm'
@@ -480,6 +487,9 @@ let g:prettier#autoformat = 0
 let g:prettier#config#trailing_comma = 'none'
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
+
+" supertab {{{2
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " vim-test config {{{2
 nnoremap <silent> <Leader>tt :TestFile<CR>
