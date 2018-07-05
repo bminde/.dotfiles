@@ -1,4 +1,10 @@
 " vim:ft=vim foldmethod=marker foldlevel=0
+
+" FIXME: temporary fix for python deprecation varnings in UltiSnips
+if has('python3')
+  silent! python3 1
+endif
+
 " Basics {{{1
 set nocompatible
 filetype plugin indent on
@@ -46,7 +52,7 @@ set noswapfile
 set noshowmode            " hide mode, e.g. --INSERT--
 set splitright
 set splitbelow
-set path+=**              " search down into subfolders
+" set path+=**              " search down into subfolders
 set guicursor+=a:blinkon0 " turn of cursor blinking
 set scrolloff=5
 set sidescrolloff=5
@@ -161,8 +167,24 @@ nnoremap gb :ls<CR>:b<Space>
 nnoremap ,, <c-^>         " toggle between last two files
 nnoremap gV `[v`]
 nnoremap J mzJ`z          " keep cursor in place while joining
+nnoremap ,e :e **/*
+nnoremap ,f :e **/*
+nnoremap ,s :sp **/*
+nnoremap ,v :vsp **/*
+nnoremap ,t :tabe **/*
 " split line
 " nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+
+" Go to tab by number
+nnoremap ,1 1gt
+nnoremap ,2 2gt
+nnoremap ,3 3gt
+nnoremap ,4 4gt
+nnoremap ,5 5gt
+nnoremap ,6 6gt
+nnoremap ,7 7gt
+nnoremap ,8 8gt
+nnoremap ,9 9gt
 
 let mapleader=" "
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
@@ -170,6 +192,8 @@ nnoremap <leader>= :wincmd =<cr>
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
+
+tnoremap <Esc> <C-\><C-n>
 
 " Color swap {{{1
 " https://superuser.com/a/1246650
