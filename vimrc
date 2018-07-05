@@ -378,8 +378,7 @@ else
   " start
   call minpac#add('benmills/vimux')
   call minpac#add('bronson/vim-trailing-whitespace')
-  call minpac#add('chrisbra/Colorizer')
-    ":ColorToggle
+  call minpac#add('chrisbra/Colorizer') " :ColorToggle
   call minpac#add('christoomey/vim-tmux-navigator')
   call minpac#add('ctrlpvim/ctrlp.vim')
   " call minpac#add('easymotion/vim-easymotion')
@@ -396,18 +395,18 @@ else
   call minpac#add('ludovicchabant/vim-gutentags')
   call minpac#add('majutsushi/tagbar')
   call minpac#add('mattn/emmet-vim')
-  call minpac#add('mxw/vim-jsx')
   call minpac#add('nelstrom/vim-visual-star-search')
-  call minpac#add('pangloss/vim-javascript')
   call minpac#add('pbrisbin/vim-mkdir')
   call minpac#add('prettier/vim-prettier')
   call minpac#add('raimondi/delimitmate')
+  call minpac#add('sgur/vim-editorconfig')
   call minpac#add('sheerun/vim-polyglot')
   call minpac#add('sjl/gundo.vim')
   call minpac#add('sunaku/vim-dasht')
   call minpac#add('tpope/vim-commentary')
   call minpac#add('tpope/vim-endwise')
   call minpac#add('tpope/vim-fugitive')
+  call minpac#add('tpope/vim-obsession')
   call minpac#add('tpope/vim-projectionist')
   call minpac#add('tpope/vim-rails')
   call minpac#add('tpope/vim-rake')
@@ -418,27 +417,26 @@ else
   call minpac#add('w0rp/ale')
 
   " opt
-  call minpac#add('arcticicestudio/nord-vim',      { 'type': 'opt'})
-  call minpac#add('editorconfig/editorconfig-vim', { 'type': 'opt'})
-  call minpac#add('fxn/vim-monochrome',            { 'type': 'opt'})
-  call minpac#add('kamwitsta/nordisk',             { 'type': 'opt'})
-  call minpac#add('lifepillar/vim-solarized8',     { 'type': 'opt'})
-  call minpac#add('lifepillar/vim-wwdc16-theme',   { 'type': 'opt'})
-  call minpac#add('lifepillar/vim-wwdc17-theme',   { 'type': 'opt'})
-  call minpac#add('Lokaltog/vim-monotone',         { 'type': 'opt'})
-  call minpac#add('lifepillar/vim-gruvbox8',       { 'type': 'opt'})
-  call minpac#add('rakr/vim-one',                  { 'type': 'opt'})
-  call minpac#add('rakr/vim-two-firewatch',        { 'type': 'opt'})
-  call minpac#add('scrooloose/nerdtree',           { 'type': 'opt'})
-  call minpac#add('tpope/vim-bundler',             { 'type': 'opt'})
-  call minpac#add('tpope/vim-dispatch',            { 'type': 'opt'})
-  call minpac#add('tpope/vim-ragtag',              { 'type': 'opt'})
-  call minpac#add('tpope/vim-rhubarb',             { 'type': 'opt'})
-  call minpac#add('tpope/vim-unimpaired',          { 'type': 'opt'})
-  call minpac#add('vim-scripts/SyntaxRange',       { 'type': 'opt'})
-  call minpac#add('whatyouhide/vim-gotham',        { 'type': 'opt'})
-  call minpac#add('wolverian/minimal',             { 'type': 'opt'})
-  call minpac#add('w0ng/vim-hybrid',               { 'type': 'opt'})
+  call minpac#add('arcticicestudio/nord-vim',    { 'type': 'opt'})
+  call minpac#add('fxn/vim-monochrome',          { 'type': 'opt'})
+  call minpac#add('kamwitsta/nordisk',           { 'type': 'opt'})
+  call minpac#add('lifepillar/vim-solarized8',   { 'type': 'opt'})
+  call minpac#add('lifepillar/vim-wwdc16-theme', { 'type': 'opt'})
+  call minpac#add('lifepillar/vim-wwdc17-theme', { 'type': 'opt'})
+  call minpac#add('Lokaltog/vim-monotone',       { 'type': 'opt'})
+  call minpac#add('lifepillar/vim-gruvbox8',     { 'type': 'opt'})
+  call minpac#add('rakr/vim-one',                { 'type': 'opt'})
+  call minpac#add('rakr/vim-two-firewatch',      { 'type': 'opt'})
+  call minpac#add('scrooloose/nerdtree',         { 'type': 'opt'})
+  call minpac#add('tpope/vim-bundler',           { 'type': 'opt'})
+  call minpac#add('tpope/vim-dispatch',          { 'type': 'opt'})
+  call minpac#add('tpope/vim-ragtag',            { 'type': 'opt'})
+  call minpac#add('tpope/vim-rhubarb',           { 'type': 'opt'})
+  call minpac#add('tpope/vim-unimpaired',        { 'type': 'opt'})
+  call minpac#add('vim-scripts/SyntaxRange',     { 'type': 'opt'})
+  call minpac#add('whatyouhide/vim-gotham',      { 'type': 'opt'})
+  call minpac#add('wolverian/minimal',           { 'type': 'opt'})
+  call minpac#add('w0ng/vim-hybrid',             { 'type': 'opt'})
 
   command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
   command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
@@ -517,9 +515,6 @@ let g:prettier#autoformat = 0
 let g:prettier#config#trailing_comma = 'none'
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
-
-" supertab {{{2
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " vim-test config {{{2
 nnoremap <silent> <Leader>tt :TestFile<CR>
