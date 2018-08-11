@@ -58,9 +58,10 @@ alias tad='tmux attach-session -dt' # detach elsewhere
 
 alias tree='tree -C'
 
-alias vimin='vim -u ~/.vimin'
-alias vimed='vim -u ~/.vimed'
-alias vimax='vim -u ~/.vimax -N'
+alias vime='vim -u ~/.vime -N --noplugin'
+alias vimin='vim -u ~/.vimin -N --noplugin'
+alias vimed='vim -u ~/.vimed -N --noplugin'
+alias vimax='vim -u ~/.vimax -N --noplugin +"runtime plugin/netrwPlugin.vim"'
 
 alias ls='ls -GF'
 alias ll='ls -l'
@@ -118,7 +119,7 @@ FZF-EOF"
 
 function ps1_branch {
   b=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-  if [ -n "$b" ]; then echo " $b"; fi
+  if [ -n "$b" ]; then echo " ($b)"; fi
 }
 
 black="\[\e[30m\]"
@@ -132,15 +133,15 @@ white="\[\e[37m\]"
 reset="\[\e[0m\]"
 
 # export PS1="${yellow}» $blue\W$magenta\$(ps1_branch)\n$yellow\$$reset "
-export PS1="${yellow}» $blue\W$green\$(ps1_branch)\n$yellow\$$reset "
+export PS1="${yellow}$blue\W$green\$(ps1_branch) $reset\$ "
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+# # tabtab source for serverless package
+# # uninstall by removing these lines or running `tabtab uninstall serverless`
+# [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# # tabtab source for sls package
+# # uninstall by removing these lines or running `tabtab uninstall sls`
+# [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
