@@ -445,6 +445,25 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
+" Theme config {{{1
+
+" Oceanic next {{{2
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+
+" ayu {{{2
+" let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+
+" two-firwatch {{{2
+hi CursorLine   cterm=NONE
+
+" wwdc 16/17 {{{2
+let g:wwdc16_term_italics = 0
+let g:wwdc17_term_italics = 0
+let g:wwdc17_frame_color = 4
+
 " Plugin config {{{1
 
 " Ale config {{{2
@@ -505,9 +524,6 @@ let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
 let g:NERDTreeWinSize = 30
 
-" two-firwatch {{{2
-hi CursorLine   cterm=NONE
-
 " prettier {{{2
 let g:prettier#autoformat = 0
 let g:prettier#config#trailing_comma = 'none'
@@ -541,11 +557,6 @@ map <Leader>vm :VimuxPromptCommand("make ")<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
-
-" wwdc 16/17 {{{2
-let g:wwdc16_term_italics = 0
-let g:wwdc17_term_italics = 0
-let g:wwdc17_frame_color = 4
 
 " FZF + ripgrep {{{2
 if executable('rg')
