@@ -473,6 +473,10 @@ let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+" Check Python files with flake8 and pylint.
+let g:ale_linters = ['flake8', 'pylint']
+" Fix Python files with autopep8 and yapf.
+let g:ale_fixers = ['autopep8', 'yapf']
 " Move between linting errors
 noremap <leader>an :ALENextWrap<cr>
 noremap <leader>ap :ALEPreviousWrap<cr>
