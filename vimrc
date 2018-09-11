@@ -152,12 +152,13 @@ tnoremap <c-k> <c-w>k
 tnoremap <c-l> <c-w>l
 
 tnoremap <Esc> <C-\><C-n>
+
 if has('nvim')
   tnoremap <c-j> <c-\><c-n><c-w>j
   tnoremap <c-k> <c-\><c-n><c-w>k
   tnoremap <c-h> <c-\><c-n><c-w>h
   tnoremap <c-l> <c-\><c-n><c-w>l
-  " au WinEnter *pid:* call feedkeys('i')
+  autocmd BufWinEnter,WinEnter term://* startinsert
 endif
 
 if bufwinnr(1)
