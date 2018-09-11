@@ -441,8 +441,8 @@ else
 
 endif
 
-if has('syntax') && has('eval')
-  packadd! matchit
+if has('syntax') && has('eval') && !exists('loaded_matchit')
+  source $VIMRUNTIME/macros/matchit.vim
 endif
 
 " Theme config {{{1
