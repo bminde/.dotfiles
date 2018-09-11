@@ -140,15 +140,25 @@ nnoremap ,q :q<CR>
 nnoremap ,x :x<CR>
 
 " NOTE: not needed when using tmux-navigator plugin
-" nnoremap <c-h> <c-w>h
-" nnoremap <c-j> <c-w>j
-" nnoremap <c-k> <c-w>k
-" nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
 nnoremap <tab> <c-w><c-w>
 tnoremap <c-h> <c-w>h
 tnoremap <c-j> <c-w>j
 tnoremap <c-k> <c-w>k
 tnoremap <c-l> <c-w>l
+
+tnoremap <Esc> <C-\><C-n>
+if has('nvim')
+  tnoremap <c-j> <c-\><c-n><c-w>j
+  tnoremap <c-k> <c-\><c-n><c-w>k
+  tnoremap <c-h> <c-\><c-n><c-w>h
+  tnoremap <c-l> <c-\><c-n><c-w>l
+  " au WinEnter *pid:* call feedkeys('i')
+endif
 
 if bufwinnr(1)
   nmap ø <C-W><<C-W><
@@ -187,8 +197,6 @@ nnoremap <leader>= :wincmd =<cr>
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
-
-tnoremap <Esc> <C-\><C-n>
 
 " Color swap {{{1
 " https://superuser.com/a/1246650
