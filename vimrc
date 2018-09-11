@@ -1,10 +1,5 @@
 " vim:ft=vim foldmethod=marker foldlevel=0
 
-" FIXME: temporary fix for python deprecation varnings in UltiSnips
-if has('python3')
-  silent! python3 1
-endif
-
 " Basics {{{1
 set nocompatible
 filetype plugin indent on
