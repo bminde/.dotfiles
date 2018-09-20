@@ -476,16 +476,18 @@ let g:wwdc17_frame_color = 4
 " Plugin config {{{1
 
 " Ale config {{{2
-let g:ale_enabled = 0 " Off by default
+let g:ale_enabled = 1 " Off by default
 " let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+let g:ale_fix_on_save = 1
 " Check Python files with flake8 and pylint.
-let g:ale_linters = ['flake8', 'pylint']
+" let g:ale_linters = ['flake8', 'pylint']
 " Fix Python files with autopep8 and yapf.
-let g:ale_fixers = ['autopep8', 'yapf']
+let g:ale_fixers = ['black', 'autopep8', 'yapf']
 " Move between linting errors
 noremap <leader>an :ALENextWrap<cr>
 noremap <leader>ap :ALEPreviousWrap<cr>
@@ -550,12 +552,13 @@ nnoremap <silent> <Leader>tl :TestLast<CR>
 nnoremap <silent> <Leader>ta :TestSuite<CR>
 nnoremap <silent> <Leader>gt :TestVisit<CR>
 
-let test#strategy = 'vimux'
-" let test#strategy = 'vimterminal'
+" let test#strategy = 'vimux'
+let test#strategy = 'neovim'
 
 " Ultisnips config {{{2
 let g:UltiSnipsSnippetsDir='~/.vim/snippets'
 let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsListSnippets        = "<c-k>" "List possible snippets based on current file
 let g:UltiSnipsExpandTrigger           = '<S-Tab>'
 let g:UltiSnipsJumpForwardTrigger      = '<S-Tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
