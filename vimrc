@@ -409,6 +409,7 @@ else
   call minpac#add('pbrisbin/vim-mkdir')
   call minpac#add('prettier/vim-prettier')
   call minpac#add('raimondi/delimitmate')
+  call minpac#add('ryanoasis/vim-devicons')
   call minpac#add('sgur/vim-editorconfig')
   call minpac#add('sheerun/vim-polyglot')
   call minpac#add('sjl/gundo.vim')
