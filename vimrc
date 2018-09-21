@@ -560,7 +560,7 @@ nnoremap <silent> <Leader>tl :TestLast<CR>
 nnoremap <silent> <Leader>ta :TestSuite<CR>
 nnoremap <silent> <Leader>gt :TestVisit<CR>
 
-let test#strategy = 'vimux'
+let test#strategy = 'basic'
 " let test#strategy = 'vimterminal'
 
 " Ultisnips config {{{2
