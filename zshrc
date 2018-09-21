@@ -9,6 +9,10 @@ ZSH_THEME="bpure"
 
 export NVM_LAZY_LOAD=true
 
+# For Python
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -35,6 +39,7 @@ export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # ymse
 alias c="clear"
@@ -55,9 +60,10 @@ alias tad='tmux attach-session -dt' # detach elsewhere
 
 alias tree='tree -C'
 
-alias vimin='vim -u ~/.vimin'
-alias vimed='vim -u ~/.vimed'
-alias vimax='vim -u ~/.vimax -N'
+alias vimin='vim -u ~/.vimin -N --noplugin'
+alias vimed='vim -u ~/.vimed -N --noplugin'
+alias vimax='vim -u ~/.vimax -N --noplugin'
+alias vi='vim -u ~/.vimax -N --noplugin'
 
 # vim
 alias ls='ls -GF'
@@ -134,3 +140,14 @@ tm() {
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/bjarte/.nvm/versions/node/v10.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/bjarte/.nvm/versions/node/v10.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/bjarte/.nvm/versions/node/v10.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/bjarte/.nvm/versions/node/v10.3.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
