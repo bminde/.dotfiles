@@ -86,7 +86,7 @@ if has('persistent_undo')
   set undofile
 endif
 
-set guifont=fira\ code\ retina:h14
+set guifont=fira\ code\ retina:h13
 
 if has("gui_macvim")
   " no toolbars, menu or scrollbars in the gui
