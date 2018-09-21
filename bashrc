@@ -1,5 +1,9 @@
 # Settings
 
+# For Python
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # Use vi mode
 set -o vi
 
@@ -62,12 +66,18 @@ alias vime='vim -u ~/.vime -N --noplugin'
 alias vimin='vim -u ~/.vimin -N --noplugin'
 alias vimed='vim -u ~/.vimed -N --noplugin'
 alias vimax='vim -u ~/.vimax -N --noplugin +"runtime plugin/netrwPlugin.vim"'
+alias vi='vim -u ~/.vimax -N --noplugin +"runtime plugin/netrwPlugin.vim"'
 
 alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -la'
 
 alias note='jrnl'
+
+alias be="bundle exec"
+
+alias r='ruby --version'
+alias p='python --version'
 
 # Reload .bashrc
 alias reload='. ~/.bash_profile'
@@ -134,6 +144,14 @@ reset="\[\e[0m\]"
 
 # export PS1="${yellow}» $blue\W$magenta\$(ps1_branch)\n$yellow\$$reset "
 export PS1="${yellow}$blue\W$green\$(ps1_branch) $reset\$ "
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+# chruby with auto switching
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
 
 # # tabtab source for serverless package
 # # uninstall by removing these lines or running `tabtab uninstall serverless`
