@@ -544,6 +544,8 @@ let NERDTreeRespectWildIgnore=1
 let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
 let g:NERDTreeWinSize = 30
 
+" polyglot {{{2
+let g:python_highlight_space_errors = 0
 " prettier {{{2
 let g:prettier#autoformat = 0
 let g:prettier#config#trailing_comma = 'none'
