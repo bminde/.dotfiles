@@ -223,6 +223,12 @@ augroup Format-Options
   au FileType * set fo-=c fo-=r fo-=o
 augroup END
 
+if !has('nvim')
+  augroup CursorLineOnlyInActiveWindow
+    :au TerminalOpen * :set nonu
+  augroup END
+endif
+
 " augroup CursorLineOnlyInActiveWindow
 "   autocmd!
 "   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
