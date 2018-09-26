@@ -1,4 +1,4 @@
-" xvim:ft=vim foldmethod=marker foldlevel=0
+" vim:ft=vim foldmethod=marker foldlevel=0
 
 " Basics {{{1
 set nocompatible
@@ -517,13 +517,6 @@ else
   let $FZF_DEFAULT_COMMAND = "find . -path '*/\.*' -type d -prune -o -type f -print -o -type l -print 2> /dev/null | sed s/^..//"
 endif
 
-" let g:fzf_layout = { 'down': '~20%' }
-" let g:fzf_layout = { 'window': '10split' }
-" let g:fzf_layout = { 'window': '-tabnew' }
-" let g:fzf_layout = { 'window': 'enew' }
-
-" Try highlight, coderay, rougify in turn, then fall back to cat
-" let g:fzf_file_options = '--preview "[[ \$(file --mime {2..-1}) =~ binary ]] && echo {2..-1} is a binary file || (highlight -O ansi -l {2..-1} || coderay {2..-1} || rougify {2..-1} || cat {2..-1}) 2> /dev/null | head -'.&lines.'"'
 let g:fzf_files_options =
    \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 " let g:fzf_layout = { 'window': '15split enew' }
