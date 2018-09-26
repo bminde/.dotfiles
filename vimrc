@@ -61,8 +61,9 @@ set synmaxcol=200         " Only highlight the first 200 columns
 set regexpengine=1        " Use old engine to fix slow ruby syntax highlighting
 set title                 " set iTerm window title to file name and path
 
-set wildignore+=*.pyc,tags,__pycache__/,.git/,.cache,Session.vim
-set wildignore+=node_modules/,bin/,.vscode/,*.db,*.sqlite3
+set wildignore+=*.pyc,tags,__pycache__,.git,.cache,Session.vim
+set wildignore+=node_modules,bin,.vscode,*.db,*.sqlite3
+set wildignore+=*.log,.DS_Store
 
 " use italics for comments
 let &t_ZH="\e[3m"
@@ -468,7 +469,6 @@ map <leader>n :NERDTreeToggle<CR>
 " expand/open with one click
 let NERDTreeMouseMode=3
 let NERDTreeRespectWildIgnore=1
-" let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist', 'Session.vim', 'tags']
 let g:NERDTreeWinSize = 30
 let NERDTreeHijackNetrw=0
 
@@ -506,7 +506,7 @@ map <Leader>vs :VimuxInterruptRunner<CR>
 
 " FZF + ripgrep {{{2
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = "rg --files --follow --glob '!.git/*'"
+  let $FZF_DEFAULT_COMMAND = "rg --files --ignore-file ~/.agignore --follow --glob '!.git/*'"
 elseif executable('ag')
   let $FZF_DEFAULT_COMMAND = "ag --hidden --ignore .git -l ''"
 else
