@@ -237,6 +237,14 @@ if !has('nvim')
   augroup END
 endif
 
+" Add syntax complete for every filetype that doesn't already have it
+if has("autocmd") && exists("+omnifunc")
+  autocmd Filetype *
+        \	if &omnifunc == "" |
+        \		setlocal omnifunc=syntaxcomplete#Complete |
+        \	endif
+endif
+
 
 " Minpac {{{1
 
@@ -259,7 +267,6 @@ else
   call minpac#add('christoomey/vim-tmux-navigator')
   call minpac#add('ctrlpvim/ctrlp.vim')
   " call minpac#add('easymotion/vim-easymotion')
-  call minpac#add('ervandew/supertab')
   call minpac#add('haya14busa/is.vim')
   call minpac#add('honza/vim-snippets')
   call minpac#add('janko-m/vim-test')
@@ -270,6 +277,7 @@ else
   call minpac#add('junegunn/vim-easy-align')
   call minpac#add('kopischke/vim-fetch')
   call minpac#add('lifepillar/vim-gruvbox8')
+  call minpac#add('lifepillar/vim-mucomplete')
   call minpac#add('ludovicchabant/vim-gutentags')
   call minpac#add('majutsushi/tagbar')
   call minpac#add('mattn/emmet-vim')
@@ -490,12 +498,12 @@ let test#strategy = 'basic'
 " let test#strategy = 'vimterminal'
 
 " Ultisnips config {{{2
-let g:UltiSnipsSnippetsDir='~/.vim/snippets'
-let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsSnippetsDir         = '~/.vim/snippets'
+let g:UltiSnipsEditSplit           = 'vertical'
 let g:UltiSnipsListSnippets        = "<c-k>" "List possible snippets based on current file
-let g:UltiSnipsExpandTrigger           = '<S-Tab>'
-let g:UltiSnipsJumpForwardTrigger      = '<S-Tab>'
-let g:UltiSnipsJumpBackwardTrigger     = '<C-æ>'
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsJumpForwardTrigger  = '<c-n>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-æ>'
 nnoremap <leader>ue :UltiSnipsEdit<cr>
 
 " Vimux config {{{2
