@@ -252,6 +252,7 @@ else
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " start
+  call minpac#add('airblade/vim-gitgutter')
   call minpac#add('benmills/vimux')
   " call minpac#add('bronson/vim-trailing-whitespace')
   call minpac#add('chrisbra/Colorizer') " :ColorToggle
@@ -456,6 +457,9 @@ nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
+
+" gitgutter {{{2
+let g:gitgutter_enabled = 0
 
 " vim-go config {{{2
 let g:go_fmt_command = "goimports"
