@@ -635,9 +635,9 @@ endif
 let delimitMate_expand_cr = 1
 
 " Devicons
-" if exists("g:loaded_webdevicons")
-"   call webdevicons#refresh()
-" endif
+if exists("g:loaded_webdevicons")
+  call webdevicons#refresh()
+endif
 
 " Local config {{{1
 if filereadable($HOME . "/.vimrc.local")
