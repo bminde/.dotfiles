@@ -1,4 +1,4 @@
-" xvim:ft=vim xfoldmethod=marker xfoldlevel=0
+" xvim:ft=vim foldmethod=marker foldlevel=0
 
 " Basics {{{1
 set nocompatible
@@ -20,7 +20,8 @@ let g:nord_comment_brightness = 8
 let g:nord_uniform_diff_background = 1
 " let g:nord_uniform_status_lines = 1
 
-colorscheme gruvbox8
+" set bg=light
+colorscheme solarized8
 
 " Settings {{{1
 set encoding=utf-8
@@ -53,10 +54,15 @@ set scrolloff=5
 set sidescrolloff=5
 " set fillchars+=vert:┃
 " set fillchars=vert:\│
-set fillchars+=vert:\ " space
+set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
+set fillchars=vert:│,fold:·
+" set fillchars+=vert:\ " space
 set synmaxcol=200         " Only highlight the first 200 columns
 set regexpengine=1        " Use old engine to fix slow ruby syntax highlighting
 set title                 " set iTerm window title to file name and path
+
+set wildignore+=*.pyc,tags,__pycache__/,.git/,.cache,Session.vim
+set wildignore+=node_modules/,bin/,.vscode/,*.db,*.sqlite3
 
 " use italics for comments
 let &t_ZH="\e[3m"
@@ -86,7 +92,7 @@ if has('persistent_undo')
   set undofile
 endif
 
-set guifont=fira\ code\ retina:h13
+set guifont=Fura\ Code\ Retina\ Nerd\ Font\ Complete:h12
 
 if has("gui_macvim")
   " no toolbars, menu or scrollbars in the gui
@@ -151,7 +157,8 @@ tnoremap <c-j> <c-w>j
 tnoremap <c-k> <c-w>k
 tnoremap <c-l> <c-w>l
 
-tnoremap <Esc> <C-\><C-n>
+" two escapes fixed problem with E21 modifiable off
+tnoremap <esc><esc> <C-\><C-n>
 
 if has('nvim')
   tnoremap <c-j> <c-\><c-n><c-w>j
@@ -225,15 +232,9 @@ augroup END
 
 if !has('nvim')
   augroup CursorLineOnlyInActiveWindow
-    :au TerminalOpen * :set nonu
+    au TerminalOpen * set nonu
   augroup END
 endif
-
-" augroup CursorLineOnlyInActiveWindow
-"   autocmd!
-"   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-"   autocmd WinLeave * setlocal nocursorline
-" augroup END
 
 
 " Minpac {{{1
@@ -251,7 +252,7 @@ else
 
   " start
   call minpac#add('benmills/vimux')
-  call minpac#add('bronson/vim-trailing-whitespace')
+  " call minpac#add('bronson/vim-trailing-whitespace')
   call minpac#add('chrisbra/Colorizer') " :ColorToggle
   call minpac#add('christoomey/vim-tmux-navigator')
   call minpac#add('ctrlpvim/ctrlp.vim')
@@ -266,14 +267,16 @@ else
   call minpac#add('junegunn/gv.vim')
   call minpac#add('junegunn/vim-easy-align')
   call minpac#add('kopischke/vim-fetch')
+  call minpac#add('lifepillar/vim-gruvbox8')
   call minpac#add('ludovicchabant/vim-gutentags')
   call minpac#add('majutsushi/tagbar')
   call minpac#add('mattn/emmet-vim')
+  call minpac#add('morhetz/gruvbox')
   call minpac#add('nelstrom/vim-visual-star-search')
   call minpac#add('pbrisbin/vim-mkdir')
-  call minpac#add('prettier/vim-prettier')
   call minpac#add('raimondi/delimitmate')
   call minpac#add('ryanoasis/vim-devicons')
+  call minpac#add('scrooloose/nerdtree')
   call minpac#add('sgur/vim-editorconfig')
   call minpac#add('sheerun/vim-polyglot')
   call minpac#add('SirVer/ultisnips')
@@ -290,34 +293,31 @@ else
   call minpac#add('tpope/vim-surround')
   call minpac#add('tpope/vim-vinegar')
   call minpac#add('vim-airline/vim-airline')
-  " call minpac#add('vim-airline/vim-airline-themes')
+  call minpac#add('vim-airline/vim-airline-themes')
   call minpac#add('w0rp/ale')
 
   " opt
-  call minpac#add('arcticicestudio/nord-vim',       { 'type': 'opt'})
-  call minpac#add('fenetikm/falcon',                { 'type': 'opt'})
-  call minpac#add('fxn/vim-monochrome',             { 'type': 'opt'})
-  call minpac#add('kamwitsta/nordisk',              { 'type': 'opt'})
-  call minpac#add('khatiba/ayu-vim',                { 'type': 'opt'})
-  " call minpac#add('lifepillar/vim-gruvbox8',        { 'type': 'opt'})
-  call minpac#add('morhetz/gruvbox',                { 'type': 'opt'})
-  call minpac#add('lifepillar/vim-solarized8',      { 'type': 'opt'})
-  call minpac#add('lifepillar/vim-wwdc16-theme',    { 'type': 'opt'})
-  call minpac#add('lifepillar/vim-wwdc17-theme',    { 'type': 'opt'})
-  call minpac#add('Lokaltog/vim-monotone',          { 'type': 'opt'})
-  call minpac#add('mhartington/oceanic-next',       { 'type': 'opt'})
-  call minpac#add('rakr/vim-one',                   { 'type': 'opt'})
-  call minpac#add('rakr/vim-two-firewatch',         { 'type': 'opt'})
-  call minpac#add('scrooloose/nerdtree',            { 'type': 'opt'})
-  call minpac#add('tpope/vim-bundler',              { 'type': 'opt'})
-  call minpac#add('tpope/vim-dispatch',             { 'type': 'opt'})
-  call minpac#add('tpope/vim-ragtag',               { 'type': 'opt'})
-  call minpac#add('tpope/vim-rhubarb',              { 'type': 'opt'})
-  call minpac#add('tpope/vim-unimpaired',           { 'type': 'opt'})
-  call minpac#add('vim-scripts/SyntaxRange',        { 'type': 'opt'})
-  call minpac#add('whatyouhide/vim-gotham',         { 'type': 'opt'})
-  call minpac#add('wolverian/minimal',              { 'type': 'opt'})
-  call minpac#add('w0ng/vim-hybrid',                { 'type': 'opt'})
+  call minpac#add('arcticicestudio/nord-vim',       {'type': 'opt'})
+  call minpac#add('chriskempson/base16-vim',        {'type': 'opt'})
+  call minpac#add('fenetikm/falcon',                {'type': 'opt'})
+  call minpac#add('fxn/vim-monochrome',             {'type': 'opt'})
+  call minpac#add('khatiba/ayu-vim',                {'type': 'opt'})
+  call minpac#add('lifepillar/vim-solarized8',      {'type': 'opt'})
+  call minpac#add('lifepillar/vim-wwdc16-theme',    {'type': 'opt'})
+  call minpac#add('lifepillar/vim-wwdc17-theme',    {'type': 'opt'})
+  call minpac#add('Lokaltog/vim-monotone',          {'type': 'opt'})
+  call minpac#add('mhartington/oceanic-next',       {'type': 'opt'})
+  call minpac#add('rakr/vim-one',                   {'type': 'opt'})
+  call minpac#add('rakr/vim-two-firewatch',         {'type': 'opt'})
+  call minpac#add('tpope/vim-bundler',              {'type': 'opt'})
+  call minpac#add('tpope/vim-dispatch',             {'type': 'opt'})
+  call minpac#add('tpope/vim-ragtag',               {'type': 'opt'})
+  call minpac#add('tpope/vim-rhubarb',              {'type': 'opt'})
+  call minpac#add('tpope/vim-unimpaired',           {'type': 'opt'})
+  call minpac#add('vim-scripts/SyntaxRange',        {'type': 'opt'})
+  call minpac#add('whatyouhide/vim-gotham',         {'type': 'opt'})
+  call minpac#add('wolverian/minimal',              {'type': 'opt'})
+  call minpac#add('w0ng/vim-hybrid',                {'type': 'opt'})
 
   command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
   command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
@@ -350,20 +350,72 @@ let g:wwdc17_frame_color = 4
 " Plugin config {{{1
 
 " Airline {{{2
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_powerline_fonts = 1
+" remove section y - only works when devicon for file format is removed
+let g:webdevicons_enable_airline_statusline_fileformat_symbols = 0
+" fixes trunctation of file type
+let g:airline_section_x = '%{&filetype}'
+let g:airline_section_y=''
+" hide function name
+let g:airline#extensions#tagbar#enabled = 0
+" only show %
+let g:airline_section_z = '%3p%%'
+let g:airline_skip_empty_sections = 1
+let g:airline_right_sep = ""
+let g:airline_left_sep = ""
+let g:airline_right_alt_sep = "|"
+let g:airline_left_alt_sep = "|"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let airline#extensions#tabline#tabs_label = ''
+let g:airline#extensions#tabline#buffers_label = ''
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline_section_z ="%3l/%L:%2v"
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#bufferline#left_sep = ""
+let g:airline#extensions#bufferline#right_sep = ""
+let g:airline#extensions#bufferline#left_alt_sep = ""
+let g:airline#extensions#bufferline#right_alt_sep = ""
+let g:airline#extensions#tabline#left_sep = " "
+let g:airline#extensions#tabline#right_sep = ""
+let g:airline#extensions#tabline#left_alt_sep = ""
+let g:airline#extensions#tabline#right_alt_sep = ""
 " let g:airline_theme='gruvbox'
+  let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ 't'  : 'T',
+\ }
 
 " Ale config {{{2
 let g:ale_enabled = 1 " Off by default
 " let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
+" let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+" let g:ale_sign_warning = '.'
+let g:ale_sign_warning='●'
+hi ALEErrorSign ctermfg=red ctermbg=none
+let g:ale_sign_error='●'
+hi ALEWarningSign ctermfg=yellow ctermbg=none
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:ale_fix_on_save = 1
+" let g:ale_open_list = 1
 " Check Python files with flake8 and pylint.
 " let g:ale_linters = ['flake8', 'pylint']
 " Fix Python files with autopep8 and yapf.
@@ -416,16 +468,12 @@ map <leader>n :NERDTreeToggle<CR>
 " expand/open with one click
 let NERDTreeMouseMode=3
 let NERDTreeRespectWildIgnore=1
-let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist']
+" let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg', '_build', '__pycache__', 'node_modules', 'dist', 'Session.vim', 'tags']
 let g:NERDTreeWinSize = 30
+let NERDTreeHijackNetrw=0
 
 " polyglot {{{2
 let g:python_highlight_space_errors = 0
-" prettier {{{2
-let g:prettier#autoformat = 0
-let g:prettier#config#trailing_comma = 'none'
-" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue PrettierAsync
 
 " vim-test config {{{2
 nnoremap <silent> <Leader>tt :TestFile<CR>
@@ -464,11 +512,106 @@ elseif executable('ag')
 else
   let $FZF_DEFAULT_COMMAND = "find . -path '*/\.*' -type d -prune -o -type f -print -o -type l -print 2> /dev/null | sed s/^..//"
 endif
+
+" let g:fzf_layout = { 'down': '~20%' }
+" let g:fzf_layout = { 'window': '10split' }
+" let g:fzf_layout = { 'window': '-tabnew' }
+" let g:fzf_layout = { 'window': 'enew' }
+
 " Try highlight, coderay, rougify in turn, then fall back to cat
+" let g:fzf_file_options = '--preview "[[ \$(file --mime {2..-1}) =~ binary ]] && echo {2..-1} is a binary file || (highlight -O ansi -l {2..-1} || coderay {2..-1} || rougify {2..-1} || cat {2..-1}) 2> /dev/null | head -'.&lines.'"'
 let g:fzf_files_options =
    \ '--preview "(coderay {} || cat {}) 2> /dev/null | head -'.&lines.'"'
+" let g:fzf_layout = { 'window': '15split enew' }
+" let g:fzf_layout = { 'window': '-tabnew' }
 
-nnoremap <leader>i :Files<CR>
+nnoremap <leader>p :call Fzf_dev()<CR>
+nnoremap <Leader>i :call Fzf_dev_preview()<CR>
+
+" Files + devicons
+function! Fzf_dev()
+  function! s:files()
+    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    return s:prepend_icon(l:files)
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let l:result = []
+    for l:candidate in a:candidates
+      let l:filename = fnamemodify(l:candidate, ':p:t')
+      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+      call add(l:result, printf('%s %s', l:icon, l:candidate))
+    endfor
+
+    return l:result
+  endfunction
+
+  function! s:edit_file(item)
+    let l:pos = stridx(a:item, ' ')
+    let l:file_path = a:item[pos+1:-1]
+    execute 'silent e' l:file_path
+  endfunction
+
+  call fzf#run(fzf#wrap('devicons',{
+        \ 'source': <sid>files(),
+        \ 'sink':   function('s:edit_file'),
+        \ 'options': '-m ',
+        \ 'down':    '40%' }))
+endfunction
+
+" FIXME: refactor
+function! Fzf_dev_preview()
+  let l:fzf_files_options = '--preview "cat {2..-1} | head -'.&lines.'"'
+
+  function! s:files()
+    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    return s:prepend_icon(l:files)
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let l:result = []
+    for l:candidate in a:candidates
+      let l:filename = fnamemodify(l:candidate, ':p:t')
+      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+      call add(l:result, printf('%s %s', l:icon, l:candidate))
+    endfor
+
+    return l:result
+  endfunction
+
+  function! s:edit_file(item)
+    let l:pos = stridx(a:item, ' ')
+    let l:file_path = a:item[pos+1:-1]
+    execute 'silent e' l:file_path
+  endfunction
+
+  call fzf#run(fzf#wrap('devicon_preview',{
+        \ 'source': <sid>files(),
+        \ 'sink':   function('s:edit_file'),
+        \ 'options': '-m ' . l:fzf_files_options,
+        \ 'down':    '40%' }))
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -489,10 +632,15 @@ if executable('rg')
   let g:ctrlp_working_path_mode = 'ra'
   let g:ctrlp_switch_buffer = 'et'
 endif
-nnoremap <Leader>p :CtrlP<CR>
+" nnoremap <Leader>p :CtrlP<CR>
 
 " Delimitmate config {{{2
 let delimitMate_expand_cr = 1
+
+" Devicons
+" if exists("g:loaded_webdevicons")
+"   call webdevicons#refresh()
+" endif
 
 " Local config {{{1
 if filereadable($HOME . "/.vimrc.local")
