@@ -36,7 +36,8 @@ HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 
-shopt -s histappend   # append history to ~\.bash_history when exiting shell
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 # Prepend cd to directory names automatically
 shopt -s autocd 2> /dev/null
@@ -49,12 +50,13 @@ alias gs='git status'
 alias gss='git status -s'
 
 alias tmux='tmux -u'
-alias t='tmux'
 alias ts='tmux new-session -s'
 alias tns='tmux new-session -s'
 alias tl='tmux list-sessions'
 alias ta='tmux attach-session -t'
 alias tad='tmux attach-session -dt' # detach elsewhere
+alias tk='tmux kill-session -t'
+alias mux='tmuxinator'
 
 alias tree='tree -C'
 
@@ -62,15 +64,20 @@ alias vime='vim -u ~/.vime -N --noplugin'
 alias vimin='vim -u ~/.vimin -N --noplugin'
 alias vimed='vim -u ~/.vimed -N --noplugin'
 alias vimax='vim -u ~/.vimax -N --noplugin +"runtime plugin/netrwPlugin.vim"'
-alias vi='vim -u ~/.vimax -N --noplugin +"runtime plugin/netrwPlugin.vim"'
+alias vi='vim -u ~/.vim/vimrc -N --noplugin +"runtime plugin/netrwPlugin.vim"'
 
 alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -la'
 
-alias note='jrnl'
+# https://rehn.me/posts/using-vim-as-a-note-taking-app.html
+alias note="vim -c 'r!date \"+\%F\"' -c 'normal i# ' -c 'normal o' ~/Dropbox/tekst/notes.md"
+alias t='cd ~/Dropbox/tekst;vim +FZF'
+alias cl='cd ~/Dropbox/changelog;vim +FZF'
 
-alias be="bundle exec"
+alias be='bundle exec'
+
+alias b='buffalo'
 
 alias r='ruby --version'
 alias p='python --version'
@@ -80,6 +87,7 @@ alias bubu="brew update && brew upgrade"
 
 # Reload .bashrc
 alias reload='. ~/.bash_profile'
+alias relaod='. ~/.bash_profile'
 
 # IP addresses
 alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
@@ -137,6 +145,7 @@ export PATH="/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH"
 export GOPATH="$HOME/go"
 # Expose the Go binaries in the PATH
 export PATH="$GOPATH/bin:$PATH"
+export GO111MODULE=on
 
 # swiftenv
 # export SWIFTENV_ROOT="$HOME/.swiftenv"
@@ -152,3 +161,6 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
 export PATH="/usr/local/opt/node@6/bin:$PATH"
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"

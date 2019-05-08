@@ -1,11 +1,12 @@
-" vim:ft=vim foldmethod=marker foldlevel=0
-
-" Basics {{{1
+" Modeline {{
+" vim: set sw=2 ts=2 sts=0 et fmr={{,}} fcs=vert\:| fdm=marker fdt=substitute(getline(v\:foldstart),'\\"\\s\\\|\{\{','','g') nospell:
+" }}
+" Basics {{
 set nocompatible
 filetype plugin indent on
 syntax on
-
-" Colors {{{1
+" }}
+" Colors {{
 if has('termguicolors') && $COLORTERM ==# 'truecolor'
   let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
   let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
@@ -22,8 +23,8 @@ let g:nord_uniform_diff_background = 1
 
 " set bg=light
 colorscheme solarized8
-
-" Settings {{{1
+" }}
+" Settings {{
 set encoding=utf-8
 set ttyfast
 set number
@@ -117,8 +118,8 @@ endif
 
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_rails = 1
-
-" Mappings {{{1
+" }}
+" Mappings {{
 
 " Save with sudo
 ca w! w !sudo tee "%"
@@ -206,8 +207,8 @@ nnoremap <leader>= :wincmd =<cr>
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <F5> :source $MYVIMRC<CR>
-
-" Color swap {{{1
+" }}
+" Color swap {{
 " https://superuser.com/a/1246650
 
 function! Solar_swap()
@@ -222,8 +223,8 @@ function! Solar_swap()
 endfunction
 
 command! SolarSwap call Solar_swap()
-
-" Auto commands {{{1
+" }}
+" Auto commands {{
 
 " Don't continue comment on new line
 augroup Format-Options
@@ -231,6 +232,7 @@ augroup Format-Options
   au FileType * set fo-=c fo-=r fo-=o
 augroup END
 
+" Don't show line numbers in terminal
 if !has('nvim')
   augroup CursorLineOnlyInActiveWindow
     au TerminalOpen * set nonu
@@ -244,9 +246,8 @@ if has("autocmd") && exists("+omnifunc")
         \		setlocal omnifunc=syntaxcomplete#Complete |
         \	endif
 endif
-
-
-" Minpac {{{1
+" }}
+" Minpac {{
 
 " Try to load minpac.
 silent! packadd minpac
@@ -266,6 +267,7 @@ else
   call minpac#add('chrisbra/Colorizer') " :ColorToggle
   call minpac#add('christoomey/vim-tmux-navigator')
   call minpac#add('ctrlpvim/ctrlp.vim')
+  call minpac#add('davidhalter/jedi-vim')
   " call minpac#add('easymotion/vim-easymotion')
   call minpac#add('haya14busa/is.vim')
   call minpac#add('honza/vim-snippets')
@@ -337,29 +339,28 @@ endif
 if has('syntax') && has('eval') && !exists('loaded_matchit')
   source $VIMRUNTIME/macros/matchit.vim
 endif
-
-" Theme config {{{1
-
-" Oceanic next {{{2
+" }}
+" Theme config {{
+" Oceanic next {{
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
-
-" ayu {{{2
+" }}
+" ayu {{
 " let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
-
-" two-firwatch {{{2
+" }}
+" two-firwatch {{
 hi CursorLine   cterm=NONE
-
-" wwdc 16/17 {{{2
+" }}
+" wwdc 16/17 {{
 let g:wwdc16_term_italics = 0
 let g:wwdc17_term_italics = 0
 let g:wwdc17_frame_color = 4
-
-" Plugin config {{{1
-
-" Airline {{{2
+" }}
+" }}
+" Plugin config {{
+" Airline {{
 let g:airline_powerline_fonts = 1
 " remove section y - only works when devicon for file format is removed
 let g:webdevicons_enable_airline_statusline_fileformat_symbols = 0
@@ -411,8 +412,8 @@ let g:airline#extensions#tabline#right_alt_sep = ""
       \ '' : 'S',
       \ 't'  : 'T',
 \ }
-
-" Ale config {{{2
+" }}
+" Ale config {{
 let g:ale_enabled = 1 " Off by default
 " let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_statusline_format = ['  ⨉ %d', ' ⚠ %d', '']
@@ -435,26 +436,26 @@ noremap <leader>an :ALENextWrap<cr>
 noremap <leader>ap :ALEPreviousWrap<cr>
 noremap <leader>at :ALEToggle<cr>
 noremap <leader>ad :ALEDetail<cr>
-
-" dasht config {{{2
+" }}
+" dasht config {{
 " search related docsets
 nnoremap <silent> <Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
 
 " search ALL the docsets
 nnoremap <silent> <Leader><Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
-
-" easy align {{{2
+" }}
+" easy align {{
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-" easymotion config {{{2
+" }}
+" easymotion config {{
 nmap <leader>f <Plug>(easymotion-bd-w)
 let g:EasyMotion_keys='qwertyuiopåasdfghjkløæcvbnm'
-
-" vim-fugitive config {{{2
+" }}
+" vim-fugitive config {{
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -465,17 +466,24 @@ nnoremap <silent> <leader>gp :Git push<CR>
 nnoremap <silent> <leader>gr :Gread<CR>
 nnoremap <silent> <leader>gw :Gwrite<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
-
-" gitgutter {{{2
+" }}
+" gitgutter {{
 let g:gitgutter_enabled = 0
-
-" vim-go config {{{2
+" }}
+" vim-go config {{
 let g:go_fmt_command = "goimports"
-
-" gundo config - visualize your undo tree {{{2
+" }}
+" gundo config - visualize your undo tree {{
 nnoremap <F6> :GundoToggle<CR>
-
-" nerdtree config {{{2
+" }}
+" mucomplete {{
+set shortmess+=c
+set completeopt-=preview
+set completeopt+=longest,menuone,noselect
+let g:jedi#popup_on_dot = 1  " It may be 1 as well
+" let g:mucomplete#enable_auto_at_startup = 1
+" }}
+" nerdtree config {{
 map <leader>n :NERDTreeToggle<CR>
 " let NERDTreeHighlightCursorline=0
 " expand/open with one click
@@ -483,11 +491,12 @@ let NERDTreeMouseMode=3
 let NERDTreeRespectWildIgnore=1
 let g:NERDTreeWinSize = 30
 let NERDTreeHijackNetrw=0
-
-" polyglot {{{2
+" }}
+" polyglot {{
+let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
-
-" vim-test config {{{2
+" }}
+" vim-test config {{
 nnoremap <silent> <Leader>tt :TestFile<CR>
 nnoremap <silent> <Leader>tn :TestNearest<CR>
 nnoremap <silent> <Leader>tl :TestLast<CR>
@@ -496,8 +505,8 @@ nnoremap <silent> <Leader>gt :TestVisit<CR>
 
 let test#strategy = 'basic'
 " let test#strategy = 'vimterminal'
-
-" Ultisnips config {{{2
+" }}
+" Ultisnips config {{
 let g:UltiSnipsSnippetsDir         = '~/.vim/snippets'
 let g:UltiSnipsEditSplit           = 'vertical'
 let g:UltiSnipsListSnippets        = "<c-k>" "List possible snippets based on current file
@@ -505,8 +514,8 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger  = '<c-n>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-æ>'
 nnoremap <leader>ue :UltiSnipsEdit<cr>
-
-" Vimux config {{{2
+" }}
+" Vimux config {{
 nnoremap <leader>r :VimuxInterruptRunner<cr>:VimuxRunCommand("clear; go run " . bufname("%"))<CR>
 nnoremap <leader>c :VimuxInterruptRunner<cr>
 map <Leader>vi :VimuxInspectRunner<CR>
@@ -515,8 +524,8 @@ map <Leader>vm :VimuxPromptCommand("make ")<CR>
 map <Leader>vp :VimuxPromptCommand<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
 map <Leader>vs :VimuxInterruptRunner<CR>
-
-" FZF + ripgrep {{{2
+" }}
+" FZF + ripgrep {{
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = "rg --files --ignore-file ~/.agignore --follow --glob '!.git/*'"
 elseif executable('ag')
@@ -629,8 +638,8 @@ command! -bang -nargs=* Rg
   \   <bang>0)
 
 nnoremap <leader>o :Rg<cr>
-
-" Ctrlp + ripgrep {{{2
+" }}
+" Ctrlp + ripgrep {{
 if executable('rg')
   let g:ctrlp_user_command = 'Rg %s --files --glob ""'
   let g:ctrlp_use_caching = 0
@@ -638,16 +647,18 @@ if executable('rg')
   let g:ctrlp_switch_buffer = 'et'
 endif
 " nnoremap <Leader>p :CtrlP<CR>
-
-" Delimitmate config {{{2
+" }}
+" Delimitmate config {{
 let delimitMate_expand_cr = 1
-
-" Devicons
+" }}
+" Devicons {{
 if exists("g:loaded_webdevicons")
   call webdevicons#refresh()
 endif
-
-" Local config {{{1
+" }}
+" }}
+" Local config {{
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
 endif
+" }}
