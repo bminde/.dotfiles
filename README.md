@@ -1,13 +1,7 @@
 # My dotfiles
 
-`git clone https://github.com/bminde/.dotfiles.git`
-
-`git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac`
-
-`ln -s .dotfiles/vimrc ~/.vimrc`
+`git clone https://git.sr.ht/~minde/.dotfiles`
 
 `ln -s .dotfiles/tmux.conf ~/.tmux.conf`
 
 `ln -s .dotfiles/bashrc ~/.bashrc`
-
-`ln -s .dotfiles/zshrc ~/.zshrc`
