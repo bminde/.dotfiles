@@ -1,5 +1,8 @@
 # Settings
 
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 # Use vi mode
 set -o vi
 
@@ -39,9 +42,6 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# Prepend cd to directory names automatically
-shopt -s autocd 2> /dev/null
-
 # Aliases
 alias c='clear'
 alias ..='cd ..'
@@ -60,18 +60,13 @@ alias mux='tmuxinator'
 
 alias tree='tree -C'
 
-alias vime='vim -u ~/.vime -N --noplugin'
-alias vimin='vim -u ~/.vimin -N --noplugin'
-alias vimed='vim -u ~/.vimed -N --noplugin'
-alias vimax='vim -u ~/.vimax -N --noplugin +"runtime plugin/netrwPlugin.vim"'
-alias vi='vim -u ~/.vim/vimrc -N --noplugin +"runtime plugin/netrwPlugin.vim"'
-
 alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -la'
 
 # https://rehn.me/posts/using-vim-as-a-note-taking-app.html
-alias note="vim -c 'r!date \"+\%F\"' -c 'normal i# ' -c 'normal o' ~/Dropbox/tekst/notes.md"
+alias note="vim '+normal G' /Users/bjarte/Library/Mobile\ Documents/com~apple~CloudDocs/notes.md"
+alias notes="vim '+normal G' /Users/bjarte/Library/Mobile\ Documents/com~apple~CloudDocs/notes.md"
 alias t='cd ~/Dropbox/tekst;vim +FZF'
 alias cl='cd ~/Dropbox/changelog;vim +FZF'
 
@@ -96,10 +91,6 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 
 # Get week number
 alias week='date +%V'
-
-# Completion
-# http://stackoverflow.com/a/15009611/128850
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # cd to current Finder path
 function pfd() {
@@ -131,36 +122,6 @@ reset="\[\e[0m\]"
 # export PS1="${yellow}» $blue\W$magenta\$(ps1_branch)\n$yellow\$$reset "
 export PS1="${yellow}$blue\W$green\$(ps1_branch) $reset\$ "
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-source ~/.local/bin/bashmarks.sh
-
-export PATH=~/.local/bin:$PATH
-
-export PATH="/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH"
-
-# Go environment
-export GOPATH="$HOME/go"
-# Expose the Go binaries in the PATH
-export PATH="$GOPATH/bin:$PATH"
-export GO111MODULE=on
-
-# swiftenv
-# export SWIFTENV_ROOT="$HOME/.swiftenv"
-# export PATH="$SWIFTENV_ROOT/bin:$PATH"
-# eval "$(swiftenv init -)"
-
-# chruby with auto switching
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-
 # For Python
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
-
-export PATH="/usr/local/opt/node@6/bin:$PATH"
-
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
