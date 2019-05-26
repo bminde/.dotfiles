@@ -64,6 +64,8 @@ alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -la'
 
+alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all"
+
 # https://rehn.me/posts/using-vim-as-a-note-taking-app.html
 alias note="vim '+normal G' /Users/bjarte/Library/Mobile\ Documents/com~apple~CloudDocs/notes.md"
 alias notes="vim '+normal G' /Users/bjarte/Library/Mobile\ Documents/com~apple~CloudDocs/notes.md"
