@@ -62,7 +62,7 @@ parse_git_branch() {
 }
 
 setopt PROMPT_SUBST
-PROMPT='%9c%{%F{green}%}$(parse_git_branch)%{%F{none}%} $ '
+PROMPT='%{%F{blue}%9c%}%{%F{green}%}$(parse_git_branch)%{%F{none}%} $ '
 
 # cd to current Finder path
 function pfd() {
