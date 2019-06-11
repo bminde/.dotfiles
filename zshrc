@@ -10,6 +10,8 @@ HISTFILE=~/.history
 alias c='clear'
 alias ..='cd ..'
 
+alias vimin='vim -u ~/.vim/vimrc_minimal -N'
+
 alias gs='git status'
 alias gss='git status -s'
 
