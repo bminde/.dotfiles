@@ -10,7 +10,7 @@ HISTFILE=~/.history
 alias c='clear'
 alias ..='cd ..'
 
-alias vimin='vim -u ~/.vim/vimrc_minimal -N'
+alias vimin='vim -u ~/.vim/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
 
 alias gs='git status'
 alias gss='git status -s'
