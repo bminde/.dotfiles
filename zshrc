@@ -36,7 +36,7 @@ alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%
 alias note="vim '+normal G' ~/Library/Mobile\ Documents/N39PJFAFEV~com~metaclassy~byword/Documents/notes.md"
 alias notes="vim '+normal G' ~/Library/Mobile\ Documents/N39PJFAFEV~com~metaclassy~byword/Documents/notes.md"
 
-alias t='cd ~/Dropbox/tekst;vim +FZF'
+alias t='cd ~/Library/Mobile\ Documents/N39PJFAFEV~com~metaclassy~byword/Documents;vim +FZF'
 alias cl='cd ~/Dropbox/changelog;vim +FZF'
 
 alias be='bundle exec'
