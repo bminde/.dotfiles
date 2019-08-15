@@ -63,6 +63,13 @@ alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -la'
 
+# docker
+alias dc='docker-compose'
+alias dd='docker-compose down'
+alias du='docker-compose up -d --build'
+alias de='docker-compose exec web'
+alias dp='docker-compose exec web python manage.py'
+
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
 # https://rehn.me/posts/using-vim-as-a-note-taking-app.html
