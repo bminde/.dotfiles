@@ -43,6 +43,8 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 alias c='clear'
 alias ..='cd ..'
 
+alias vimin='vim -u ~/.vim/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
+
 alias gs='git status'
 alias gss='git status -s'
 
@@ -60,6 +62,13 @@ alias tree='tree -C'
 alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -la'
+
+# docker
+alias dc='docker-compose'
+alias dd='docker-compose down'
+alias du='docker-compose up -d --build'
+alias de='docker-compose exec web'
+alias dp='docker-compose exec web python manage.py'
 
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
