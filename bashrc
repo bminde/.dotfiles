@@ -67,6 +67,7 @@ alias la='ls -la'
 alias dc='docker-compose'
 alias dd='docker-compose down'
 alias du='docker-compose up -d --build'
+alias dr='dd && du'
 alias de='docker-compose exec web'
 alias dp='docker-compose exec web python manage.py'
 
