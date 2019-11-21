@@ -71,6 +71,9 @@ alias dr='dd && du'
 alias de='docker-compose exec web'
 alias dp='docker-compose exec web python manage.py'
 
+# python
+alias pm='python manage.py'
+
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
 # https://rehn.me/posts/using-vim-as-a-note-taking-app.html
@@ -134,3 +137,6 @@ export PS1="${yellow}$blue\W$green\$(ps1_branch) $reset\$ "
 # For Python
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
+
+# Elixir iex shell history
+export ERL_AFLAGS="-kernel shell_history enabled"
