@@ -43,11 +43,25 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 alias c='clear'
 alias ..='cd ..'
 
-alias vimin='vim -u ~/.vim/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
+alias tree='tree -C'
 
+alias ls='ls -GF'
+alias ll='ls -l'
+alias la='ls -la'
+
+# git
 alias gs='git status'
 alias gss='git status -s'
 
+# vim
+alias vime='vim -u ~/.vime -N --noplugin'
+alias vimin='vim -u ~/.vimin -N --noplugin'
+# alias vimin='vim -u ~/.vim/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
+alias vimed='vim -u ~/.vimed -N --noplugin'
+alias vimax='vim -u ~/.vimax -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
+alias vi='vim -u ~/.vim/vimrc -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
+
+# tmux
 alias tmux='tmux -u'
 alias ts='tmux new-session -s'
 alias tns='tmux new-session -s'
@@ -57,29 +71,26 @@ alias tad='tmux attach-session -dt' # detach elsewhere
 alias tk='tmux kill-session -t'
 alias mux='tmuxinator'
 
-alias tree='tree -C'
-
-alias ls='ls -GF'
-alias ll='ls -l'
-alias la='ls -la'
-
 # docker
 alias dc='docker-compose'
 alias dd='docker-compose down'
 alias du='docker-compose up -d --build'
 alias dr='dd && du'
 alias de='docker-compose exec web'
-alias dp='docker-compose exec web python manage.py'
+alias dm='docker-compose exec web python manage.py'
 
 # python
 alias pm='python manage.py'
+alias pe='python3 -m venv env'
+alias pa='source env/bin/activate'
+alias pd='deactivate'
 
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
 # https://rehn.me/posts/using-vim-as-a-note-taking-app.html
 alias note="vim '+normal G' ~/Library/Mobile\ Documents/N39PJFAFEV~com~metaclassy~byword/Documents/notes.md"
 alias notes="vim '+normal G' ~/Library/Mobile\ Documents/N39PJFAFEV~com~metaclassy~byword/Documents/notes.md"
-alias t='cd ~/Dropbox/tekst;vim +FZF'
+alias t='cd ~/Library/Mobile\ Documents/N39PJFAFEV~com~metaclassy~byword/Documents;vim +FZF'
 alias cl='cd ~/Dropbox/changelog;vim +FZF'
 
 alias be='bundle exec'
@@ -140,3 +151,5 @@ export LANG="en_US.UTF-8"
 
 # Elixir iex shell history
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
