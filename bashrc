@@ -84,6 +84,7 @@ alias pm='python manage.py'
 alias pe='python3 -m venv env'
 alias pa='source env/bin/activate'
 alias pd='deactivate'
+alias pu='pip install --upgrade pip'
 
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
