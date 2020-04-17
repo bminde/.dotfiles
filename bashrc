@@ -81,8 +81,8 @@ alias dm='docker-compose exec web python manage.py'
 
 # python
 alias pm='python manage.py'
-alias pe='python3 -m venv env'
-alias pa='source env/bin/activate'
+alias pe='python3 -m venv .venv'
+alias pa='source .venv/bin/activate'
 alias pd='deactivate'
 alias pu='pip install --upgrade pip'
 
