@@ -59,7 +59,7 @@ alias vimin='vim -u ~/.vimin -N --noplugin'
 # alias vimin='vim -u ~/.vim/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
 alias vimed='vim -u ~/.vimed -N --noplugin'
 alias vimax='vim -u ~/.vimax -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
-alias vi='vim -u ~/.vim/vimrc -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
+alias vi='vim -u ~/.dotfiles/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
 
 # tmux
 alias tmux='tmux -u'
@@ -81,21 +81,22 @@ alias dm='docker-compose exec web python manage.py'
 
 # python
 alias pm='python manage.py'
-alias pe='python3 -m venv .venv'
-alias pa='source .venv/bin/activate'
+alias pe='python3 -m venv venv'
+alias pv='python3 -m venv venv'
+alias pa='source venv/bin/activate'
 alias pd='deactivate'
 alias pu='pip install --upgrade pip'
+alias pi='pip install -r requirements.txt'
 
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
 # https://rehn.me/posts/using-vim-as-a-note-taking-app.html
-alias note="vim '+normal G' ~/Library/Mobile\ Documents/N39PJFAFEV~com~metaclassy~byword/Documents/notes.md"
-alias notes="vim '+normal G' ~/Library/Mobile\ Documents/N39PJFAFEV~com~metaclassy~byword/Documents/notes.md"
-alias t='cd ~/Library/Mobile\ Documents/N39PJFAFEV~com~metaclassy~byword/Documents;vim +FZF'
-alias cl='cd ~/Dropbox/changelog;vim +FZF'
+alias note="vim '+normal G' ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents/notes.md"
+alias notes="vim '+normal G' ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents/notes.md"
+alias t='cd ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents;vim +FindFile'
+alias cl='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/changelog;vim +FindFile'
 
 alias be='bundle exec'
-
 alias b='buffalo'
 
 alias r='ruby --version'
