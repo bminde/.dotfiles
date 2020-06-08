@@ -1,0 +1,247 @@
+" vim
+set encoding=utf-8
+filetype plugin indent on
+syntax on
+runtime macros/matchit.vim
+set autoindent                 " Minimal automatic indenting for any filetype.
+set backspace=indent,eol,start " Proper backspace behavior.
+set hidden                     " Possibility to have more than one unsaved buffers.
+set incsearch                  " Incremental search, hit `<CR>` to stop.
+set ruler                      " Shows the current line number at the bottom-right of the screen.
+set wildmenu                   " Great command-line completion, use `<Tab>` to move around and `<CR>` to validate.
+set ttyfast
+set ttimeoutlen=10
+set relativenumber
+set laststatus=2
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+set vb t_vb=
+set hlsearch
+set ignorecase
+set smartcase
+set mouse=a
+set display+=lastline
+set iskeyword+=-          " makes foo-bar considered one word
+set clipboard^=unnamed    " use system clipboard
+set noswapfile
+set splitright
+set splitbelow
+set guicursor+=a:blinkon0 " turn of cursor blinking
+set scrolloff=5
+set sidescrolloff=5
+set fillchars+=vert:\ " space
+set path+=**              " search down into subfolders
+set autoread
+set wildcharm=<C-z>
+if v:version >= 800
+  set breakindent   " indent wrapped lines if supported
+endif
+
+nnoremap gb :ls<CR>:b<Space>
+nnoremap <space>p :find *
+nnoremap ,f :find *
+nnoremap ,s :sfind *
+nnoremap ,v :vert sfind *
+nnoremap ,t :tabfind *
+nnoremap <silent> cd :<c-u>cd %:h \| pwd<cr> " Change to the directory of the current file
+nnoremap ,w :w<cr>
+nnoremap ,q :q<cr>
+nnoremap ,x :x<cr>
+nnoremap 0 ^
+nnoremap ,, <c-^>         " toggle between last two files
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <space>et :tabedit ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents/todo.md<cr><cr>
+nnoremap <space>en :tabedit ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents/notes.md<cr><cr>
+nnoremap <space>d "=strftime('# %F')<cr>P " insert date
+if exists(':terminal')
+  tnoremap <c-h> <c-w>h
+  tnoremap <c-j> <c-w>j
+  tnoremap <c-k> <c-w>k
+  tnoremap <c-l> <c-w>l
+  tnoremap <esc><esc> <C-\><C-n> " Two escapes fixes problem with E21 modifiable off
+endif
+if bufwinnr(1)
+  nnoremap ø <C-W><<C-W><
+  nnoremap æ <C-W>><C-W>>
+  nnoremap Æ <C-W>-<C-W>-
+  nnoremap Ø <C-W>+<C-W>+
+endif
+nnoremap ,1 1gt " tab navigation
+nnoremap ,2 2gt
+nnoremap ,3 3gt
+nnoremap ,4 4gt
+nnoremap ,5 5gt
+nnoremap ,6 6gt
+nnoremap ,7 7gt
+nnoremap ,8 8gt
+nnoremap ,9 9gt
+nnoremap <silent> å :set hlsearch!<cr> " toggle search highlight
+nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]" " reselect pasted block
+nnoremap <space>ev :tabedit ~/.dotfiles/vimrc_minimal<cr> " edit vimrc
+" navigate quickfix entries
+nnoremap <Right> :cnext<CR>
+nnoremap <Left> :cprevious<CR>
+nnoremap <space><space> /
+" persistent undo
+if has('persistent_undo')
+  let s:vim_cache = expand('$HOME/.vim/tmp/undo')
+  if filewritable(s:vim_cache) == 0 && exists("*mkdir")
+    call mkdir(s:vim_cache, "p", 0700)
+  endif
+  set undodir=~/.vim/tmp/undo
+  set undofile
+endif
+" netrw
+let g:netrw_banner=0
+let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+let g:netrw_list_hide .= ',__pycache__,.pyc$,node_modules,.git/,.cache,tags,Session.vim'
+let g:netrw_bufsettings = 'noswf noma nomod nu rnu nowrap ro nobl'
+let g:netrw_sort_options = 'i'
+nnoremap - :Ex<cr>
+function! SearchNetrw(fname)
+  if ! search('\V\^' . a:fname . '\$')
+    call search('^' . substitute(a:fname, '\w\zs.*', '', '') . '.*\/\@<!$')
+  endif
+endfunction
+
+augroup Autocmds
+  autocmd!
+  " Netrw
+  autocmd FileType netrw set nolist
+  " focus on current file - https://stackoverflow.com/a/29457190
+  autocmd VimEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string(expand('%:t')) . ')'
+  autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
+  " Linting
+  autocmd FileType python setlocal makeprg=black\ -
+  autocmd BufWritePost *.py silent make! <afile> | silent redraw!
+  autocmd FileType python nmap <silent> <space>r :terminal ++rows=20 python %<cr>
+
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd FileType * set fo-=c fo-=r fo-=o " Don't continue comment on new line
+  if exists(':terminal')
+    autocmd TerminalOpen * set nonumber norelativenumber signcolumn=no
+  endif
+augroup END
+
+" Poor mans toggle comment https://stackoverflow.com/a/24046914
+let s:comment_map = {
+      \   "go": '\/\/',
+      \   "javascript": '\/\/',
+      \   "lua": '--',
+      \   "php": '\/\/',
+      \   "python": '#',
+      \   "ruby": '#',
+      \   "rust": '\/\/',
+      \   "sh": '#',
+      \   "conf": '#',
+      \   "profile": '#',
+      \   "bashrc": '#',
+      \   "bash_profile": '#',
+      \   "mail": '>',
+      \   "vim": '"',
+      \   "tex": '%',
+      \   "dockerfile": '#',
+      \ }
+
+function! ToggleComment() abort
+  if has_key(s:comment_map, &filetype)
+    let comment_leader = s:comment_map[&filetype]
+    if getline('.') =~ "^\\s*" . comment_leader . " "
+      " Uncomment the line
+      execute "silent s/^\\(\\s*\\)" . comment_leader . " /\\1/"
+    else
+      if getline('.') =~ "^\\s*" . comment_leader
+        " Uncomment the line
+        execute "silent s/^\\(\\s*\\)" . comment_leader . "/\\1/"
+      else
+        " Comment the line
+        execute "silent s/^\\(\\s*\\)/\\1" . comment_leader . " /"
+      end
+    end
+  else
+    echo "No comment leader found for filetype"
+  end
+endfunction
+nnoremap gcc :call ToggleComment()<cr>
+vnoremap gc :call ToggleComment()<cr>
+
+function TabComplete()
+  if getline('.')[col('.') - 2] =~ '\K' || pumvisible()
+    return "\<C-P>"
+  else
+    return "\<Tab>"
+  endif
+endfun
+inoremap <expr> <Tab> TabComplete()
+set completeopt=menuone
+imap <C-o> <C-x><C-o>
+imap <C-f> <C-x><C-f>
+imap <C-t> <C-x><C-]>
+
+" monochrome color scheme
+hi clear
+if exists('syntax_on')
+   syntax reset
+endif
+let g:colors_name = 'monochrome'
+hi Normal                   ctermfg=NONE    cterm=NONE
+hi Cursor                   ctermfg=16      cterm=NONE
+hi CursorLine               ctermfg=NONE    cterm=NONE
+hi CursorLineNr             ctermfg=NONE    cterm=bold
+hi DiffAdd                  ctermfg=0       ctermbg=2
+hi DiffChange               ctermfg=0       ctermbg=3
+hi DiffDelete               ctermfg=0       ctermbg=1
+hi DiffText                 ctermfg=0       ctermbg=11      cterm=bold
+hi FoldColumn               ctermfg=248     cterm=NONE
+hi Folded                   ctermfg=NONE    cterm=NONE
+hi Number                   ctermfg=NONE    cterm=NONE      term=NONE
+hi LineNr                   ctermfg=248     cterm=NONE      term=NONE
+hi Statement                ctermfg=NONE    cterm=bold      term=bold
+hi PreProc                  ctermfg=NONE    cterm=bold      term=bold
+hi String                   ctermfg=75      cterm=NONE
+hi Comment                  ctermfg=243     cterm=NONE      term=NONE
+hi Constant                 ctermfg=NONE    cterm=NONE      term=NONE
+hi Type                     ctermfg=NONE    cterm=bold      term=bold
+hi Function                 ctermfg=NONE    cterm=NONE
+hi Identifier               ctermfg=NONE    cterm=NONE      term=NONE
+hi Special                  ctermfg=NONE    cterm=NONE
+hi MatchParen               ctermfg=16      ctermbg=252
+hi Underlined               ctermfg=75      ctermbg=NONE
+hi Todo                     ctermfg=16      cterm=bold
+hi Pmenu                    ctermfg=NONE    cterm=NONE
+hi PmenuSel                 ctermfg=75      cterm=NONE
+hi Search                   ctermfg=NONE    cterm=NONE
+hi Visual                   ctermfg=NONE    ctermbg=NONE    cterm=inverse
+hi NonText                  ctermfg=248     cterm=NONE
+hi Directory                ctermfg=NONE    cterm=bold
+hi Title                    ctermfg=NONE    cterm=bold
+hi TabLine                                  cterm=NONE
+hi StatusLineTerm           ctermfg=NONE    ctermbg=NONE    cterm=reverse,bold
+hi StatusLineTermNC         ctermfg=NONE    ctermbg=NONE    cterm=reverse
+hi SignColumn                               ctermbg=NONE
+if &background == "light"
+  highlight ColorColumn     ctermfg=8       ctermbg=7
+  highlight Folded          ctermfg=8       ctermbg=7
+  highlight FoldColumn      ctermfg=8       ctermbg=7
+  highlight Pmenu           ctermfg=0       ctermbg=7
+  highlight PmenuSel        ctermfg=7       ctermbg=0
+  highlight SpellCap        ctermfg=8       ctermbg=7
+  highlight StatusLine      ctermfg=0       ctermbg=7       cterm=bold
+  highlight StatusLineNC    ctermfg=8       ctermbg=7       cterm=NONE
+  highlight VertSplit       ctermfg=8       ctermbg=7       cterm=NONE
+else
+  highlight ColorColumn     ctermfg=7       ctermbg=8
+  highlight Folded          ctermfg=7       ctermbg=8
+  highlight FoldColumn      ctermfg=7       ctermbg=8
+  highlight Pmenu           ctermfg=15      ctermbg=8
+  highlight PmenuSel        ctermfg=8       ctermbg=15
+  highlight SpellCap        ctermfg=7       ctermbg=8
+  highlight StatusLine      ctermfg=15      ctermbg=8       cterm=bold
+  highlight StatusLineNC    ctermfg=7       ctermbg=8       cterm=NONE
+  highlight VertSplit       ctermfg=7       ctermbg=8       cterm=NONE
+endif
