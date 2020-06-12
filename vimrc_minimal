@@ -86,6 +86,8 @@ nnoremap <space>ev :tabedit ~/.dotfiles/vimrc_minimal<cr> " edit vimrc
 " navigate quickfix entries
 nnoremap <Right> :cnext<CR>
 nnoremap <Left> :cprevious<CR>
+nnoremap <Up> :copen<CR>
+nnoremap <Down> :cclose<CR>
 nnoremap <space><space> /
 " persistent undo
 if has('persistent_undo')
@@ -117,8 +119,10 @@ augroup Autocmds
   autocmd VimEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string(expand('%:t')) . ')'
   autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
   " Linting
-  autocmd FileType python setlocal makeprg=black\ -
-  autocmd BufWritePost *.py silent make! <afile> | silent redraw!
+  " autocmd FileType python setlocal makeprg=black\ -
+  " autocmd BufWritePost *.py silent make! <afile> | silent redraw!
+  autocmd FileType python setlocal formatprg=black\ --quiet\ -
+  autocmd FileType python autocmd BufWritePre <buffer> silent normal mkHmlgggqG`lzt`k
   autocmd FileType python nmap <silent> <space>r :terminal ++rows=20 python %<cr>
 
   autocmd QuickFixCmdPost [^l]* cwindow
