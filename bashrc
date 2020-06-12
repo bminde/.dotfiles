@@ -87,6 +87,7 @@ alias pa='source venv/bin/activate'
 alias pd='deactivate'
 alias pu='pip install --upgrade pip'
 alias pi='pip install -r requirements.txt'
+alias pp='python3 -m venv venv;source venv/bin/activate;pip install --upgrade pip;pip install -r requirements.txt'
 
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
@@ -95,6 +96,8 @@ alias note="vim '+normal G' ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Do
 alias notes="vim '+normal G' ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents/notes.md"
 alias t='cd ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents;vim +FindFile'
 alias cl='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/changelog;vim +FindFile'
+alias et='cd ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents;vim +FindFile'
+alias ec='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/changelog;vim +FindFile'
 
 alias be='bundle exec'
 alias b='buffalo'
@@ -116,6 +119,11 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 
 # Get week number
 alias week='date +%V'
+
+# use <C-z> instead of fg<cr>
+# https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb/
+stty susp undef
+bind '"\C-z":"fg\015"'
 
 # cd to current Finder path
 function pfd() {
