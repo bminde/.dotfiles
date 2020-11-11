@@ -120,6 +120,8 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 # Get week number
 alias week='date +%V'
 
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
 # use <C-z> instead of fg<cr>
 # https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb/
 stty susp undef
@@ -154,6 +156,8 @@ reset="\[\e[0m\]"
 
 # export PS1="${yellow}» $blue\W$magenta\$(ps1_branch)\n$yellow\$$reset "
 export PS1="${yellow}$blue\W$green\$(ps1_branch) $reset\$ "
+
+export BAT_THEME="Solarized (light)"
 
 # For Python
 export LC_ALL="en_US.UTF-8"
