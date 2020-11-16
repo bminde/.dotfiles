@@ -157,7 +157,7 @@ reset="\[\e[0m\]"
 # export PS1="${yellow}» $blue\W$magenta\$(ps1_branch)\n$yellow\$$reset "
 export PS1="${yellow}$blue\W$green\$(ps1_branch) $reset\$ "
 
-export BAT_THEME="Solarized (light)"
+export BAT_THEME="Nord"
 
 # For Python
 export LC_ALL="en_US.UTF-8"
