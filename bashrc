@@ -54,12 +54,7 @@ alias gs='git status'
 alias gss='git status -s'
 
 # vim
-alias vime='vim -u ~/.vime -N --noplugin'
-alias vimin='vim -u ~/.vimin -N --noplugin'
-# alias vimin='vim -u ~/.vim/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
-alias vimed='vim -u ~/.vimed -N --noplugin'
-alias vimax='vim -u ~/.vimax -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
-alias vi='vim -u ~/.dotfiles/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
+alias vimin='vim -u ~/.vim/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
 
 # tmux
 alias tmux='tmux -u'
@@ -91,22 +86,10 @@ alias pp='python3 -m venv venv;source venv/bin/activate;pip install --upgrade pi
 
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
-# https://rehn.me/posts/using-vim-as-a-note-taking-app.html
-alias note="vim '+normal G' ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents/notes.md"
-alias notes="vim '+normal G' ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents/notes.md"
-alias t='cd ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents;vim +FindFile'
-alias cl='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/changelog;vim +FindFile'
-alias et='cd ~/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents;vim +FindFile'
-alias ec='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/changelog;vim +FindFile'
-
 alias be='bundle exec'
-alias b='buffalo'
 
 alias r='ruby --version'
 alias p='python --version'
-
-# homebrew
-alias bubu="brew update && brew upgrade"
 
 # Reload .bashrc
 alias reload='. ~/.bash_profile'
@@ -119,8 +102,6 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 
 # Get week number
 alias week='date +%V'
-
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 # use <C-z> instead of fg<cr>
 # https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb/
