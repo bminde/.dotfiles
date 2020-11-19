@@ -1,9 +1,7 @@
 # My dotfiles
 
-`git clone https://git.sr.ht/~minde/.dotfiles`
+`git clone https://github.com/bminde/.dotfiles`
 
 `ln -s .dotfiles/tmux.conf ~/.tmux.conf`
 
 `ln -s .dotfiles/bashrc ~/.bashrc`
-
-`ln -s .dotfiles/zshrc ~/.zshrc`
