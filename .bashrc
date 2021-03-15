@@ -79,8 +79,9 @@ alias pm='python manage.py'
 alias pe='python3 -m venv venv'
 alias pv='python3 -m venv venv'
 alias va='source venv/bin/activate'
-alias pa='source "$(pipenv --venv)/bin/activate"'
+alias pa='source venv/bin/activate'
 alias pd='deactivate'
+alias prm='rm -rf venv'
 alias pu='pip install --upgrade pip'
 alias pi='pip install -r requirements.txt'
 alias pp='python3 -m venv venv;source venv/bin/activate;pip install --upgrade pip;pip install -r requirements.txt'
@@ -139,11 +140,11 @@ reset="\[\e[0m\]"
 # export PS1="${yellow}» $blue\W$magenta\$(ps1_branch)\n$yellow\$$reset "
 export PS1="${yellow}$blue\W$green\$(ps1_branch) $reset\$ "
 
-export BAT_THEME="Nord"
+export BAT_THEME="Solarized (light)"
 
 # For Python
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
+# export LC_ALL="en_US.UTF-8"
+# export LANG="en_US.UTF-8"
 
 # Elixir iex shell history
 export ERL_AFLAGS="-kernel shell_history enabled"
