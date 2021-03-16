@@ -54,7 +54,7 @@ alias gs='git status'
 alias gss='git status -s'
 
 # vim
-alias vimin='vim -u ~/.vim/vimrc_minimal -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
+alias vimin='vim -u ~/.dotfiles/.vimrc -N --noplugin +"runtime plugin/netrwPlugin.vim" +"runtime plugin/matchparen.vim"'
 
 # tmux
 alias tmux='tmux -u'
