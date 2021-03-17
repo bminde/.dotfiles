@@ -26,7 +26,6 @@
   co = checkout
   df = diff
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --all
-
 [user]
   name = bminde
   email = 8491+bminde@users.noreply.github.com
@@ -36,8 +35,8 @@
   smudge = git media smudge %f
 [push]
   default = simple
-[mergetool]
-  keepBackup = true
+[pull]
+  rebase = true
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
@@ -46,6 +45,8 @@
 [pager]
   branch = false
 [merge]
-  tool = smerge
-[pull]
-  rebase = true
+  tool = vimdiff
+  conflictstyle = diff3
+[mergetool]
+  keepBackup = true
+  prompt = false
