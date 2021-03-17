@@ -163,8 +163,12 @@ augroup Autocmds
   if exists(':terminal')
     autocmd TerminalOpen * set nonumber norelativenumber signcolumn=no
   endif
+  " Jump to last known position
+  autocmd BufReadPost *
+    \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+    \ |   exe "normal! g`\""
+    \ | end
 augroup END
-
 
 " Returns a pair of comment delimiters, extracted from 'commentstring'.
 " The delimiters are ready to be used in a regular expression.
