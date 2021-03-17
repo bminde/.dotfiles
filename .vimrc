@@ -303,7 +303,6 @@ if &background == "light"
   highlight Pmenu           ctermfg=0       ctermbg=7
   highlight PmenuSel        ctermfg=7       ctermbg=0
   highlight SpellCap        ctermfg=8       ctermbg=7
-  highlight VertSplit       ctermfg=8       ctermbg=7       cterm=NONE
 else
   highlight ColorColumn     ctermfg=7       ctermbg=8
   highlight Folded          ctermfg=7       ctermbg=8
@@ -311,5 +310,4 @@ else
   highlight Pmenu           ctermfg=15      ctermbg=8
   highlight PmenuSel        ctermfg=8       ctermbg=15
   highlight SpellCap        ctermfg=7       ctermbg=8
-  highlight VertSplit       ctermfg=7       ctermbg=8       cterm=NONE
 endif
