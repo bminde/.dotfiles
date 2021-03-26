@@ -268,6 +268,13 @@ command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
 cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() ==# 'grep')  ? 'Grep'  : 'grep'
 cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'lgrep') ? 'LGrep' : 'lgrep'
 
+" Align {{{1
+" https://vimrcfu.com/snippet/236
+function! Align()
+  '<,'>!column -t|sed 's/  \(\S\)/ \1/g'
+  normal gv=
+endfunction
+xnoremap <silent> <F5> :<C-u>silent call Align()<CR>
 " Name:        photon.vim
 " Author:      Alex Vear <av@axvr.io>
 " Webpage:     https://github.com/axvr/photon.vim
