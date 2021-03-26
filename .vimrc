@@ -77,7 +77,11 @@ let &t_ZR="\e[23m"
 " Mappings {{{1
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <space>p :find *
-nnoremap ,f :GitFind *
+if isdirectory('.git')
+  nnoremap ,f :GitFind *
+else
+  nnoremap ,f :Find *
+endif
 nnoremap ,g :Grep
 nnoremap ,s :sfind *
 nnoremap ,v :vert sfind *
