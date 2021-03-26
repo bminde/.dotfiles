@@ -1,4 +1,6 @@
-" vim
+" Modeline and Notes {{{1
+" vim: set sw=2 ts=2 sts=0 et foldmethod=marker foldlevel=0 :nospell:
+" Settings {{{1
 set encoding=utf-8
 filetype plugin indent on
 syntax on
@@ -39,6 +41,28 @@ if v:version >= 800
   set breakindent   " indent wrapped lines if supported
 endif
 
+" Statusline
+set statusline=\ %t                                    " file name
+set statusline+=\ %1*%m%0*                             " modified flag
+set statusline+=%r                                     " read only flag
+set statusline+=%w                                     " preview window flag
+set statusline+=\ %<%{empty(&bt)?expand('%:p:~:h'):''} " file path
+set statusline+=%=                                     " switch to the right side
+set statusline+=%y                                     " filetype
+set statusline+=\ %l                                   " current line
+set statusline+=/                                      " separator
+set statusline+=%L                                     " total lines
+set statusline+=:                                      " separator
+set statusline+=%c\                                    " current column
+
+" Semi-persistent undo
+set backupdir=/tmp//,.
+set directory=/tmp//,.
+if has('persistent_undo')
+  set undodir=/tmp,.
+  set undofile
+endif
+
 " Show block cursor in Normal mode and line cursor in Insert mode
 " (use odd numbers for blinking cursor):
 let &t_ti.="\e[2 q"
@@ -50,10 +74,11 @@ let &t_te.="\e[0 q"
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 
+" Mappings {{{1
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <space>p :find *
 nnoremap ,f :GitFind *
-nnoremap ,g :Grep 
+nnoremap ,g :Grep
 nnoremap ,s :sfind *
 nnoremap ,v :vert sfind *
 nnoremap ,t :tabfind *
@@ -110,40 +135,7 @@ inoremap [<CR> [<CR>]<Esc>O
 inoremap [;    [<CR>];<Esc>O
 inoremap [,    [<CR>],<Esc>O
 
-set statusline=\ %t                                    " file name
-set statusline+=\ %1*%m%0*                             " modified flag
-set statusline+=%r                                     " read only flag
-set statusline+=%w                                     " preview window flag
-set statusline+=\ %<%{empty(&bt)?expand('%:p:~:h'):''} " file path
-set statusline+=%=                                     " switch to the right side
-set statusline+=%y                                     " filetype
-set statusline+=\ %l                                   " current line
-set statusline+=/                                      " separator
-set statusline+=%L                                     " total lines
-set statusline+=:                                      " separator
-set statusline+=%c\                                    " current column
-
-set backupdir=/tmp//,.
-set directory=/tmp//,.
-" Semi-persistent undo
-if has('persistent_undo')
-  set undodir=/tmp,.
-  set undofile
-endif
-
-" netrw
-let g:netrw_banner=0
-let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
-let g:netrw_list_hide .= ',__pycache__,.pyc$,node_modules,.git/,.cache,tags,Session.vim'
-let g:netrw_bufsettings = 'noswf noma nomod nu rnu nowrap ro nobl'
-let g:netrw_sort_options = 'i'
-nnoremap - :Ex<cr>
-function! SearchNetrw(fname)
-  if ! search('\V\^' . a:fname . '\$')
-    call search('^' . substitute(a:fname, '\w\zs.*', '', '') . '.*\/\@<!$')
-  endif
-endfunction
-
+" Autocmds {{{1
 augroup Autocmds
   autocmd!
   " Netrw
@@ -170,6 +162,20 @@ augroup Autocmds
     \ | end
 augroup END
 
+" Netrw {{{1
+let g:netrw_banner = 0
+let g:netrw_list_hide = '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+let g:netrw_list_hide .= ',__pycache__,.pyc$,node_modules,.git/,.cache,tags,Session.vim'
+let g:netrw_bufsettings = 'noswf noma nomod nu rnu nowrap ro nobl'
+let g:netrw_sort_options = 'i'
+nnoremap - :Ex<cr>
+function! SearchNetrw(fname)
+  if ! search('\V\^' . a:fname . '\$')
+    call search('^' . substitute(a:fname, '\w\zs.*', '', '') . '.*\/\@<!$')
+  endif
+endfunction
+
+" Commenting {{{1
 " Returns a pair of comment delimiters, extracted from 'commentstring'.
 " The delimiters are ready to be used in a regular expression.
 function! Comment_delimiters()
@@ -223,6 +229,7 @@ endfunction
 nnoremap <silent>  gcc :set opfunc=Toggle_comment<cr>g@l
 vnoremap <silent>  gc :<c-u>call Toggle_comment(visualmode(), 1)<cr>
 
+" TabComplete {{{1
 function! TabComplete()
   if getline('.')[col('.') - 2] =~ '\K' || pumvisible()
     return "\<C-P>"
@@ -237,6 +244,7 @@ imap <C-o> <C-x><C-o>
 imap <C-f> <C-x><C-f>
 imap <C-t> <C-x><C-]>
 
+" GitFind  {{{1
 " https://vi.stackexchange.com/a/2589
 function! GitFindComplete(ArgLead, CmdLine, CursorPos)
   let search_pattern = "*" . a:ArgLead . "*"
@@ -245,7 +253,8 @@ function! GitFindComplete(ArgLead, CmdLine, CursorPos)
 endfunction
 command! -nargs=1 -bang -complete=customlist,GitFindComplete GitFind edit<bang> <args>
 
-" Grep - https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
+" Grep {{{1
+" https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
 set grepprg=rg\ --vimgrep
 function! Grep(...)
   return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
