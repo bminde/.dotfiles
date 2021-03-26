@@ -85,7 +85,7 @@ endif
 nnoremap ,g :Grep
 nnoremap ,s :sfind *
 nnoremap ,v :vert sfind *
-nnoremap ,t :tabfind *
+nnoremap ,t :terminal ++rows=15<cr>
 nnoremap <silent> cd :<c-u>cd %:h \| pwd<cr> " Change to the directory of the current file
 nnoremap ,w :w<cr>
 nnoremap ,q :q<cr>
