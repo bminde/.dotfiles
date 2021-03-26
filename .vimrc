@@ -275,6 +275,58 @@ function! Align()
   normal gv=
 endfunction
 xnoremap <silent> <F5> :<C-u>silent call Align()<CR>
+
+" Better incremental search {{{1
+" https://vimrcfu.com/snippet/38
+set wildcharm=<C-z>
+function! BetterIncSearch(key)
+    if getcmdtype() == "/" || getcmdtype() == "?"
+        if (a:key == "tab" && b:direction == "f") || (a:key == "stab" && b:direction == "b")
+            return "\<CR>/\<C-r>/"
+        elseif (a:key == "tab" && b:direction == "b") || (a:key == "stab" && b:direction == "f")
+            return "\<CR>?\<C-r>/"
+        endif
+    else
+        if a:key == "tab"
+            return "\<C-z>"
+        else
+            return "\<S-Tab>"
+        endif
+    endif
+endfunction
+
+nnoremap / :let b:direction = "f"<CR>/
+nnoremap ? :let b:direction = "b"<CR>?
+nnoremap ø :let b:direction = "f"<CR>/
+nnoremap Ø :let b:direction = "b"<CR>?
+cnoremap <expr> <Tab>   BetterIncSearch("tab")
+cnoremap <expr> <S-Tab> BetterIncSearch("stab")
+
+noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
+
+fu! HlSearch()
+    let s:pos = match(getline('.'), @/, col('.') - 1) + 1
+    if s:pos != col('.')
+        call StopHL()
+    endif
+endfu
+
+fu! StopHL()
+    if !v:hlsearch || mode() isnot 'n'
+        return
+    else
+        sil call feedkeys("\<Plug>(StopHL)", 'm')
+    endif
+endfu
+
+augroup SearchHighlight
+au!
+    au CursorMoved * call HlSearch()
+    au InsertEnter * call StopHL()
+augroup end
+
+" Theme {{{1
 " Name:        photon.vim
 " Author:      Alex Vear <av@axvr.io>
 " Webpage:     https://github.com/axvr/photon.vim
