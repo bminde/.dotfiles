@@ -1,11 +1,7 @@
 # My personal dotfiles
 
-`git clone https://github.com/bminde/dotfiles`
+`git clone https://github.com/bminde/dotfiles .dotfiles`
 
-`ln -s .dotfiles/.tmux.conf ~/.tmux.conf`
+`cd .dotfiles`
 
-`ln -s .dotfiles/.bashrc ~/.bashrc`
-
-`ln -s .dotfiles/.gitconfig ~/.gitconfig`
-
-`ln -s .dotfiles/.vimrc ~/.vimrc`
+`make`
