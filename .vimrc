@@ -63,6 +63,10 @@ if has('persistent_undo')
   set undofile
 endif
 
+set wildignore+=*.swp,*.bak,tmp/**,tags,.DS_Store
+set wildignore+=*.pyc,venv/**,__pycache__/**
+set wildignore+=.git/**,.gitkeep
+
 " Show block cursor in Normal mode and line cursor in Insert mode
 " (use odd numbers for blinking cursor):
 let &t_ti.="\e[2 q"
@@ -168,8 +172,8 @@ augroup END
 
 " Netrw {{{1
 let g:netrw_banner = 0
-let g:netrw_list_hide = '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
-let g:netrw_list_hide .= ',__pycache__,.pyc$,node_modules,.git/,.cache,tags,Session.vim'
+let g:netrw_list_hide = '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$,db.sqlite3'
+let g:netrw_list_hide .= ',__pycache__,.pyc$,node_modules,.git/,.cache,tags,Session.vim,venv'
 let g:netrw_bufsettings = 'noswf noma nomod nu rnu nowrap ro nobl'
 let g:netrw_sort_options = 'i'
 nnoremap - :Ex<cr>
