@@ -245,11 +245,11 @@ endf
 
 fun! FindFile() abort
   if executable('rg')
-    let choice = FilterInteractively('rg --files .', "Choose file ")
+    let choice = FilterInteractively('rg --files --hidden --glob "!.git" .', 'Choose file ')
   elseif isdirectory('.git')
-    let choice = FilterInteractively('git ls-files .', "Choose file ")
+    let choice = FilterInteractively('git ls-files .', 'Choose file ')
   else
-    let choice = FilterInteractively('find . -type f', "Choose file ")
+    let choice = FilterInteractively('find . -type f', 'Choose file ')
   endif
   if !empty(choice)
     execute "edit" choice[0]
