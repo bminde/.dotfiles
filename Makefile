@@ -7,7 +7,7 @@ unlink:
 	@echo "Removed symlinks"
 
 link:
-	@$(foreach file,$(DOTFILES),ln -s ~/.dotfiles/$(file) ~/$(file);)
+	@$(foreach file,$(DOTFILES),ln -s $(CURDIR)/$(file) ~/$(file);)
 	@echo "Created symlinks"
 
 .PHONY: all unlink link
