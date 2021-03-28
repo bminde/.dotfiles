@@ -149,6 +149,7 @@ inoremap [<CR> [<CR>]<Esc>O
 inoremap [;    [<CR>];<Esc>O
 inoremap [,    [<CR>],<Esc>O
 
+nnoremap <silent> <space>ow :<c-u>call ToggleWrap()<cr>
 nnoremap <silent> <space>ew :<c-u>call RemoveTrailingSpace()<cr>
 " Autocmds {{{1
 augroup Autocmds
@@ -262,6 +263,32 @@ fun! FindFile() abort
   endif
 endf
 command! -nargs=? -complete=dir FindFile call FindFile()
+
+" Toggle wrap {{{1
+fun! EnableSoftWrap()
+  setlocal wrap
+  map <buffer> j gj
+  map <buffer> k gk
+  echomsg "Soft wrap enabled"
+endf
+
+fun! DisableSoftWrap()
+  setlocal nowrap
+  if mapcheck("j") != ""
+    unmap <buffer> j
+    unmap <buffer> k
+  endif
+  echomsg "Soft wrap disabled"
+endf
+
+" Toggle soft-wrapped text in the current buffer.
+fun! ToggleWrap()
+  if &l:wrap
+    call DisableSoftWrap()
+  else
+    call EnableSoftWrap()
+  endif
+endf
 
 " Remove trailing white space {{{1
 fun! RemoveTrailingSpace()
