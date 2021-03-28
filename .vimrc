@@ -40,6 +40,11 @@ set wildcharm=<C-z>
 if v:version >= 800
   set breakindent   " indent wrapped lines if supported
 endif
+if has("patch-7.4.710")
+  set listchars=tab:▸\ ,trail:∙,space:∙,eol:¬,nbsp:▪,precedes:⟨,extends:⟩  " Invisible characters
+else
+  set listchars=tab:>-,trail:.,eol:~,precedes:<,extends:>
+endif
 
 " Statusline
 set statusline=\ %t                                    " file name
