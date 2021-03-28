@@ -152,7 +152,17 @@ inoremap [<CR> [<CR>]<Esc>O
 inoremap [;    [<CR>];<Esc>O
 inoremap [,    [<CR>],<Esc>O
 
+" Options {{{1
+nnoremap <silent> <space>oc :<c-u>setlocal cursorline!<cr>
+nnoremap          <space>od :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
+nnoremap <silent> <space>ol :<c-u>setlocal list!<cr>
+nnoremap <silent> <space>on :<c-u>setlocal number!<cr>
+nnoremap <silent> <space>or :<c-u>setlocal relativenumber!<cr>
+nnoremap <silent> <space>ot :<c-u>setlocal expandtab!<cr>
 nnoremap <silent> <space>ow :<c-u>call ToggleWrap()<cr>
+nnoremap <silent> <space>ob :let &background = (&background == 'dark') ? 'light' : 'dark'<cr>
+
+nnoremap          <space>so :source $MYVIMRC<cr>
 nnoremap <silent> <space>ew :<c-u>call RemoveTrailingSpace()<cr>
 " Autocmds {{{1
 augroup Autocmds
