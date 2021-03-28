@@ -132,6 +132,7 @@ nnoremap ,9 9gt
 nnoremap <silent> å :set hlsearch!<cr> " toggle search highlight
 nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]" " reselect pasted block
 nnoremap <space>ev :tabedit $MYVIMRC<cr> " edit vimrc
+nnoremap <silent> <space>gd :<c-u>call GitDiff()<cr>
 " navigate quickfix entries
 nnoremap <Right> :cnext<CR>
 nnoremap <Left> :cprevious<CR>
@@ -264,6 +265,28 @@ fun! FindFile() abort
 endf
 command! -nargs=? -complete=dir FindFile call FindFile()
 
+" Git diff {{{1
+
+" args: a List providing the arguments for git
+" where: a Vim command specifying where the window should be opened
+fun! Git(args, where) abort
+  call lf_run#cmd(['git'] + a:args, {'pos': a:where})
+  setlocal nomodifiable
+endf
+
+" Show a vertical diff between the current buffer and its last committed
+" version.
+fun! GitDiff() abort
+  let l:ft = getbufvar("%", '&ft') " Get the file type
+  let l:fn = expand('%:t')
+  call Git(['show', 'HEAD:./'.l:fn], 'rightbelow vertical')
+  let &l:filetype = l:ft
+  execute 'silent file' l:fn '[HEAD]'
+  diffthis
+  autocmd BufWinLeave <buffer> diffoff!
+  wincmd p
+  diffthis
+endf
 " Toggle wrap {{{1
 fun! EnableSoftWrap()
   setlocal wrap
