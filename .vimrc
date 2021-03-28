@@ -133,6 +133,8 @@ nnoremap <silent> å :set hlsearch!<cr> " toggle search highlight
 nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]" " reselect pasted block
 nnoremap <space>ev :tabedit $MYVIMRC<cr> " edit vimrc
 nnoremap <silent> <space>gd :<c-u>call GitDiff()<cr>
+nnoremap <silent> <space>gs :<c-u>call TerminalRun('git status')<cr>
+
 " navigate quickfix entries
 nnoremap <Right> :cnext<CR>
 nnoremap <Left> :cprevious<CR>
@@ -287,6 +289,16 @@ fun! GitDiff() abort
   wincmd p
   diffthis
 endf
+
+" Run cmd in terminal {{{1
+fun! TerminalRun(cmd, ...) abort
+  let l:bufnr = term_start(a:cmd, extend({
+        \ 'cwd': expand('%:p:h'),
+        \ 'term_rows': 20,
+        \ }, get(a:000, 0, {})))
+  return l:bufnr
+endf
+
 " Toggle wrap {{{1
 fun! EnableSoftWrap()
   setlocal wrap
