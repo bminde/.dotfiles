@@ -91,7 +91,7 @@ nnoremap <space>p :find *
 " else
 "   nnoremap ,f :find *
 " endif
-nnoremap ,f :FindFile<cr>
+nnoremap <silent>,f :<c-u>call FindFile()<cr>
 nnoremap ,g :Grep
 nnoremap ,s :sfind *
 nnoremap ,v :vert sfind *
@@ -275,7 +275,6 @@ fun! FindFile() abort
     execute "edit" choice[0]
   endif
 endf
-command! -nargs=? -complete=dir FindFile call FindFile()
 
 " Git diff {{{1
 
