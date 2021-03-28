@@ -149,6 +149,7 @@ inoremap [<CR> [<CR>]<Esc>O
 inoremap [;    [<CR>];<Esc>O
 inoremap [,    [<CR>],<Esc>O
 
+nnoremap <silent> <space>ew :<c-u>call RemoveTrailingSpace()<cr>
 " Autocmds {{{1
 augroup Autocmds
   autocmd!
@@ -261,6 +262,15 @@ fun! FindFile() abort
   endif
 endf
 command! -nargs=? -complete=dir FindFile call FindFile()
+
+" Remove trailing white space {{{1
+fun! RemoveTrailingSpace()
+  let l:winview = winsaveview() " Save window state
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:winview) " Restore window state
+  redraw  " See :h :echo-redraw
+  echomsg 'Trailing space removed!'
+endf
 
 " Netrw {{{1
 let g:netrw_banner = 0
