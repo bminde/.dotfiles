@@ -86,11 +86,6 @@ let &t_ZR="\e[23m"
 " Mappings {{{1
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <space>p :find *
-" if isdirectory('.git')
-"   nnoremap ,f :GitFind *
-" else
-"   nnoremap ,f :find *
-" endif
 nnoremap <silent>,f :<c-u>call FindFile()<cr>
 nnoremap ,g :Grep
 nnoremap ,s :sfind *
@@ -130,6 +125,7 @@ nnoremap <Left> :cprevious<CR>
 nnoremap <Up> :copen<CR>
 nnoremap <Down> :cclose<CR>
 nnoremap <space><space> /
+
 " pair expansion on the cheap
 inoremap (<CR> (<CR>)<Esc>O
 inoremap (;    (<CR>);<Esc>O
@@ -172,7 +168,7 @@ else
   nnoremap <c-k> <c-w>k
 endif
 
-" Options {{{1
+" Toggle options {{{1
 nnoremap <silent> <space>oc :<c-u>setlocal cursorline!<cr>
 nnoremap          <space>od :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
 nnoremap <silent> <space>ol :<c-u>setlocal list!<cr>
@@ -444,15 +440,6 @@ set completeopt=menuone
 imap <C-o> <C-x><C-o>
 imap <C-f> <C-x><C-f>
 imap <C-t> <C-x><C-]>
-
-" GitFind  {{{1
-" https://vi.stackexchange.com/a/2589
-function! GitFindComplete(ArgLead, CmdLine, CursorPos)
-  let search_pattern = "*" . a:ArgLead . "*"
-  let shell_cmd = "git ls-files " . shellescape(search_pattern)
-  return split(system(shell_cmd), "\n")
-endfunction
-command! -nargs=1 -bang -complete=customlist,GitFindComplete GitFind edit<bang> <args>
 
 " Grep {{{1
 " https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
