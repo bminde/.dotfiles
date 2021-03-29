@@ -197,6 +197,7 @@ augroup Autocmds
   command! -range=% Isort :<line1>,<line2>! isort -
   autocmd FileType elixir nmap <silent> <buffer> ,tt :terminal ++rows=20 mix test %<cr>
   autocmd FileType elixir nmap <silent> <buffer> ,ta :terminal ++rows=20 mix test<cr>
+  autocmd FileType markdown setlocal textwidth=80
 
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd FileType * set fo-=c fo-=r fo-=o " Don't continue comment on new line
