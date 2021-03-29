@@ -70,8 +70,9 @@ let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 
 " Mappings {{{1
+map <space> <leader>
 nnoremap gb :ls<CR>:b<Space>
-nnoremap <space>p :find *
+nnoremap <leader>p :find *
 nnoremap <silent>,f :<c-u>call FindFile()<cr>
 nnoremap ,g :Grep
 nnoremap ,s :sfind *
@@ -83,7 +84,7 @@ nnoremap ,q :q<cr>
 nnoremap ,x :x<cr>
 nnoremap 0 ^
 nnoremap ,, <c-^>         " toggle between last two files
-nnoremap <space>d "=strftime('# %F')<cr>P " insert date
+nnoremap <leader>d "=strftime('# %F')<cr>P " insert date
 if bufwinnr(1)
   nnoremap ø <C-W><<C-W><
   nnoremap æ <C-W>><C-W>>
@@ -101,10 +102,12 @@ nnoremap ,8 8gt
 nnoremap ,9 9gt
 nnoremap <silent> å :set hlsearch!<cr> " toggle search highlight
 nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]" " reselect pasted block
-nnoremap <space>ev :tabedit $MYVIMRC<cr> " edit vimrc
-nnoremap <silent> <space>gd :<c-u>call GitDiff()<cr>
-nnoremap <silent> <space>gs :<c-u>call TerminalRun('git status')<cr>
+nnoremap <leader>ev :tabedit $MYVIMRC<cr> " edit vimrc
 nnoremap          <leader>el :tabedit ~/.vim/vimrc_local<cr> " edit vimrc_local
+nnoremap <silent> <leader>gd :<c-u>call GitDiff()<cr>
+nnoremap <silent> <leader>gs :<c-u>call TerminalRun('git status')<cr>
+
+nnoremap          <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <leader>ew :<c-u>call <sid>removeTrailingSpace()<cr>
 
 " navigate quickfix entries
@@ -112,7 +115,7 @@ nnoremap <Right> :cnext<CR>
 nnoremap <Left> :cprevious<CR>
 nnoremap <Up> :copen<CR>
 nnoremap <Down> :cclose<CR>
-nnoremap <space><space> /
+nnoremap <leader><leader> /
 
 " pair expansion on the cheap
 inoremap (<CR> (<CR>)<Esc>O
@@ -291,17 +294,14 @@ else
 endif
 
 " Toggle options {{{1
-nnoremap <silent> <space>oc :<c-u>setlocal cursorline!<cr>
-nnoremap          <space>od :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
-nnoremap <silent> <space>ol :<c-u>setlocal list!<cr>
-nnoremap <silent> <space>on :<c-u>setlocal number!<cr>
-nnoremap <silent> <space>or :<c-u>setlocal relativenumber!<cr>
-nnoremap <silent> <space>ot :<c-u>setlocal expandtab!<cr>
-nnoremap <silent> <space>ow :<c-u>call ToggleWrap()<cr>
-nnoremap <silent> <space>ob :let &background = (&background == 'dark') ? 'light' : 'dark'<cr>
-
-nnoremap          <space>so :source $MYVIMRC<cr>
-nnoremap <silent> <space>ew :<c-u>call RemoveTrailingSpace()<cr>
+nnoremap <silent> <leader>oc :<c-u>setlocal cursorline!<cr>
+nnoremap          <leader>od :<c-r>=&diff ? 'diffoff' : 'diffthis'<cr><cr>
+nnoremap <silent> <leader>ol :<c-u>setlocal list!<cr>
+nnoremap <silent> <leader>on :<c-u>setlocal number!<cr>
+nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
+nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
+nnoremap <silent> <leader>ow :<c-u>call ToggleWrap()<cr>
+nnoremap <silent> <leader>ob :let &background = (&background == 'dark') ? 'light' : 'dark'<cr>
 " Autocmds {{{1
 augroup Autocmds
   autocmd!
@@ -314,8 +314,8 @@ augroup Autocmds
   autocmd FileType python setlocal formatprg=black\ --quiet\ -
   autocmd FileType python setlocal makeprg=black\ --quiet
   autocmd FileType python autocmd BufWritePre <buffer> silent normal mkHmlgggqG`lzt`k
-  autocmd FileType python nmap <silent> <space>r :terminal ++rows=20 python %<cr>
-  autocmd FileType python nmap <silent> <space>i :<c-u>Isort<cr>
+  autocmd FileType python nmap <silent> <leader>r :terminal ++rows=20 python %<cr>
+  autocmd FileType python nmap <silent> <leader>i :<c-u>Isort<cr>
   command! -range=% Isort :<line1>,<line2>! isort -
   autocmd FileType elixir nmap <silent> <buffer> ,tt :terminal ++rows=20 mix test %<cr>
   autocmd FileType elixir nmap <silent> <buffer> ,ta :terminal ++rows=20 mix test<cr>
@@ -336,7 +336,7 @@ augroup END
 " Make/Fix {{{1
 set autoread
 command! Make silent make % | checktime | silent redraw!
-nnoremap <space>m :Make<cr>
+nnoremap <leader>m :Make<cr>
 
 " Poor man's ctrlp {{{1
 " https://vimrcfu.com/snippet/251
