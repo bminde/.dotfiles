@@ -190,6 +190,7 @@ augroup Autocmds
   autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
   " Linting
   autocmd FileType python setlocal formatprg=black\ --quiet\ -
+  autocmd FileType python setlocal makeprg=black\ --quiet
   autocmd FileType python autocmd BufWritePre <buffer> silent normal mkHmlgggqG`lzt`k
   autocmd FileType python nmap <silent> <space>r :terminal ++rows=20 python %<cr>
   autocmd FileType elixir nmap <silent> <buffer> ,tt :terminal ++rows=20 mix test %<cr>
@@ -206,6 +207,11 @@ augroup Autocmds
     \ |   exe "normal! g`\""
     \ | end
 augroup END
+
+" Make/Fix {{{1
+set autoread
+command! Make silent make % | checktime | silent redraw!
+nnoremap <space>m :Make<cr>
 
 " Poor man's ctrlp {{{1
 " https://vimrcfu.com/snippet/251
