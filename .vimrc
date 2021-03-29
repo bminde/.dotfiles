@@ -102,18 +102,7 @@ nnoremap ,q :q<cr>
 nnoremap ,x :x<cr>
 nnoremap 0 ^
 nnoremap ,, <c-^>         " toggle between last two files
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
 nnoremap <space>d "=strftime('# %F')<cr>P " insert date
-if exists(':terminal')
-  tnoremap <c-h> <c-w>h
-  tnoremap <c-j> <c-w>j
-  tnoremap <c-k> <c-w>k
-  tnoremap <c-l> <c-w>l
-  tnoremap <esc><esc> <C-\><C-n> " Two escapes fixes problem with E21 modifiable off
-endif
 if bufwinnr(1)
   nnoremap ø <C-W><<C-W><
   nnoremap æ <C-W>><C-W>>
@@ -151,6 +140,37 @@ inoremap {,    {<CR>},<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
 inoremap [;    [<CR>];<Esc>O
 inoremap [,    [<CR>],<Esc>O
+
+if exists(':terminal')
+  tnoremap <c-h> <c-w>h
+  tnoremap <c-j> <c-w>j
+  tnoremap <c-k> <c-w>k
+  tnoremap <c-l> <c-w>l
+  tnoremap <esc><esc> <C-\><C-n> " Two escapes fixes problem with E21 modifiable off
+endif
+
+" Tmux {{{1
+let s:tmux_directions = {'h':'L', 'j':'D', 'k':'U', 'l':'R'}
+
+fun! TmuxNavigate(dir)
+  let l:winnr = winnr()
+  execute 'wincmd' a:dir
+  if winnr() ==# l:winnr
+    call system("tmux select-pane -" .. s:tmux_directions[a:dir])
+  endif
+endf
+
+if $TERM =~# '^\%(tmux\|screen\)'
+  nnoremap <silent> <c-h> :<c-u>call TmuxNavigate('h')<cr>
+  nnoremap <silent> <c-j> :<c-u>call TmuxNavigate('j')<cr>
+  nnoremap <silent> <c-k> :<c-u>call TmuxNavigate('k')<cr>
+  nnoremap <silent> <c-l> :<c-u>call TmuxNavigate('l')<cr>
+else
+  nnoremap <c-l> <c-w>l
+  nnoremap <c-h> <c-w>h
+  nnoremap <c-j> <c-w>j
+  nnoremap <c-k> <c-w>k
+endif
 
 " Options {{{1
 nnoremap <silent> <space>oc :<c-u>setlocal cursorline!<cr>
