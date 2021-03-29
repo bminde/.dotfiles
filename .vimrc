@@ -193,6 +193,8 @@ augroup Autocmds
   autocmd FileType python setlocal makeprg=black\ --quiet
   autocmd FileType python autocmd BufWritePre <buffer> silent normal mkHmlgggqG`lzt`k
   autocmd FileType python nmap <silent> <space>r :terminal ++rows=20 python %<cr>
+  autocmd FileType python nmap <silent> <space>i :<c-u>Isort<cr>
+  command! -range=% Isort :<line1>,<line2>! isort -
   autocmd FileType elixir nmap <silent> <buffer> ,tt :terminal ++rows=20 mix test %<cr>
   autocmd FileType elixir nmap <silent> <buffer> ,ta :terminal ++rows=20 mix test<cr>
 
