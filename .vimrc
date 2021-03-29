@@ -297,7 +297,7 @@ endf
 " args: a List providing the arguments for git
 " where: a Vim command specifying where the window should be opened
 fun! Git(args, where) abort
-  call lf_run#cmd(['git'] + a:args, {'pos': a:where})
+  call RunCmd(['git'] + a:args, {'pos': a:where})
   setlocal nomodifiable
 endf
 
@@ -313,6 +313,19 @@ fun! GitDiff() abort
   autocmd BufWinLeave <buffer> diffoff!
   wincmd p
   diffthis
+endf
+
+fun! RunCmd(cmd, ...) abort
+  let l:opt = get(a:000, 0, {})
+  if !has_key(l:opt, 'cwd')
+    let l:opt['cwd'] = fnameescape(expand('%:p:h'))
+  endif
+  let l:cmd = join(map(a:cmd, 'v:val !~# "\\v^[%#<]" || expand(v:val) == "" ? v:val : shellescape(expand(v:val))'))
+  execute get(l:opt, "pos", "botright") "new"
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  nnoremap <buffer> q <c-w>c
+  execute 'lcd' l:opt['cwd']
+  execute '%!' l:cmd
 endf
 
 " Run cmd in terminal {{{1
