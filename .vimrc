@@ -104,6 +104,7 @@ nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]" " reselect pasted bloc
 nnoremap <space>ev :tabedit $MYVIMRC<cr> " edit vimrc
 nnoremap <silent> <space>gd :<c-u>call GitDiff()<cr>
 nnoremap <silent> <space>gs :<c-u>call TerminalRun('git status')<cr>
+nnoremap          <leader>el :tabedit ~/.vim/vimrc_local<cr> " edit vimrc_local
 nnoremap <silent> <leader>ew :<c-u>call <sid>removeTrailingSpace()<cr>
 
 " navigate quickfix entries
@@ -751,3 +752,11 @@ hi! link gitcommitSummary Title
 " Init {{{1
 
 EnableStatusLine
+
+" Local settings
+let s:vimrc_local = fnamemodify(resolve(expand('<sfile>:p')), ':h').'/vimrc_local'
+if filereadable(s:vimrc_local)
+  execute 'source' s:vimrc_local
+else
+  silent! colorscheme nord
+endif
