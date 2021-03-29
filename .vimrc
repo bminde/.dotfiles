@@ -46,20 +46,6 @@ else
   set listchars=tab:>-,trail:.,eol:~,precedes:<,extends:>
 endif
 
-" Statusline
-set statusline=\ %t                                    " file name
-set statusline+=\ %1*%m%0*                             " modified flag
-set statusline+=%r                                     " read only flag
-set statusline+=%w                                     " preview window flag
-set statusline+=\ %<%{empty(&bt)?expand('%:p:~:h'):''} " file path
-set statusline+=%=                                     " switch to the right side
-set statusline+=%y                                     " filetype
-set statusline+=\ %l                                   " current line
-set statusline+=/                                      " separator
-set statusline+=%L                                     " total lines
-set statusline+=:                                      " separator
-set statusline+=%c\                                    " current column
-
 " Semi-persistent undo
 set backupdir=/tmp//,.
 set directory=/tmp//,.
@@ -118,6 +104,7 @@ nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]" " reselect pasted bloc
 nnoremap <space>ev :tabedit $MYVIMRC<cr> " edit vimrc
 nnoremap <silent> <space>gd :<c-u>call GitDiff()<cr>
 nnoremap <silent> <space>gs :<c-u>call TerminalRun('git status')<cr>
+nnoremap <silent> <leader>ew :<c-u>call <sid>removeTrailingSpace()<cr>
 
 " navigate quickfix entries
 nnoremap <Right> :cnext<CR>
@@ -144,6 +131,140 @@ if exists(':terminal')
   tnoremap <c-l> <c-w>l
   tnoremap <esc><esc> <C-\><C-n> " Two escapes fixes problem with E21 modifiable off
 endif
+
+" Status line {{{1
+let g:lf_stlh = {
+      \ 'n': 'NormalMode',  'i': 'InsertMode',      'R': 'ReplaceMode',
+      \ 'v': 'VisualMode',  'V': 'VisualMode', "\<c-v>": 'VisualMode',
+      \ 's': 'VisualMode',  'S': 'VisualMode', "\<c-s>": 'VisualMode',
+      \ 'c': 'CommandMode', 'r': 'CommandMode',     't': 'CommandMode',
+      \ '!': 'CommandMode',  '': 'StatusLineNC'
+      \ }
+
+let g:lf_stlm = {
+      \ 'n': 'N',           'i': 'I',               'R': 'R',
+      \ 'v': 'V',           'V': 'V',          "\<c-v>": 'V',
+      \ 's': 'S',           'S': 'S',          "\<c-s>": 'S',
+      \ 'c': 'C',           'r': 'P',               't': 'T',
+      \ '!': '!'}
+
+fun! LFStlHighlight()
+  return get(g:lf_stlh,
+        \    g:statusline_winid ==# win_getid() ? mode() : '',
+        \   'Warnings')
+endf
+
+let s:stl = "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
+      \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
+      \ %=
+      \ %a %w %y %{winwidth(0)<80?'':' '.(strlen(&fenc)?&fenc:&enc).(&bomb?',BOM ':' ').&ff.(&et?'':' ⇥ ')}
+      \ %l/%L:%v
+      \ %#Warnings#%{get(b:, 'lf_stl_warnings', '')}%*"
+
+let s:stlnc = '    ' . "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
+      \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
+      \ %=
+      \ %w %y  %l/%L:%v "
+
+fun! LFBuildStatusLine()
+  return g:statusline_winid ==# win_getid()
+        \ ? '%#'.get(g:lf_stlh, mode(), 'Warnings').'# '
+        \ . get(g:lf_stlm, mode(), mode()) . (&paste ? ' PASTE %* ' : ' %* ') . s:stl
+        \ : s:stlnc
+endf
+
+command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
+command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
+
+" Tabline {{{1
+  fun! BuildTabLabel(nr, active)
+    return (a:active ? '●' : a:nr).' '.fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t:s/^$/[No Name]/").' '
+  endf
+
+  fun! LFBuildTabLine()
+    return (tabpagenr('$') == 1 ? '' : join(map(
+          \   range(1, tabpagenr('$')),
+          \   '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.",".(v:val == tabpagenr()).")}"'
+          \ ), ''))
+          \ . "%#TabLineFill#%T%=⌘ %<%{&columns < 100 ? fnamemodify(getcwd(), ':t') : getcwd()} " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
+  endf
+
+" Helper functions {{{1
+  fun! s:enableStatusLine()
+    if exists("g:default_stl") | return | endif
+    augroup lf_warnings
+      autocmd!
+      autocmd BufReadPost,BufWritePost * call <sid>update_warnings()
+    augroup END
+    set noshowmode " Do not show the current mode because it is displayed in the status line
+    set noruler
+    let g:default_stl = &statusline
+    let g:default_tal = &tabline
+    set statusline=%!LFBuildStatusLine()
+    set tabline=%!LFBuildTabLine()
+  endf
+
+  fun! s:disableStatusLine()
+    if !exists("g:default_stl") | return | endif
+    let &tabline = g:default_tal
+    let &statusline = g:default_stl
+    unlet g:default_tal
+    unlet g:default_stl
+    set ruler
+    set showmode
+    autocmd! lf_warnings
+    augroup! lf_warnings
+  endf
+
+  " Update trailing space and mixed indent warnings for the current buffer.
+  fun! s:update_warnings()
+    if exists('b:lf_no_warnings')
+      unlet! b:lf_stl_warnings
+      return
+    endif
+    if exists('b:lf_large_file')
+      let b:lf_stl_warnings = ' Large file '
+      return
+    endif
+    let l:trail  = search('\s$',       'cnw')
+    let l:spaces = search('^  ',       'cnw')
+    let l:tabs   = search('^\t',       'cnw')
+    if l:trail || (l:spaces && l:tabs)
+      let b:lf_stl_warnings = ' '
+            \ . (l:trail            ? 'Trailing space ('.l:trail.') '           : '')
+            \ . (l:spaces && l:tabs ? 'Mixed indent ('.l:spaces.'/'.l:tabs.') ' : '')
+    else
+      unlet! b:lf_stl_warnings
+    endif
+  endf
+
+  " Delete trailing white space.
+  fun! s:removeTrailingSpace()
+    let l:winview = winsaveview() " Save window state
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:winview) " Restore window state
+    call s:update_warnings()
+    redraw  " See :h :echo-redraw
+    echomsg 'Trailing space removed!'
+  endf
+
+  " Create directory if it doesn't exit when saving new file
+  function! EnsureDirectoryExists()
+    let required_dir = expand("%:h")
+
+    if !isdirectory(required_dir)
+      " Remove this if-clause if you don't need the confirmation
+      " if !confirm("Directory '" . required_dir . "' doesn't exist. Create it?")
+      " return
+      " endif
+
+      try
+        call mkdir(required_dir, 'p')
+      catch
+        echoerr "Can't create '" . required_dir . "'"
+      endtry
+    endif
+  endfunction
 
 " Tmux {{{1
 let s:tmux_directions = {'h':'L', 'j':'D', 'k':'U', 'l':'R'}
@@ -370,15 +491,6 @@ fun! ToggleWrap()
   else
     call EnableSoftWrap()
   endif
-endf
-
-" Remove trailing white space {{{1
-fun! RemoveTrailingSpace()
-  let l:winview = winsaveview() " Save window state
-  keeppatterns %s/\s\+$//e
-  call winrestview(l:winview) " Restore window state
-  redraw  " See :h :echo-redraw
-  echomsg 'Trailing space removed!'
 endf
 
 " Netrw {{{1
@@ -635,3 +747,7 @@ hi! link diffRemoved DiffDelete
 hi! link htmlTag htmlTagName
 hi! link htmlEndTag htmlTag
 hi! link gitcommitSummary Title
+
+" Init {{{1
+
+EnableStatusLine
