@@ -137,6 +137,7 @@ if exists(':terminal')
 endif
 
 " Status line {{{1
+if has('patch-8.1.1372') " Has g:statusline_winid
 let g:lf_stlh = {
       \ 'n': 'NormalMode',  'i': 'InsertMode',      'R': 'ReplaceMode',
       \ 'v': 'VisualMode',  'V': 'VisualMode', "\<c-v>": 'VisualMode',
@@ -169,6 +170,22 @@ let s:stlnc = '    ' . "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
       \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
       \ %=
       \ %w %y  %l/%L:%v %P "
+
+else
+let g:default_stl=1
+set statusline=\ %t                                    " file name
+set statusline+=\ %1*%m%0*                             " modified flag
+set statusline+=%r                                     " read only flag
+set statusline+=%w                                     " preview window flag
+set statusline+=\ %<%{empty(&bt)?expand('%:p:~:h'):''} " file path
+set statusline+=%=                                     " switch to the right side
+set statusline+=%y                                     " filetype
+set statusline+=\ %l                                   " current line
+set statusline+=/                                      " separator
+set statusline+=%L                                     " total lines
+set statusline+=:                                      " separator
+set statusline+=%c\                                    " current column
+endif
 
 fun! LFBuildStatusLine()
   return g:statusline_winid ==# win_getid()
