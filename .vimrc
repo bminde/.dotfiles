@@ -309,7 +309,8 @@ augroup Autocmds
   autocmd FileType netrw set nolist
   " focus on current file - https://stackoverflow.com/a/29457190
   autocmd VimEnter * com! -nargs=* -bar -bang -count=0 -complete=dir  Explore execute "call netrw#Explore(<count>,0,0+<bang>0,<q-args>)" . ' | call SearchNetrw(' . string(expand('%:t')) . ')'
-  autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
+  " Create directory if it doesn't exit when saving new file
+  autocmd BufNewFile * call EnsureDirectoryExists()
   " Linting
   autocmd FileType python setlocal formatprg=black\ --quiet\ -
   autocmd FileType python setlocal makeprg=black\ --quiet
