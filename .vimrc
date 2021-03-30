@@ -758,5 +758,5 @@ let s:vimrc_local = fnamemodify(resolve(expand('<sfile>:p')), ':h').'/vimrc_loca
 if filereadable(s:vimrc_local)
   execute 'source' s:vimrc_local
 else
-  silent! colorscheme nord
+  " silent! colorscheme nord
 endif
