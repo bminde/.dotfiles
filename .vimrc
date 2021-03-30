@@ -668,8 +668,6 @@ if has('termguicolors') && $COLORTERM ==# 'truecolor'
 endif
 
 hi clear
-let g:colors_name = 'gh'
-
 hi! link QuickFixLine Search
 hi! link StatusLineTerm StatusLine
 hi! link StatusLineTermNC StatusLineNC
