@@ -646,6 +646,20 @@ au!
     au InsertEnter * call StopHL()
 augroup end
 
+" GUI {{{1
+  if has('gui_running')
+    let s:linespace=2
+    " GTK GUIs always pick up the first guifont entry (:help gui-font)
+    set guifont=SFMono-Medium:h12,Menlo-Regular:h12,Courier:h12
+    set guioptions=!cgm
+    set sidescrolloff=0
+    set guicursor+=a:blinkon0
+    let &linespace=s:linespace
+    if !has('ios')
+      let $TERM='xterm-256color'
+    endif
+  endif
+
 " Color {{{1
 if has('termguicolors') && $COLORTERM ==# 'truecolor'
   let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
