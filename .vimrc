@@ -162,13 +162,13 @@ let s:stl = "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
       \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
       \ %=
       \ %a %w %y %{winwidth(0)<80?'':' '.(strlen(&fenc)?&fenc:&enc).(&bomb?',BOM ':' ').&ff.(&et?'':' ⇥ ')}
-      \ %l/%L:%v
+      \ %l/%L:%v %P
       \ %#Warnings#%{get(b:, 'lf_stl_warnings', '')}%*"
 
 let s:stlnc = '    ' . "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
       \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
       \ %=
-      \ %w %y  %l/%L:%v "
+      \ %w %y  %l/%L:%v %P "
 
 fun! LFBuildStatusLine()
   return g:statusline_winid ==# win_getid()
