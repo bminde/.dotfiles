@@ -33,7 +33,7 @@ set splitbelow
 set guicursor+=a:blinkon0 " turn of cursor blinking
 set scrolloff=5
 set sidescrolloff=5
-set fillchars+=vert:\ " space
+set fillchars+=vert:\│
 set path=.,**
 set autoread
 set wildcharm=<C-z>
