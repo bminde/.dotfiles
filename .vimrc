@@ -152,53 +152,53 @@ endif
 
 " Status line {{{1
 if has('patch-8.1.1372') " Has g:statusline_winid
-let g:lf_stlh = {
-      \ 'n': 'NormalMode',  'i': 'InsertMode',      'R': 'ReplaceMode',
-      \ 'v': 'VisualMode',  'V': 'VisualMode', "\<c-v>": 'VisualMode',
-      \ 's': 'VisualMode',  'S': 'VisualMode', "\<c-s>": 'VisualMode',
-      \ 'c': 'CommandMode', 'r': 'CommandMode',     't': 'CommandMode',
-      \ '!': 'CommandMode',  '': 'StatusLineNC'
-      \ }
+  let g:lf_stlh = {
+        \ 'n': 'NormalMode',  'i': 'InsertMode',      'R': 'ReplaceMode',
+        \ 'v': 'VisualMode',  'V': 'VisualMode', "\<c-v>": 'VisualMode',
+        \ 's': 'VisualMode',  'S': 'VisualMode', "\<c-s>": 'VisualMode',
+        \ 'c': 'CommandMode', 'r': 'CommandMode',     't': 'CommandMode',
+        \ '!': 'CommandMode',  '': 'StatusLineNC'
+        \ }
 
-let g:lf_stlm = {
-      \ 'n': 'N',           'i': 'I',               'R': 'R',
-      \ 'v': 'V',           'V': 'V',          "\<c-v>": 'V',
-      \ 's': 'S',           'S': 'S',          "\<c-s>": 'S',
-      \ 'c': 'C',           'r': 'P',               't': 'T',
-      \ '!': '!'}
+  let g:lf_stlm = {
+        \ 'n': 'N',           'i': 'I',               'R': 'R',
+        \ 'v': 'V',           'V': 'V',          "\<c-v>": 'V',
+        \ 's': 'S',           'S': 'S',          "\<c-s>": 'S',
+        \ 'c': 'C',           'r': 'P',               't': 'T',
+        \ '!': '!'}
 
-fun! LFStlHighlight()
-  return get(g:lf_stlh,
-        \    g:statusline_winid ==# win_getid() ? mode() : '',
-        \   'Warnings')
-endf
+  fun! LFStlHighlight()
+    return get(g:lf_stlh,
+          \    g:statusline_winid ==# win_getid() ? mode() : '',
+          \   'Warnings')
+  endf
 
-let s:stl = "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
-      \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
-      \ %=
-      \ %a %w %y %{winwidth(0)<80?'':' '.(strlen(&fenc)?&fenc:&enc).(&bomb?',BOM ':' ').&ff.(&et?'':' ⇥ ')}
-      \ %l/%L:%v %P
-      \ %#Warnings#%{get(b:, 'lf_stl_warnings', '')}%*"
+  let s:stl = "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
+        \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
+        \ %=
+        \ %a %w %y %{winwidth(0)<80?'':' '.(strlen(&fenc)?&fenc:&enc).(&bomb?',BOM ':' ').&ff.(&et?'':' ⇥ ')}
+        \ %l/%L:%v %P
+        \ %#Warnings#%{get(b:, 'lf_stl_warnings', '')}%*"
 
-let s:stlnc = '    ' . "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
-      \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
-      \ %=
-      \ %w %y  %l/%L:%v %P "
+  let s:stlnc = '    ' . "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
+        \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
+        \ %=
+        \ %w %y  %l/%L:%v %P "
 
 else
-let g:default_stl=1
-set statusline=\ %t                                    " file name
-set statusline+=\ %1*%m%0*                             " modified flag
-set statusline+=%r                                     " read only flag
-set statusline+=%w                                     " preview window flag
-set statusline+=\ %<%{empty(&bt)?expand('%:p:~:h'):''} " file path
-set statusline+=%=                                     " switch to the right side
-set statusline+=%y                                     " filetype
-set statusline+=\ %l                                   " current line
-set statusline+=/                                      " separator
-set statusline+=%L                                     " total lines
-set statusline+=:                                      " separator
-set statusline+=%c\                                    " current column
+  let g:default_stl=1
+  set statusline=\ %t                                    " file name
+  set statusline+=\ %1*%m%0*                             " modified flag
+  set statusline+=%r                                     " read only flag
+  set statusline+=%w                                     " preview window flag
+  set statusline+=\ %<%{empty(&bt)?expand('%:p:~:h'):''} " file path
+  set statusline+=%=                                     " switch to the right side
+  set statusline+=%y                                     " filetype
+  set statusline+=\ %l                                   " current line
+  set statusline+=/                                      " separator
+  set statusline+=%L                                     " total lines
+  set statusline+=:                                      " separator
+  set statusline+=%c\                                    " current column
 endif
 
 fun! LFBuildStatusLine()
@@ -212,94 +212,94 @@ command! -nargs=0 EnableStatusLine call <sid>enableStatusLine()
 command! -nargs=0 DisableStatusLine call <sid>disableStatusLine()
 
 " Tabline {{{1
-  fun! BuildTabLabel(nr, active)
-    return (a:active ? '●' : a:nr).' '.fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t:s/^$/[No Name]/").' '
-  endf
+fun! BuildTabLabel(nr, active)
+  return (a:active ? '●' : a:nr).' '.fnamemodify(bufname(tabpagebuflist(a:nr)[tabpagewinnr(a:nr) - 1]), ":t:s/^$/[No Name]/").' '
+endf
 
-  fun! LFBuildTabLine()
-    return (tabpagenr('$') == 1 ? '' : join(map(
-          \   range(1, tabpagenr('$')),
-          \   '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.",".(v:val == tabpagenr()).")}"'
-          \ ), ''))
-          \ . "%#TabLineFill#%T%=⌘ %<%{&columns < 100 ? fnamemodify(getcwd(), ':t') : getcwd()} " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
-  endf
+fun! LFBuildTabLine()
+  return (tabpagenr('$') == 1 ? '' : join(map(
+        \   range(1, tabpagenr('$')),
+        \   '(v:val == tabpagenr() ? "%#TabLineSel#" : "%#TabLine#") . "%".v:val."T %{BuildTabLabel(".v:val.",".(v:val == tabpagenr()).")}"'
+        \ ), ''))
+        \ . "%#TabLineFill#%T%=⌘ %<%{&columns < 100 ? fnamemodify(getcwd(), ':t') : getcwd()} " . (tabpagenr('$') > 1 ? "%999X✕ " : "")
+endf
 
 " Helper functions {{{1
-  fun! s:enableStatusLine()
-    if exists("g:default_stl") | return | endif
-    augroup lf_warnings
-      autocmd!
-      autocmd BufReadPost,BufWritePost * call <sid>update_warnings()
-    augroup END
-    set noshowmode " Do not show the current mode because it is displayed in the status line
-    set noruler
-    let g:default_stl = &statusline
-    let g:default_tal = &tabline
-    set statusline=%!LFBuildStatusLine()
-    set tabline=%!LFBuildTabLine()
-  endf
+fun! s:enableStatusLine()
+  if exists("g:default_stl") | return | endif
+  augroup lf_warnings
+    autocmd!
+    autocmd BufReadPost,BufWritePost * call <sid>update_warnings()
+  augroup END
+  set noshowmode " Do not show the current mode because it is displayed in the status line
+  set noruler
+  let g:default_stl = &statusline
+  let g:default_tal = &tabline
+  set statusline=%!LFBuildStatusLine()
+  set tabline=%!LFBuildTabLine()
+endf
 
-  fun! s:disableStatusLine()
-    if !exists("g:default_stl") | return | endif
-    let &tabline = g:default_tal
-    let &statusline = g:default_stl
-    unlet g:default_tal
-    unlet g:default_stl
-    set ruler
-    set showmode
-    autocmd! lf_warnings
-    augroup! lf_warnings
-  endf
+fun! s:disableStatusLine()
+  if !exists("g:default_stl") | return | endif
+  let &tabline = g:default_tal
+  let &statusline = g:default_stl
+  unlet g:default_tal
+  unlet g:default_stl
+  set ruler
+  set showmode
+  autocmd! lf_warnings
+  augroup! lf_warnings
+endf
 
-  " Update trailing space and mixed indent warnings for the current buffer.
-  fun! s:update_warnings()
-    if exists('b:lf_no_warnings')
-      unlet! b:lf_stl_warnings
-      return
-    endif
-    if exists('b:lf_large_file')
-      let b:lf_stl_warnings = ' Large file '
-      return
-    endif
-    let l:trail  = search('\s$',       'cnw')
-    let l:spaces = search('^  ',       'cnw')
-    let l:tabs   = search('^\t',       'cnw')
-    if l:trail || (l:spaces && l:tabs)
-      let b:lf_stl_warnings = ' '
-            \ . (l:trail            ? 'Trailing space ('.l:trail.') '           : '')
-            \ . (l:spaces && l:tabs ? 'Mixed indent ('.l:spaces.'/'.l:tabs.') ' : '')
-    else
-      unlet! b:lf_stl_warnings
-    endif
-  endf
+" Update trailing space and mixed indent warnings for the current buffer.
+fun! s:update_warnings()
+  if exists('b:lf_no_warnings')
+    unlet! b:lf_stl_warnings
+    return
+  endif
+  if exists('b:lf_large_file')
+    let b:lf_stl_warnings = ' Large file '
+    return
+  endif
+  let l:trail  = search('\s$',       'cnw')
+  let l:spaces = search('^  ',       'cnw')
+  let l:tabs   = search('^\t',       'cnw')
+  if l:trail || (l:spaces && l:tabs)
+    let b:lf_stl_warnings = ' '
+          \ . (l:trail            ? 'Trailing space ('.l:trail.') '           : '')
+          \ . (l:spaces && l:tabs ? 'Mixed indent ('.l:spaces.'/'.l:tabs.') ' : '')
+  else
+    unlet! b:lf_stl_warnings
+  endif
+endf
 
-  " Delete trailing white space.
-  fun! s:removeTrailingSpace()
-    let l:winview = winsaveview() " Save window state
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:winview) " Restore window state
-    call s:update_warnings()
-    redraw  " See :h :echo-redraw
-    echomsg 'Trailing space removed!'
-  endf
+" Delete trailing white space.
+fun! s:removeTrailingSpace()
+  let l:winview = winsaveview() " Save window state
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:winview) " Restore window state
+  call s:update_warnings()
+  redraw  " See :h :echo-redraw
+  echomsg 'Trailing space removed!'
+endf
 
-  " Create directory if it doesn't exit when saving new file
-  function! EnsureDirectoryExists()
-    let required_dir = expand("%:h")
+" Create directory if it doesn't exit when saving new file
+function! EnsureDirectoryExists()
+  let required_dir = expand("%:h")
 
-    if !isdirectory(required_dir)
-      " Remove this if-clause if you don't need the confirmation
-      " if !confirm("Directory '" . required_dir . "' doesn't exist. Create it?")
-      " return
-      " endif
+  if !isdirectory(required_dir)
+    " Remove this if-clause if you don't need the confirmation
+    " if !confirm("Directory '" . required_dir . "' doesn't exist. Create it?")
+    " return
+    " endif
 
-      try
-        call mkdir(required_dir, 'p')
-      catch
-        echoerr "Can't create '" . required_dir . "'"
-      endtry
-    endif
-  endfunction
+    try
+      call mkdir(required_dir, 'p')
+    catch
+      echoerr "Can't create '" . required_dir . "'"
+    endtry
+  endif
+endfunction
 
 " Tmux {{{1
 let s:tmux_directions = {'h':'L', 'j':'D', 'k':'U', 'l':'R'}
@@ -360,9 +360,9 @@ augroup Autocmds
   endif
   " Jump to last known position
   autocmd BufReadPost *
-    \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-    \ |   exe "normal! g`\""
-    \ | end
+        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+        \ |   exe "normal! g`\""
+        \ | end
 augroup END
 
 " Make/Fix {{{1
@@ -631,19 +631,19 @@ xnoremap <silent> <F5> :<C-u>silent call Align()<CR>
 " https://vimrcfu.com/snippet/38
 set wildcharm=<C-z>
 function! BetterIncSearch(key)
-    if getcmdtype() == "/" || getcmdtype() == "?"
-        if (a:key == "tab" && b:direction == "f") || (a:key == "stab" && b:direction == "b")
-            return "\<CR>/\<C-r>/"
-        elseif (a:key == "tab" && b:direction == "b") || (a:key == "stab" && b:direction == "f")
-            return "\<CR>?\<C-r>/"
-        endif
-    else
-        if a:key == "tab"
-            return "\<C-z>"
-        else
-            return "\<S-Tab>"
-        endif
+  if getcmdtype() == "/" || getcmdtype() == "?"
+    if (a:key == "tab" && b:direction == "f") || (a:key == "stab" && b:direction == "b")
+      return "\<CR>/\<C-r>/"
+    elseif (a:key == "tab" && b:direction == "b") || (a:key == "stab" && b:direction == "f")
+      return "\<CR>?\<C-r>/"
     endif
+  else
+    if a:key == "tab"
+      return "\<C-z>"
+    else
+      return "\<S-Tab>"
+    endif
+  endif
 endfunction
 
 nnoremap / :let b:direction = "f"<CR>/
@@ -657,24 +657,24 @@ noremap <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 noremap! <expr> <Plug>(StopHL) execute('nohlsearch')[-1]
 
 fu! HlSearch()
-    let s:pos = match(getline('.'), @/, col('.') - 1) + 1
-    if s:pos != col('.')
-        call StopHL()
-    endif
+  let s:pos = match(getline('.'), @/, col('.') - 1) + 1
+  if s:pos != col('.')
+    call StopHL()
+  endif
 endfu
 
 fu! StopHL()
-    if !v:hlsearch || mode() isnot 'n'
-        return
-    else
-        sil call feedkeys("\<Plug>(StopHL)", 'm')
-    endif
+  if !v:hlsearch || mode() isnot 'n'
+    return
+  else
+    sil call feedkeys("\<Plug>(StopHL)", 'm')
+  endif
 endfu
 
 augroup SearchHighlight
-au!
-    au CursorMoved * call HlSearch()
-    au InsertEnter * call StopHL()
+  au!
+  au CursorMoved * call HlSearch()
+  au InsertEnter * call StopHL()
 augroup end
 
 " Color {{{1
