@@ -69,6 +69,20 @@ let &t_te.="\e[0 q"
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 
+" GUI {{{1
+if has('gui_running')
+  let s:linespace=2
+  " GTK GUIs always pick up the first guifont entry (:help gui-font)
+  set guifont=SFMono-Medium:h12,Menlo-Regular:h12,Courier:h12
+  set guioptions=!cgm
+  set sidescrolloff=0
+  set guicursor+=a:blinkon0
+  let &linespace=s:linespace
+  if !has('ios')
+    let $TERM='xterm-256color'
+  endif
+endif
+
 " Mappings {{{1
 map <space> <leader>
 nnoremap gb :ls<CR>:b<Space>
@@ -662,20 +676,6 @@ au!
     au CursorMoved * call HlSearch()
     au InsertEnter * call StopHL()
 augroup end
-
-" GUI {{{1
-  if has('gui_running')
-    let s:linespace=2
-    " GTK GUIs always pick up the first guifont entry (:help gui-font)
-    set guifont=SFMono-Medium:h12,Menlo-Regular:h12,Courier:h12
-    set guioptions=!cgm
-    set sidescrolloff=0
-    set guicursor+=a:blinkon0
-    let &linespace=s:linespace
-    if !has('ios')
-      let $TERM='xterm-256color'
-    endif
-  endif
 
 " Color {{{1
 if has('termguicolors') && $COLORTERM ==# 'truecolor'
