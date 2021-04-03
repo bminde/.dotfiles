@@ -3,7 +3,7 @@ DOTFILES := .vimrc .bashrc .tmux.conf .gitconfig
 all: unlink link
 
 unlink:
-	@$(foreach file,$(DOTFILES),rm -f ~/$(file);)
+	@$(foreach file,$(DOTFILES),rm -i ~/$(file);)
 	@echo "Removed symlinks"
 
 link:
