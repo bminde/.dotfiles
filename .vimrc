@@ -677,6 +677,21 @@ augroup SearchHighlight
   au InsertEnter * call StopHL()
 augroup end
 
+" Update background color {{{1
+" https://github.com/jeffkreeftmeijer/vim-nightfall
+function UpdateBackground()
+  if system("defaults read -g AppleInterfaceStyle") == "Dark\n"
+    if &bg == "light" | set bg=dark | endif
+  else
+    if &bg == "dark" | set bg=light | endif
+  endif
+endfunction
+
+augroup nightfall
+  autocmd!
+  autocmd FocusGained,BufEnter * call UpdateBackground()
+augroup END
+
 " Color {{{1
 if has('termguicolors') && $COLORTERM ==# 'truecolor'
   let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
