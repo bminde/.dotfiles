@@ -117,7 +117,7 @@ nnoremap ,9 9gt
 nnoremap <silent> å :set hlsearch!<cr> " toggle search highlight
 nnoremap <expr> gV    "`[".getregtype(v:register)[0]."`]" " reselect pasted block
 nnoremap <leader>ev :tabedit $MYVIMRC<cr> " edit vimrc
-nnoremap          <leader>el :tabedit ~/.vim/vimrc_local<cr> " edit vimrc_local
+nnoremap          <leader>el :tabedit ~/.dotfiles/vimrc_local<cr> " edit vimrc_local
 nnoremap <silent> <leader>gd :<c-u>call GitDiff()<cr>
 nnoremap <silent> <leader>gs :<c-u>call TerminalRun('git status')<cr>
 
