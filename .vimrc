@@ -1,4 +1,4 @@
-" Modeline and Notes {{{1
+" Modeline {{{1
 " vim: set sw=2 ts=2 sts=0 et foldmethod=marker foldlevel=0 :nospell:
 " Settings {{{1
 set encoding=utf-8
@@ -30,7 +30,7 @@ set clipboard^=unnamed    " use system clipboard
 set noswapfile
 set splitright
 set splitbelow
-set guicursor+=a:blinkon0 " turn of cursor blinking
+set guicursor+=a:blinkon0 " turn off cursor blinking
 set scrolloff=5
 set sidescrolloff=5
 set fillchars+=vert:\│
@@ -273,7 +273,7 @@ fun! s:update_warnings()
   endif
 endf
 
-" Delete trailing white space.
+" Delete trailing whitespace
 fun! s:removeTrailingSpace()
   let l:winview = winsaveview() " Save window state
   keeppatterns %s/\s\+$//e
