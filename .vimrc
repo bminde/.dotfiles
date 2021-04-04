@@ -677,123 +677,75 @@ augroup SearchHighlight
   au InsertEnter * call StopHL()
 augroup end
 
-" Update background color {{{1
-" https://github.com/jeffkreeftmeijer/vim-nightfall
-function UpdateBackground()
-  if system("defaults read -g AppleInterfaceStyle") == "Dark\n"
-    if &bg == "light" | set bg=dark | endif
-  else
-    if &bg == "dark" | set bg=light | endif
-  endif
-endfunction
-
-augroup nightfall
-  autocmd!
-  autocmd FocusGained,BufEnter * call UpdateBackground()
-augroup END
-
 " Color {{{1
-if has('termguicolors') && $COLORTERM ==# 'truecolor'
-  let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
-  let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
-  " set termguicolors
-endif
-
-" basic theme - https://github.com/jeffkreeftmeijer/vim-dim
-" highlight clear
-" if exists("syntax_on")
-"   syntax reset
+" if has('termguicolors') && $COLORTERM ==# 'truecolor'
+"   let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
+"   let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
+"   set termguicolors
 " endif
-highlight SpecialKey     ctermfg=4
-highlight TermCursor     cterm=reverse
-highlight NonText        ctermfg=12
-highlight Directory      ctermfg=4
-highlight ErrorMsg       ctermfg=15 ctermbg=1
-highlight IncSearch      cterm=reverse
-highlight MoreMsg        ctermfg=2
-highlight ModeMsg        cterm=bold
-highlight Question       ctermfg=2
-highlight Title          ctermfg=5
-highlight WarningMsg     ctermfg=1
-highlight WildMenu       ctermfg=0 ctermbg=11
-highlight Conceal        ctermfg=7 ctermbg=7
-highlight SpellBad       ctermbg=9
-highlight SpellRare      ctermbg=13
-highlight SpellLocal     ctermbg=14
-highlight PmenuSbar      ctermbg=8
-highlight PmenuThumb     ctermbg=0
-highlight TabLine        cterm=underline ctermfg=0 ctermbg=7
-highlight TabLineSel     cterm=bold
-highlight TabLineFill    cterm=reverse
-highlight CursorColumn   ctermbg=7
-highlight CursorLine     cterm=underline
-highlight MatchParen     ctermbg=14
-highlight Constant       ctermfg=1
-highlight Special        ctermfg=5
-highlight Identifier     cterm=NONE ctermfg=6
-highlight Statement      ctermfg=3
-highlight PreProc        ctermfg=5
-highlight Type           ctermfg=2
-highlight Underlined     cterm=underline ctermfg=5
-highlight Ignore         ctermfg=15
-highlight Error          ctermfg=15 ctermbg=9
-highlight Todo           ctermfg=0 ctermbg=11
-" dim
-highlight DiffAdd        ctermfg=0    ctermbg=2
-highlight DiffChange     ctermfg=0    ctermbg=3
-highlight DiffDelete     ctermfg=0    ctermbg=1
-highlight DiffText       ctermfg=0    ctermbg=11   cterm=bold
-highlight Visual         ctermfg=NONE ctermbg=NONE cterm=inverse
-highlight Search         ctermfg=0    ctermbg=11
-if &background == "light"
-  highlight LineNr       ctermfg=7
-  highlight CursorLineNr ctermfg=8
-  highlight Comment      ctermfg=7
-  highlight ColorColumn  ctermfg=8    ctermbg=7
-  highlight Folded       ctermfg=8    ctermbg=7
-  highlight FoldColumn   ctermfg=8    ctermbg=7
-  highlight Pmenu        ctermfg=0    ctermbg=7
-  highlight PmenuSel     ctermfg=7    ctermbg=0
-  highlight SpellCap     ctermfg=8    ctermbg=7
-  highlight StatusLine   ctermfg=0    ctermbg=7    cterm=bold
-  highlight StatusLineNC ctermfg=8    ctermbg=7    cterm=NONE
-  highlight VertSplit    ctermfg=8    ctermbg=7    cterm=NONE
-  highlight SignColumn                ctermbg=7
-else
-  highlight LineNr       ctermfg=8
-  highlight CursorLineNr ctermfg=7
-  highlight Comment      ctermfg=8
-  highlight ColorColumn  ctermfg=7    ctermbg=8
-  highlight Folded       ctermfg=7    ctermbg=8
-  highlight FoldColumn   ctermfg=7    ctermbg=8
-  highlight Pmenu        ctermfg=15   ctermbg=8
-  highlight PmenuSel     ctermfg=8    ctermbg=15
-  highlight SpellCap     ctermfg=7    ctermbg=8
-  highlight StatusLine   ctermfg=15   ctermbg=8    cterm=bold
-  highlight StatusLineNC ctermfg=7    ctermbg=8    cterm=NONE
-  highlight VertSplit    ctermfg=7    ctermbg=8    cterm=NONE
-  highlight SignColumn                ctermbg=8
+
+" minimal color scheme
+hi clear
+if exists('syntax_on')
+   syntax reset
 endif
-" grim
+hi Normal                   ctermfg=NONE    cterm=NONE
+hi Cursor                   ctermfg=16      cterm=NONE
+hi CursorLine               ctermfg=NONE    cterm=NONE      cterm=underline
+hi CursorLineNr             ctermfg=NONE    cterm=bold
+hi DiffAdd                  ctermfg=0       ctermbg=2
+hi DiffChange               ctermfg=0       ctermbg=11
+hi DiffDelete               ctermfg=0       ctermbg=1
+hi DiffText                 ctermfg=0       ctermbg=3       cterm=bold
+hi FoldColumn               ctermfg=248     cterm=NONE
+hi Folded                   ctermfg=NONE    cterm=NONE
+hi Number                   ctermfg=NONE    cterm=NONE      term=NONE
+hi LineNr                   ctermfg=248     cterm=NONE      term=NONE
+hi Statement                ctermfg=NONE    cterm=bold      term=bold
+hi PreProc                  ctermfg=NONE    cterm=bold      term=bold
+hi String                   ctermfg=24      cterm=NONE
+hi Comment                  ctermfg=243     cterm=NONE      term=NONE
+hi Constant                 ctermfg=NONE    cterm=NONE      term=NONE
+hi Type                     ctermfg=NONE    cterm=bold      term=bold
+hi Function                 ctermfg=NONE    cterm=NONE
+hi Identifier               ctermfg=NONE    cterm=NONE      term=NONE
+hi Special                  ctermfg=NONE    cterm=NONE
+hi MatchParen               ctermfg=16      ctermbg=252
+hi Underlined               ctermfg=24      ctermbg=NONE
+hi Todo                     ctermfg=16      cterm=bold
+hi Pmenu                    ctermfg=NONE    cterm=NONE
+hi PmenuSel                 ctermfg=24      cterm=NONE
+hi Search                   ctermfg=NONE    cterm=NONE
+hi Visual                   ctermfg=NONE    ctermbg=NONE    cterm=inverse
+hi NonText                  ctermfg=248     cterm=NONE
+hi Directory                ctermfg=NONE    cterm=bold
+hi Title                    ctermfg=NONE    cterm=bold
+hi TabLine                                  cterm=NONE
+hi StatusLineTerm           ctermfg=NONE    ctermbg=NONE    cterm=reverse,bold
+hi StatusLineTermNC         ctermfg=NONE    ctermbg=NONE    cterm=reverse
+hi SignColumn                               ctermbg=NONE
+hi link Warnings ErrorMsg
 if &background == "light"
-  highlight Constant       ctermfg=8
-  highlight Identifier     ctermfg=0
-  highlight PreProc        ctermfg=0 cterm=bold
-  highlight Special        ctermfg=0
-  highlight Statement      ctermfg=0 cterm=bold
-  highlight Title          ctermfg=0 cterm=bold
-  highlight Type           ctermfg=0
-  highlight Underlined     cterm=underline ctermfg=0
+  highlight ColorColumn     ctermfg=8       ctermbg=7
+  highlight Folded          ctermfg=8       ctermbg=7
+  highlight FoldColumn      ctermfg=8       ctermbg=7
+  highlight Pmenu           ctermfg=0       ctermbg=7
+  highlight PmenuSel        ctermfg=7       ctermbg=0
+  highlight SpellCap        ctermfg=8       ctermbg=7
+  highlight StatusLine      ctermfg=0       ctermbg=7       cterm=bold
+  highlight StatusLineNC    ctermfg=8       ctermbg=7       cterm=NONE
+  highlight VertSplit       ctermfg=8       ctermbg=NONE    cterm=NONE
 else
-  highlight Constant       ctermfg=7
-  highlight Identifier     ctermfg=15
-  highlight PreProc        ctermfg=15 cterm=bold
-  highlight Special        ctermfg=15
-  highlight Statement      ctermfg=15 cterm=bold
-  highlight Title          ctermfg=15 cterm=bold
-  highlight Type           ctermfg=15
-  highlight Underlined     cterm=underline ctermfg=15
-end
+  highlight ColorColumn     ctermfg=7       ctermbg=8
+  highlight Folded          ctermfg=7       ctermbg=8
+  highlight FoldColumn      ctermfg=7       ctermbg=8
+  highlight Pmenu           ctermfg=15      ctermbg=8
+  highlight PmenuSel        ctermfg=8       ctermbg=15
+  highlight SpellCap        ctermfg=7       ctermbg=8
+  highlight StatusLine      ctermfg=15      ctermbg=8       cterm=bold
+  highlight StatusLineNC    ctermfg=7       ctermbg=8       cterm=NONE
+  highlight VertSplit       ctermfg=7       ctermbg=8       cterm=NONE
+endif
 
 " Init {{{1
 
