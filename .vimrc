@@ -604,7 +604,6 @@ endfunction
 inoremap <expr> <Tab> TabComplete()
 inoremap <S-Tab> <c-n>
 set completeopt=menuone
-imap <C-o> <C-x><C-o>
 imap <C-f> <C-x><C-f>
 imap <C-t> <C-x><C-]>
 
