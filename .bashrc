@@ -67,12 +67,13 @@ alias tk='tmux kill-session -t'
 alias mux='tmuxinator'
 
 # docker
-alias dc='docker-compose'
-alias dd='docker-compose down'
-alias du='docker-compose up -d --build'
+alias dc='docker compose'
+alias dd='docker compose down'
+# alias du='docker-compose up -d --build'
+alias du='docker compose up --build'
 alias dr='dd && du'
-alias de='docker-compose exec web'
-alias dm='docker-compose exec web python manage.py'
+alias de='docker compose exec web'
+alias dm='docker compose exec web python manage.py'
 
 # python
 alias pm='python manage.py'
