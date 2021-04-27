@@ -94,7 +94,10 @@ nnoremap ,v :vert sfind *
 nnoremap ,t :terminal ++rows=15<cr>
 nnoremap <silent> cd :<c-u>cd %:h \| pwd<cr> " Change to the directory of the current file
 nnoremap ,w :w<cr>
+nnoremap <space>w :w<cr>
+cmap w!! w !sudo tee > /dev/null %
 nnoremap ,q :q<cr>
+nnoremap <space>q :q<cr>
 nnoremap ,x :x<cr>
 nnoremap 0 ^
 nnoremap ,, <c-^>         " toggle between last two files
