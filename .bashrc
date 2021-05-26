@@ -106,11 +106,6 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 # Get week number
 alias week='date +%V'
 
-# use <C-z> instead of fg<cr>
-# https://www.reddit.com/r/vim/comments/gxoupg/on_the_use_of_vim_in_slow_and_restricted/ft52cvb/
-stty susp undef
-bind '"\C-z":"fg\015"'
-
 # cd to current Finder path
 function pfd() {
   osascript 2>/dev/null <<EOF
