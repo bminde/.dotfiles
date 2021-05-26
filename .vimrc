@@ -102,6 +102,7 @@ nnoremap ,x :x<cr>
 nnoremap 0 ^
 nnoremap ,, <c-^>         " toggle between last two files
 nnoremap <leader>d "=strftime('# %F')<cr>P " insert date
+nnoremap gd <c-]>
 if bufwinnr(1)
   nnoremap ø <C-W><<C-W><
   nnoremap æ <C-W>><C-W>>
