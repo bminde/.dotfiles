@@ -34,7 +34,7 @@ set guicursor+=a:blinkon0 " turn off cursor blinking
 set scrolloff=5
 set sidescrolloff=5
 set fillchars+=vert:\│
-set path=.,**
+" set path=.,**
 set autoread
 set wildcharm=<C-z>
 if v:version >= 800
@@ -349,6 +349,7 @@ augroup Autocmds
   " Linting
   autocmd FileType python setlocal formatprg=black\ --quiet\ -
   autocmd FileType python setlocal makeprg=black\ --quiet
+  autocmd FileType python setlocal path=.,,templates/**,config/**,static/**,users/**
   autocmd FileType python autocmd BufWritePre <buffer> silent normal mkHmlgggqG`lzt`k
   autocmd FileType python nmap <silent> <leader>r :terminal ++rows=20 python %<cr>
   autocmd FileType python nmap <silent> <leader>i :<c-u>Isort<cr>
