@@ -335,6 +335,7 @@ nnoremap <silent> <leader>ol :<c-u>setlocal list!<cr>
 nnoremap <silent> <leader>on :<c-u>setlocal number!<cr>
 nnoremap <silent> <leader>or :<c-u>setlocal relativenumber!<cr>
 nnoremap <silent> <leader>ot :<c-u>setlocal expandtab!<cr>
+nnoremap <silent> <leader>og :<c-u>setlocal termguicolors!<cr>
 nnoremap <silent> <leader>ow :<c-u>call ToggleWrap()<cr>
 nnoremap <silent> <leader>ob :let &background = (&background == 'dark') ? 'light' : 'dark'<cr>
 " Autocmds {{{1
