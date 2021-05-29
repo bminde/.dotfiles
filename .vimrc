@@ -688,7 +688,6 @@ augroup end
 if has('termguicolors')
   let &t_8f = "\<esc>[38;2;%lu;%lu;%lum" " Needed in tmux
   let &t_8b = "\<esc>[48;2;%lu;%lu;%lum" " Ditto
-  set termguicolors
 endif
 
 " minimal color scheme
