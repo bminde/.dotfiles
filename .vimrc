@@ -89,6 +89,7 @@ map <space> <leader>
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <leader>p :find *
 nnoremap <silent>,f :<c-u>call FindFile()<cr>
+nnoremap <silent><leader>f :<c-u>call FindFile()<cr>
 nnoremap ,g :Grep
 nnoremap ,s :sfind *
 nnoremap ,v :vert sfind *
