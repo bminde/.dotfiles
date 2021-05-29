@@ -35,7 +35,6 @@ set scrolloff=5
 set sidescrolloff=5
 set foldmethod=indent
 set foldlevel=99
-set fillchars+=vert:\│
 " set path=.,**
 set autoread
 set wildcharm=<C-z>
