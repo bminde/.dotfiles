@@ -126,7 +126,7 @@ nnoremap <leader>ev :tabedit $MYVIMRC<cr> " edit vimrc
 nnoremap          <leader>el :tabedit ~/.dotfiles/vimrc_local<cr> " edit vimrc_local
 nnoremap <silent> <leader>gd :<c-u>call GitDiff()<cr>
 nnoremap <silent> <leader>gs :<c-u>call TerminalRun('git status')<cr>
-
+nnoremap <silent> <leader>cv :!ctags -R .<cr>
 nnoremap          <leader>so :source $MYVIMRC<cr>
 nnoremap <silent> <leader>ew :<c-u>call <sid>removeTrailingSpace()<cr>
 
@@ -184,7 +184,7 @@ if has('patch-8.1.1372') " Has g:statusline_winid
         \ %=
         \ %a %w %y %{winwidth(0)<80?'':' '.(strlen(&fenc)?&fenc:&enc).(&bomb?',BOM ':' ').&ff.(&et?'':' ⇥ ')}
         \ %l/%L:%v %P
-        \ %#Warnings#%{get(b:, 'lf_stl_warnings', '')}%*"
+        \ %#ErrorMsg#%{get(b:, 'lf_stl_warnings', '')}%*"
 
   let s:stlnc = '    ' . "%{&mod?'◦':' '} %t %{&ma?(&ro?'▪':' '):'✗'}
         \ %<%{empty(&bt)?(winwidth(0)<80?(winwidth(0)<50?'':expand('%:p:h:t')):expand('%:p:~:h')):''}
