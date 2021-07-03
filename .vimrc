@@ -363,7 +363,7 @@ augroup Autocmds
 
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd FileType * set fo-=c fo-=r fo-=o " Don't continue comment on new line
-  if exists(':terminal')
+  if (exists(':terminal') && !has('nvim'))
     autocmd TerminalOpen * set nonumber norelativenumber signcolumn=no
   endif
   " Jump to last known position
